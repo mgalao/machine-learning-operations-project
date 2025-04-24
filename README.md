@@ -3,6 +3,7 @@
 ## Team Members
 - Bruna Simões
 - Daniel Caridade
+- Leonardo Caterina
 - Marco Galão
 
 ## Project Overview
