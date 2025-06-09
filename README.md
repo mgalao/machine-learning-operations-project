@@ -7,4 +7,7 @@
 - Marco Galão
 
 ## Project Overview
-This repository contains materials for our Machine Learning Operations project.
+This repository contains materials for a Machine Learning Operations project, that aims to study Fraud detention in the United States.
+
+## Repository Structure
+
