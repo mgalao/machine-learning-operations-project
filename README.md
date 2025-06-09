@@ -14,7 +14,7 @@ This repository contains materials for a Machine Learning Operations project, th
 ```text
 .
 ├── data/                               # Folder that stores the data that was used for this project 
-│   └── credit_card_transactions.zip    # Dataset of credit card transactions made in the USA in zip format
+│   └── credit_card_transactions.zip    # Dataset of credit card transactions made in the USA in October 2019
 ├── notebooks/                          # Folder with all the notebooks used for the development of the final model
 │   └── EDA                             # Folder with the code of the EDA of the data
     │   └── EDA code.zip                # Notebok with the Exploratory Data Analysis in zip format
