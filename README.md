@@ -1,15 +1,15 @@
 # Machine Learning Operations: Project
 
-## Team Members
+## 👥 Team Members
 - Bruna Simões
 - Daniel Caridade
 - Leonardo Caterina
 - Marco Galão
 
-## Project Overview
+## 📋 Project Overview
 This repository contains materials for a Machine Learning Operations project, that aims to study Fraud detention in the United States in October 2019.
 
-## Repository Structure
+## 🗂️ Repository Structure
 ```text
 .
 ├── data/                               # Main data directory for all dataset stages and data-related scripts
