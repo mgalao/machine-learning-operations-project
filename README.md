@@ -23,21 +23,14 @@ This repository contains materials for a Machine Learning Operations project, th
 │   ├── 07_model_output/                # Model predictions and output files
 │   ├── 08_reporting/                   # Reports, evaluation results, visualizations
 │   ├── data_loader.py                  # Script for loading datasets from the various folders
-
 │── gx/                                 # Great Expectations data validation artifacts
-
 │── mlruns/                             # MLflow experiment tracking directory
-
 ├── notebooks/                          # Notebooks used for experimentation and development
 │   ├── EDA/                            # Exploratory Data Analysis notebooks
 │   │   └── EDA code.ipynb              # Notebook performing EDA on the raw dataset
-
 ├── src/                                # (Consider renaming or moving – 'src' should ideally be outside 'notebooks/')
-
 ├── streamlit/                          # Notebooks or files related to Streamlit dashboards/apps
-
 │──  optuna/                            # Notebooks or scripts for hyperparameter tuning with Optuna
-│
 ├── README.md                           # Project documentation and overview
 └── requirements.txt                    # Python package dependencies required to run the project
 ```
