@@ -28,7 +28,7 @@ This repository contains materials for a Machine Learning Operations project, th
 ├── notebooks/                          # Notebooks used for experimentation and development
 │   ├── EDA/                            # Exploratory Data Analysis notebooks
 │   │   └── EDA code.ipynb              # Notebook performing EDA on the raw dataset
-│──  optuna/                            # Notebooks or scripts for hyperparameter tuning with Optuna
+│── optuna/                             # Notebooks or scripts for hyperparameter tuning with Optuna
 ├── src/                                # (Consider renaming or moving – 'src' should ideally be outside 'notebooks/')
 ├── streamlit/                          # Notebooks or files related to Streamlit dashboards/apps
 ├── README.md                           # Project documentation and overview
