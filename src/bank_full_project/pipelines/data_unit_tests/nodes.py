@@ -68,7 +68,8 @@ def get_validation_results(checkpoint_result):
 
 
 def test_data(df):
-    context = gx.get_context(context_root_dir = "//..//..//gx")
+    # context = gx.get_context(context_root_dir = "//..//..//gx")
+    context = gx.get_context(context_root_dir = "../gx")
     datasource_name = "bank_datasource"
     try:
         datasource = context.sources.add_pandas(datasource_name)

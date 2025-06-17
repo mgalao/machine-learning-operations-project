@@ -1,0 +1,2 @@
+[console_scripts]
+bank-full-project = bank_full_project.__main__:main

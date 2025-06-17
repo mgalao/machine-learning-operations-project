@@ -1,0 +1,14 @@
+# Python virtual environments
+venv/
+.venv/
+
+# macOS metadata
+.DS_Store
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/

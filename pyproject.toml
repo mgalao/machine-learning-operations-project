@@ -54,6 +54,11 @@ exclude_lines = ["pragma: no cover", "raise NotImplementedError"]
 [tool.ruff.format]
 docstring-code-format = true
 
+[tool.uv.workspace]
+members = [
+    "project_0",
+]
+
 [tool.ruff]
 line-length = 88
 show-fixes = true
