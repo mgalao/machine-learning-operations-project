@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/rosan/OneDrive/Desktop/MLOps_2025/MLOps_project/04_week/bank-full-project/mlruns/350557509530414750/791b8b36e21e4b3eac7d2912ba7305b7/artifacts
+end_time: 1747867955021
+entry_point_name: ''
+experiment_id: '350557509530414750'
+lifecycle_stage: active
+run_id: 791b8b36e21e4b3eac7d2912ba7305b7
+run_name: efficient-donkey-466
+run_uuid: 791b8b36e21e4b3eac7d2912ba7305b7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747867938634
+status: 3
+tags: []
+user_id: rosan

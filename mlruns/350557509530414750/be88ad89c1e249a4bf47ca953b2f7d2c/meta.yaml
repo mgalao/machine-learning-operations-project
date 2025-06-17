@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/rosan/OneDrive/Desktop/MLOps_2025/MLOps_project/04_week/bank-full-project/mlruns/350557509530414750/be88ad89c1e249a4bf47ca953b2f7d2c/artifacts
+end_time: 1747600421447
+entry_point_name: ''
+experiment_id: '350557509530414750'
+lifecycle_stage: active
+run_id: be88ad89c1e249a4bf47ca953b2f7d2c
+run_name: efficient-fly-425
+run_uuid: be88ad89c1e249a4bf47ca953b2f7d2c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747600389623
+status: 3
+tags: []
+user_id: rosan

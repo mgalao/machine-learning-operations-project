@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/rosan/OneDrive/Desktop/MLOps_2025/MLOps_project/04_week/bank-full-project/mlruns/350557509530414750/75a7b5e135a14826a2bf349e7a65d4dc/artifacts
+end_time: 1747600380147
+entry_point_name: ''
+experiment_id: '350557509530414750'
+lifecycle_stage: active
+run_id: 75a7b5e135a14826a2bf349e7a65d4dc
+run_name: rebellious-worm-784
+run_uuid: 75a7b5e135a14826a2bf349e7a65d4dc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747600364412
+status: 3
+tags: []
+user_id: rosan

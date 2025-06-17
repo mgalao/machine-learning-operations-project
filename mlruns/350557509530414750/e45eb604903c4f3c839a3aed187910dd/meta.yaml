@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/rosan/OneDrive/Desktop/MLOps_2025/MLOps_project/04_week/bank-full-project/mlruns/350557509530414750/e45eb604903c4f3c839a3aed187910dd/artifacts
+end_time: 1747867998313
+entry_point_name: ''
+experiment_id: '350557509530414750'
+lifecycle_stage: active
+run_id: e45eb604903c4f3c839a3aed187910dd
+run_name: flawless-croc-995
+run_uuid: e45eb604903c4f3c839a3aed187910dd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747867955061
+status: 3
+tags: []
+user_id: rosan

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/rosan/OneDrive/Desktop/MLOps_2025/MLOps_project/04_week/bank-full-project/mlruns/350557509530414750/034b9f6652d4426e8a0018bb70c7549c/artifacts
+end_time: 1747867997712
+entry_point_name: ''
+experiment_id: '350557509530414750'
+lifecycle_stage: active
+run_id: 034b9f6652d4426e8a0018bb70c7549c
+run_name: defiant-flea-279
+run_uuid: 034b9f6652d4426e8a0018bb70c7549c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747867955061
+status: 3
+tags: []
+user_id: rosan

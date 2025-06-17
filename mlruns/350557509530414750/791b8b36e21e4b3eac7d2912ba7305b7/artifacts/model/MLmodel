@@ -1,0 +1,35 @@
+artifact_path: model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.11.11
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.5.2
+is_signature_from_type_hint: false
+mlflow_version: 2.21.0
+model_size_bytes: 125734
+model_uuid: c31b0a457abf452d803583b039d22cad
+prompts: null
+run_id: 791b8b36e21e4b3eac7d2912ba7305b7
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "feat1", "required": true}, {"type": "double",
+    "name": "feat2", "required": true}, {"type": "double", "name": "feat3", "required":
+    true}, {"type": "double", "name": "feat4", "required": true}, {"type": "double",
+    "name": "feat5", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int32", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-05-21 22:52:21.285484'
