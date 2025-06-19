@@ -1,4 +1,4 @@
-target_column: "y"
+target_column: "is_fraud"
 to_feature_store: True
 test_fraction: 0.3
 random_state: 2021
