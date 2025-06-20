@@ -3,12 +3,12 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "bank_full_project"
+name = "fraud_project"
 readme = "README.md"
 dynamic = ["dependencies", "version"]
 
 [project.scripts]
-bank-full-project = "bank_full_project.__main__:main"
+fraud-project = "fraud_project.__main__:main"
 
 [project.entry-points."kedro.hooks"]
 
@@ -27,15 +27,15 @@ docs = [
 
 [tool.setuptools.dynamic]
 dependencies = {file = "requirements.txt"}
-version = {attr = "bank_full_project.__version__"}
+version = {attr = "fraud_project.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
 namespaces = false
 
 [tool.kedro]
-package_name = "bank_full_project"
-project_name = "bank_full_project"
+package_name = "fraud_project"
+project_name = "fraud_project"
 kedro_init_version = "0.19.5"
 tools = ['Linting', 'Testing', 'Custom Logging', 'Documentation', 'Data Structure']
 example_pipeline = "False"
@@ -44,7 +44,7 @@ source_dir = "src"
 [tool.pytest.ini_options]
 addopts = """
 --cov-report term-missing \
---cov src/bank_full_project -ra"""
+--cov src/fraud_project -ra"""
 
 [tool.coverage.report]
 fail_under = 0
@@ -72,3 +72,6 @@ select = [
     "T201", # Print Statement
 ]
 ignore = ["E501"]  # Ruff format takes care of line-too-long
+
+[tool.kedro_telemetry]
+project_id = "112077844e4745259c7812e0e6012465"

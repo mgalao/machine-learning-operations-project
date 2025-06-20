@@ -5,17 +5,11 @@
 
 
 
-bank_raw_data:
+fraud_raw_data:
   type: pandas.CSVDataset
-  filepath: data/01_raw/bank_data.csv
-  # load_args:
-  #   sep: ';'
-
-
-bank_additional_data:
-  type: pandas.CSVDataset
-  filepath: data/01_raw/bank_data_additional.csv
-
+  filepath: data/01_raw/data_v1.csv
+  load_args:
+    sep: ';'
 
 ingested_data:
   type: pandas.CSVDataset

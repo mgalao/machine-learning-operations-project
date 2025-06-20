@@ -14,7 +14,7 @@ import pandas as pd
 import numpy as np
 import os
 
-from ...src.bank_full_project.pipelines.preprocessing_train.nodes import clean_data, feature_engineer
+from ...src.fraud_project.pipelines.preprocessing_train.nodes import clean_data, feature_engineer
 
 def test_clean_date_type():
     df = pd.read_csv("./tests/pipelines/sample/sample.csv") 

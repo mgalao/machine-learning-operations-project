@@ -46,7 +46,7 @@ Example: flows/kedro_flows.py
   import os, sys
   sys.stdout.reconfigure(encoding="utf-8")
   sys.path.append(os.path.join(os.path.dirname(__file__), "../src"))
-  from bank_full_project.run_kedro_pipeline import run_pipeline
+  from fraud_project.run_kedro_pipeline import run_pipeline
 
   @task
   def run_kedro_task(pipeline_name: str):

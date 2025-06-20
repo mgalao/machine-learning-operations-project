@@ -60,7 +60,7 @@ dataset = datacatalog.load(choice)
 
 from ydata_profiling import ProfileReport
 
-profile = ProfileReport(dataset, title=f"Bank Profiling Report", minimal=True)
+profile = ProfileReport(dataset, title=f"fraud Profiling Report", minimal=True)
 
 if choice != '':
     if stateful_button(f'**Generate report on data**', key=f'**Generate report on data**'):

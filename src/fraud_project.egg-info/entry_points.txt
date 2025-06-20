@@ -1,0 +1,2 @@
+[console_scripts]
+fraud-project = fraud_project.__main__:main

@@ -1,5 +1,5 @@
 from prefect import flow, task, get_run_logger
-from src.bank_full_project.run_kedro_pipeline import run_pipeline
+from src.fraud_project.run_kedro_pipeline import run_pipeline
 import sys
 import os
 

@@ -36,7 +36,7 @@ loggers:
   kedro:
     level: INFO
 
-  bank_full_project:
+  fraud_project:
     level: INFO
 
 root:

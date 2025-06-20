@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-# bank_full_project documentation build
+# fraud_project documentation build
 # configuration file, created by sphinx-quickstart.
 #
 # This file is execfile()d with the current directory set to its
@@ -21,11 +21,11 @@ import re
 
 from kedro.framework.cli.utils import find_stylesheets
 
-from bank_full_project import __version__ as release
+from fraud_project import __version__ as release
 
 # -- Project information -----------------------------------------------------
 
-project = "bank_full_project"
+project = "fraud_project"
 author = "Kedro"
 
 # The short X.Y version.
@@ -119,7 +119,7 @@ html_show_sourcelink = False
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "bank_full_projectdoc"
+htmlhelp_basename = "fraud_projectdoc"
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -147,8 +147,8 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "bank_full_project.tex",
-        "bank_full_project Documentation",
+        "fraud_project.tex",
+        "fraud_project Documentation",
         "Kedro",
         "manual",
     )
@@ -161,8 +161,8 @@ latex_documents = [
 man_pages = [
     (
         master_doc,
-        "bank_full_project",
-        "bank_full_project Documentation",
+        "fraud_project",
+        "fraud_project Documentation",
         [author],
         1,
     )
@@ -176,11 +176,11 @@ man_pages = [
 texinfo_documents = [
     (
         master_doc,
-        "bank_full_project",
-        "bank_full_project Documentation",
+        "fraud_project",
+        "fraud_project Documentation",
         author,
-        "bank_full_project",
-        "Project bank_full_project codebase.",
+        "fraud_project",
+        "Project fraud_project codebase.",
         "Data-Science",
     )
 ]

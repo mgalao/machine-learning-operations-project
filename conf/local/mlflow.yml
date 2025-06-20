@@ -34,7 +34,7 @@ tracking:
     pipelines: []
 
   experiment:
-    name: bank_full_project
+    name: fraud_project
     restore_if_deleted: True  # if the experiment`name` was previously deleted experiment, should we restore it?
 
   run:

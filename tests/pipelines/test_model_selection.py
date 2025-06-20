@@ -8,7 +8,7 @@ import logging
 warnings.filterwarnings("ignore", category=Warning)
 
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from src.bank_full_project.pipelines.model_selection.nodes import model_selection
+from src.fraud_project.pipelines.model_selection.nodes import model_selection
 
 logger = logging.getLogger(__name__)
 

@@ -1,3 +1,0 @@
-{
-  "GradientBoostingClassifier_score_X_test": "GradientBoostingClassifier.score(X=X_test, y=y_test)"
-}
