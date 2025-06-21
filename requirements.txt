@@ -14,10 +14,14 @@ pandas==2.1.4
 shap
 nannyml
 evidently>=0.5.0 # need to update data_drift nodes to use dashboard instead of report
-# evidently==0.2.2
+# evidently==0.2.2q
 
 # Validation
 great-expectations==0.17.23
+
+# Profiling
+ydata-profiling==4.7.0
+visions>=0.7.4
 
 # Testing
 pytest~=7.2

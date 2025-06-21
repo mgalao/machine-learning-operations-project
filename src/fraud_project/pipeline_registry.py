@@ -25,6 +25,7 @@ from kedro.pipeline import Pipeline, pipeline
 from fraud_project.pipelines import (
     ingestion as data_ingestion,
     data_unit_tests as data_tests,
+    profiling as data_profiling,
     preprocessing_train as preprocess_train,
     split_train_pipeline as split_train,
     model_selection as model_selection_pipeline,
@@ -33,7 +34,7 @@ from fraud_project.pipelines import (
     split_data,
     preprocessing_batch,
     model_predict,
-    data_drift
+    # data_drift
 
 )
 
@@ -45,6 +46,7 @@ def register_pipelines() -> Dict[str, Pipeline]:
     """
     ingestion_pipeline = data_ingestion.create_pipeline()
     data_unit_tests_pipeline = data_tests.create_pipeline()
+    profiling_pipeline = data_profiling.create_pipeline()
     split_data_pipeline = split_data.create_pipeline()
     preprocess_train_pipeline = preprocess_train.create_pipeline()
     split_train_pipeline = split_train.create_pipeline()
@@ -53,11 +55,12 @@ def register_pipelines() -> Dict[str, Pipeline]:
     feature_selection = feature_selection_pipeline.create_pipeline()
     preprocess_batch_pipeline = preprocessing_batch.create_pipeline()
     model_predict_pipeline = model_predict.create_pipeline()
-    data_drift_pipeline = data_drift.create_pipeline()
+    # data_drift_pipeline = data_drift.create_pipeline()
 
     return {
         "ingestion": ingestion_pipeline,
         "data_unit_tests": data_unit_tests_pipeline,
+        "profiling": profiling_pipeline,
         "split_data": split_data_pipeline,
         "preprocess_train": preprocess_train_pipeline,
         "split_train": split_train_pipeline,
@@ -68,5 +71,5 @@ def register_pipelines() -> Dict[str, Pipeline]:
         "preprocess_batch": preprocess_batch_pipeline,
         "inference" : model_predict_pipeline,
         "production_full_prediction_process" : preprocess_batch_pipeline + model_predict_pipeline,
-        "data_drift_pipeline" : data_drift_pipeline
+        # "data_drift_pipeline" : data_drift_pipeline
     }

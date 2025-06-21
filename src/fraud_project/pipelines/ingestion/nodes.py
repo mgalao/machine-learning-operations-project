@@ -291,6 +291,7 @@ def ingestion(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
     # Fix datetime column
     df["datetime"] = pd.to_datetime(df["trans_date_trans_time"], errors="coerce")
     df.drop(columns=["trans_date_trans_time"], inplace=True)
+    df.drop(columns=["unix_time"], inplace=True) # Drop unix_time as it is redundant
 
     logger.info("Created 'datetime' column from 'trans_date_trans_time'.")
 
