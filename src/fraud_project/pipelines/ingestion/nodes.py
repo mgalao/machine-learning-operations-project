@@ -78,7 +78,7 @@ def build_expectation_suite(
         numerical_columns = [col for col in expected_numeric_columns if col not in ['trans_num', 'datetime']]
 
         for col in numerical_columns:
-            int_columns = ['age', 'city_pop', 'unix_time']
+            int_columns = ['age', 'city_pop']
             expected_type = "int64" if col in int_columns else "float64"
             
             expectation_suite.add_expectation(
@@ -291,9 +291,10 @@ def ingestion(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
     # Fix datetime column
     df["datetime"] = pd.to_datetime(df["trans_date_trans_time"], errors="coerce")
     df.drop(columns=["trans_date_trans_time"], inplace=True)
-    df.drop(columns=["unix_time"], inplace=True) # Drop unix_time as it is redundant
+    df.drop(columns=["unix_time"], inplace=True)
 
     logger.info("Created 'datetime' column from 'trans_date_trans_time'.")
+    logger.info("Dropped 'unix_time' column as it is redundant.")
 
     # Convert IDs and categorical numerics to string
     id_columns = ["cc_num", "zip", "merch_zipcode"]
@@ -335,7 +336,7 @@ def ingestion(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
     df_target = df[["trans_num", "datetime", target_col]]
 
     # Expected columns
-    expected_numeric_columns = ['trans_num', 'datetime', 'age', 'amt', 'lat', 'long', 'city_pop', 'unix_time', 'merch_lat', 'merch_long']
+    expected_numeric_columns = ['trans_num', 'datetime', 'age', 'amt', 'lat', 'long', 'city_pop', 'merch_lat', 'merch_long']
     expected_categorical_columns = ['trans_num', 'datetime', 'cc_num', 'merchant', 'category', 'first', 'last', 'gender', 'street', 'city', 'state', 'zip', 'job', 'merch_zipcode']
     expected_target_columns = ['trans_num', 'datetime', target_col]
 
@@ -376,7 +377,6 @@ def ingestion(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
         {"name": "lat", "description": "Latitude coordinate of the transaction."},
         {"name": "long", "description": "Longitude coordinate of the transaction."},
         {"name": "city_pop", "description": "Population of the city where the transaction occurred."},
-        {"name": "unix_time", "description": "Unix timestamp of the transaction."},
         {"name": "merch_lat", "description": "Latitude coordinate of the merchant."},
         {"name": "merch_long", "description": "Longitude coordinate of the merchant."},
         {"name": "trans_num", "description": "Unique transaction number."},

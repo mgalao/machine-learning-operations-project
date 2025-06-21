@@ -4,6 +4,7 @@ from typing import Optional
 import pandas as pd
 from ydata_profiling import ProfileReport
 import great_expectations as gx
+from great_expectations.exceptions import DataContextError
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +64,7 @@ def get_validation_results(checkpoint_result):
 
 def profile_and_validate_data(
     df: pd.DataFrame,
-    context_root_dir: str = "../gx",
+    context_root_dir: str = "../../../gx",
     datasource_name: str = "profiling_datasource",
     data_asset_name: str = "profiling_asset",
     suite_name: str = "profiling_suite",
@@ -73,13 +74,22 @@ def profile_and_validate_data(
     Generate a ydata_profiling report, convert it to a Great Expectations suite, run validation,
     and return validation results as a DataFrame.
     """
+
+    import os
+    print("Current working dir:", os.getcwd())
+    print("GX path exists?", os.path.exists("../../../gx/great_expectations.yml"))
+
     # Generate ProfileReport with minimal=True (can be changed as needed)
     profile = ProfileReport(df, title="Profiling Report", minimal=True)
     logger.info("ProfileReport generated")
 
     # Get GE context
-    context = gx.get_context(context_root_dir=context_root_dir)
-    
+    project_root_dir = os.getcwd()  # You're running from here
+    gx_path = os.path.join(project_root_dir, "gx")
+    context = gx.get_context(context_root_dir=gx_path)
+    # context = gx.get_context(context_root_dir=context_root_dir)
+    print("Loaded validation operators:", context.validation_operators.keys())
+
     # Add or get datasource
     try:
         datasource = context.sources.add_pandas(datasource_name)
@@ -99,17 +109,23 @@ def profile_and_validate_data(
     # Build batch request
     batch_request = data_asset.build_batch_request(dataframe=df)
 
+    # Clean up existing suite to avoid duplication error
+    try:
+        context.delete_expectation_suite(suite_name)
+        logger.info(f"Deleted existing expectation suite '{suite_name}'.")
+    except DataContextError:
+        logger.info(f"No existing suite '{suite_name}' to delete.")
+
     # Convert profiling report to GE expectation suite
     new_suite = profile.to_expectation_suite(
-        datasource_name=datasource_name,
-        data_asset_name=data_asset_name,
         suite_name=suite_name,
         data_context=context,
     )
     logger.info(f"Expectation suite '{suite_name}' created from profiling report.")
 
-    # Save expectation suite
+    # Save the new suite
     context.save_expectation_suite(expectation_suite=new_suite)
+    logger.info(f"Expectation suite '{suite_name}' created and saved.")
 
     # Setup and run checkpoint for validation
     checkpoint = gx.checkpoint.SimpleCheckpoint(
@@ -121,6 +137,7 @@ def profile_and_validate_data(
                 "expectation_suite_name": suite_name,
             },
         ],
+        validation_operator_name="action_list_operator",
     )
     checkpoint_result = checkpoint.run()
     logger.info(f"Checkpoint '{checkpoint_name}' run completed.")

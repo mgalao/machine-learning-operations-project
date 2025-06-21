@@ -10,6 +10,17 @@
 # It is auto-generated and usually does not need to be changed.
 config_version: 3.0
 
+validation_operators:
+  action_list_operator:
+    class_name: ActionListValidationOperator
+    action_list:
+      - name: store_validation_result
+        action:
+          class_name: StoreValidationResultAction
+      - name: update_data_docs
+        action:
+          class_name: UpdateDataDocsAction
+
 # Datasources tell Great Expectations where your data lives and how to get it.
 # Read more at https://docs.greatexpectations.io/docs/guides/connecting_to_your_data/connect_to_data_overview
 datasources: {}
@@ -101,6 +112,12 @@ fluent_datasources:
     type: pandas
     assets:
       test:
+        type: dataframe
+        batch_metadata: {}
+  profiling_datasource:
+    type: pandas
+    assets:
+      profiling_asset:
         type: dataframe
         batch_metadata: {}
 notebooks:
