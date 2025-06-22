@@ -106,7 +106,7 @@ def build_expectation_suite(
         expectation_suite.add_expectation(
             ExpectationConfiguration(
                 expectation_type="expect_column_values_to_be_between",
-                kwargs={"column": "age", "min_value": 18, "max_value": 120, "mostly": 0.95},
+                kwargs={"column": "age", "min_value": 16, "max_value": 120},
             )
         )
 
