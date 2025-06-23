@@ -1,1 +1,1 @@
-{"ingested_data": {"rows": 90767, "columns": 22, "file_size": 22414149}, "reporting_tests": {"rows": 35, "columns": 12, "file_size": 3768}}
+{"ingested_data": {"rows": 90767, "columns": 22, "file_size": 22414149}, "profiling_report": {"rows": 75, "columns": 12}}

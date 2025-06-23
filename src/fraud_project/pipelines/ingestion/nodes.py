@@ -102,40 +102,21 @@ def build_expectation_suite(
             )
         )
 
-        # Specific expectation for 'age'
-        expectation_suite.add_expectation(
-            ExpectationConfiguration(
-                expectation_type="expect_column_values_to_be_between",
-                kwargs={"column": "age", "min_value": 16, "max_value": 120, "mostly": 1.0},
-            )
-        )
-
-        # Specific expectations for 'amt'
-        expectation_suite.add_expectation(
-            ExpectationConfiguration(
-                expectation_type="expect_column_min_to_be_between",
-                kwargs={"column": "amt", "min_value": 0, "strict_min": True},
-            )
-        )
-        expectation_suite.add_expectation(
-            ExpectationConfiguration(
-                expectation_type="expect_column_max_to_be_between",
-                kwargs={"column": "amt", "max_value": 100000, "strict_max": False},
-            )
-        )
-
-        # Add expectations for coordinates
-        coordinate_expectations = {
-            "lat": (-90, 90),
-            "long": (-180, 180),
-            "merch_lat": (-90, 90),
-            "merch_long": (-180, 180),
-        }
-        for col, (min_val, max_val) in coordinate_expectations.items():
+        # Expect columns to be within expected ranges
+        numerical_expectations = [
+            ("age", 16, 120),
+            ("amt", 0, 1_000_000),
+            ("lat", -90, 90),
+            ("long", -180, 180),
+            ("city_pop", 0, 100_000_000),
+            ("merch_lat", -90, 90),
+            ("merch_long", -180, 180),
+        ]
+        for col, min_v, max_v in numerical_expectations:
             expectation_suite.add_expectation(
                 ExpectationConfiguration(
                     expectation_type="expect_column_values_to_be_between",
-                    kwargs={"column": col, "min_value": min_val, "max_value": max_val},
+                    kwargs={"column": col, "min_value": min_v, "max_value": max_v},
                 )
             )
 

@@ -94,7 +94,13 @@ def test_data(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
         )
     )
 
-    # ID Column Expectation
+    # ID Column Expectations
+    suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_column_values_to_be_of_type",
+            kwargs={"column": "trans_num", "type_": "object"},
+        )
+    )
     suite.add_expectation(
         ExpectationConfiguration(
             expectation_type="expect_column_values_to_be_unique",
@@ -113,6 +119,14 @@ def test_data(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
         ("merch_long", -180, 180),
     ]
     for col, min_v, max_v in numerical_expectations:
+        int_columns = ['age', 'city_pop']
+        expected_type = "int64" if col in int_columns else "float64"
+        suite.add_expectation(
+            ExpectationConfiguration(
+                expectation_type="expect_column_values_to_be_of_type",
+                kwargs={"column": col, "type_": expected_type},
+            )
+        )
         suite.add_expectation(
             ExpectationConfiguration(
                 expectation_type="expect_column_values_to_be_between",
@@ -140,6 +154,12 @@ def test_data(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
         "street", "city", "state", "zip", "job", "merch_zipcode"
     ]
     for col in string_columns:
+        suite.add_expectation(
+            ExpectationConfiguration(
+                expectation_type="expect_column_values_to_be_of_type",
+                kwargs={"column": col, "type_": "object"},
+            )
+        )
         suite.add_expectation(
             ExpectationConfiguration(
                 expectation_type="expect_column_values_to_not_be_null",
@@ -172,6 +192,12 @@ def test_data(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
     # DateTime: Expecting format 'YYYY-MM-DD HH:MM:SS'
     suite.add_expectation(
         ExpectationConfiguration(
+            expectation_type="expect_column_values_to_be_of_type",
+            kwargs={"column": "datetime", "type_": "datetime64[ns]"},
+        )
+    )
+    suite.add_expectation(
+        ExpectationConfiguration(
             expectation_type="expect_column_values_to_match_strftime_format",
             kwargs={"column": "datetime", "strftime_format": "%Y-%m-%d %H:%M:%S"},
         )
@@ -197,7 +223,13 @@ def test_data(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
         )
     )
 
-    # Target Variable Expectation
+    # Target Variable Expectations
+    suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_column_values_to_be_of_type",
+            kwargs={"column": target_col, "type_": "int64"},
+        )
+    )
     suite.add_expectation(
         ExpectationConfiguration(
             expectation_type="expect_column_values_to_be_in_set",
@@ -235,14 +267,16 @@ def test_data(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
     checkpoint_result = checkpoint.run()
 
     # Manual Assertions
-    pd_df_ge = gx.from_pandas(df)
-    assert pd_df_ge.expect_column_values_to_be_of_type("amt", "float64").success
-    assert pd_df_ge.expect_column_values_to_be_in_set(target_col, [0, 1]).success
-    assert pd_df_ge.expect_column_values_to_not_be_null("trans_num").success
+    # pd_df_ge = gx.from_pandas(df)
+    assert set(df.columns) == set(expected_columns)
+    assert df["trans_num"].notnull().all() and df["trans_num"].is_unique
+    assert df[target_col].isin([0, 1, 2]).all()
+    assert df["amt"].dtype == "float64"
 
-    # Full Suite Assertion
     if not checkpoint_result["success"]:
-        logger.warning("Great Expectations suite failed.")
+        failed = get_validation_results(checkpoint_result)
+        failed_rows = failed[failed["Success"] == False]
+        logger.warning(f"{len(failed_rows)} expectations failed:\n{failed_rows[['Expectation Type', 'Column', 'Unexpected Percent']]}")
     else:
         logger.info("Great Expectations suite passed successfully.")
 

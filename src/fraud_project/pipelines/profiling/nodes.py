@@ -2,6 +2,7 @@ import logging
 from typing import Optional
 
 import pandas as pd
+from pathlib import Path
 from ydata_profiling import ProfileReport
 import great_expectations as gx
 from great_expectations.exceptions import DataContextError
@@ -64,7 +65,6 @@ def get_validation_results(checkpoint_result):
 
 def profile_and_validate_data(
     df: pd.DataFrame,
-    context_root_dir: str = "../../../gx",
     datasource_name: str = "profiling_datasource",
     data_asset_name: str = "profiling_asset",
     suite_name: str = "profiling_suite",
@@ -74,21 +74,12 @@ def profile_and_validate_data(
     Generate a ydata_profiling report, convert it to a Great Expectations suite, run validation,
     and return validation results as a DataFrame.
     """
-
-    import os
-    print("Current working dir:", os.getcwd())
-    print("GX path exists?", os.path.exists("../../../gx/great_expectations.yml"))
-
     # Generate ProfileReport with minimal=True (can be changed as needed)
     profile = ProfileReport(df, title="Profiling Report", minimal=True)
     logger.info("ProfileReport generated")
 
     # Get GE context
-    project_root_dir = os.getcwd()  # You're running from here
-    gx_path = os.path.join(project_root_dir, "gx")
-    context = gx.get_context(context_root_dir=gx_path)
-    # context = gx.get_context(context_root_dir=context_root_dir)
-    print("Loaded validation operators:", context.validation_operators.keys())
+    context = gx.get_context(context_root_dir="gx")
 
     # Add or get datasource
     try:
@@ -146,4 +137,17 @@ def profile_and_validate_data(
     df_validation = get_validation_results(checkpoint_result)
     
     logger.info("Validation results extracted.")
+
+    # Save profiling report
+    reporting_folder = "data/08_reporting"
+
+    report_path = Path(reporting_folder) / "profiling_report.html"
+    profile.to_file(report_path)
+    logger.info(f"Profiling report saved to {report_path}")
+
+    # Save validation results
+    validation_csv_path = Path(reporting_folder) / "profiling_results.csv"
+    df_validation.to_csv(validation_csv_path, index=False)
+    logger.info(f"Profiling results saved to {validation_csv_path}")
+
     return df_validation
