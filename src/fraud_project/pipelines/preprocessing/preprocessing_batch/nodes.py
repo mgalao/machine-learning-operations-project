@@ -3,12 +3,13 @@ This is a boilerplate pipeline
 generated using Kedro 0.18.8
 """
 from fraud_project.utils import *
-from utils.encoding import *
-from utils.cleaning import *
-from utils.feature_engineering import *
-from utils.missing_values import *
-from utils.outliers import *
-from utils.scaling import *
+
+from fraud_project.pipelines.preprocessing.utils_preprocessing.encoding import *
+from fraud_project.pipelines.preprocessing.utils_preprocessing.cleaning import *
+from fraud_project.pipelines.preprocessing.utils_preprocessing.feature_engineering import *
+from fraud_project.pipelines.preprocessing.utils_preprocessing.missing_values import *
+from fraud_project.pipelines.preprocessing.utils_preprocessing.outliers import *
+from fraud_project.pipelines.preprocessing.utils_preprocessing.scaling import *
 
 
 from kedro.config import OmegaConfigLoader
@@ -24,10 +25,8 @@ credentials = conf_loader["credentials"]
 logger = logging.getLogger(__name__)
 
 def preprocessing_batch(data: pd.DataFrame, params: Dict[str, Any]) -> pd.DataFrame:
-    data = convert_datetime(data)
-    data = convert_strings(data)
-    data = create_time_features(data)
-    data = cap_min_age(data)
+
+    # CORRIGIR!!!!!!!!!!!!!!!!!!
     data = impute_merch_zipcode(data)
 
     features = {
