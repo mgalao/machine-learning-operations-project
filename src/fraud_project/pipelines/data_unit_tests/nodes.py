@@ -18,7 +18,6 @@ from kedro.config import OmegaConfigLoader
 from kedro.framework.project import settings
 
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -66,86 +65,190 @@ def get_validation_results(checkpoint_result):
         
     return df_validation
 
-
-def test_data(df):
-    # context = gx.get_context(context_root_dir = "//..//..//gx")
-    context = gx.get_context(context_root_dir = "../gx")
+def test_data(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
+    logger = logging.getLogger(__name__)
+    context = gx.get_context(context_root_dir="../gx")
     datasource_name = "fraud_datasource"
+    target_col = parameters["target_column"]
+
+    # Set up the data source
     try:
         datasource = context.sources.add_pandas(datasource_name)
-        logger.info("Data Source created.")
-    except:
-        logger.info("Data Source already exists.")
+        logger.info("Datasource created.")
+    except Exception:
+        logger.info("Datasource already exists.")
         datasource = context.datasources[datasource_name]
 
-    suite_fraud = context.add_or_update_expectation_suite(expectation_suite_name="fraud")
-    
-    #add more expectations to your data
-    expectation_marital = ExpectationConfiguration(
-    expectation_type="expect_column_distinct_values_to_be_in_set",
-    kwargs={
-        "column": "marital",
-        "value_set" : ['married', 'single', 'divorced']
-    },
+    suite = context.add_or_update_expectation_suite(expectation_suite_name="fraud")
+
+    # Column existence
+    expected_columns = [
+        "cc_num", "merchant", "category", "first", "last", "gender", "street", "city", "state", "zip", "job",
+        "merch_zipcode", "age", "amt", "lat", "long", "city_pop", "merch_lat", "merch_long", "datetime",
+        "trans_num", target_col
+    ]
+    suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_table_columns_to_match_set",
+            kwargs={"column_set": expected_columns, "exact_match": True},
         )
-    suite_fraud.add_expectation(expectation_configuration=expectation_marital)
-
-    expectation_balance = ExpectationConfiguration(
-        expectation_type="expect_column_values_to_be_between",
-        kwargs={
-            "column": "balance",
-            "max_value": 105000,
-            "min_value": 0
-        },
     )
-    suite_fraud.add_expectation(expectation_configuration=expectation_balance)
 
-    expectation_age = ExpectationConfiguration(
-        expectation_type="expect_column_values_to_be_between",
-        kwargs={
-            "column": "age",
-            "max_value": 100,
-            "min_value": 18
-        },
+    # ID Column Expectation
+    suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_column_values_to_be_unique",
+            kwargs={"column": "trans_num"}, # cc_num can be non-unique, representing multiple transactions
+        )
     )
-    suite_fraud.add_expectation(expectation_configuration=expectation_age)
 
+    # Numerical Column Expectations
+    numerical_expectations = [
+        ("age", 16, 120),
+        ("amt", 0, 1_000_000),
+        ("lat", -90, 90),
+        ("long", -180, 180),
+        ("city_pop", 0, 100_000_000),
+        ("merch_lat", -90, 90),
+        ("merch_long", -180, 180),
+    ]
+    for col, min_v, max_v in numerical_expectations:
+        suite.add_expectation(
+            ExpectationConfiguration(
+                expectation_type="expect_column_values_to_be_between",
+                kwargs={"column": col, "min_value": min_v, "max_value": max_v},
+            )
+        )
+        # Define null tolerance for each column
+        if col in {"amt", "age"}:
+            # No nulls allowed
+            null_kwargs = {"column": col}
+        else:
+            # Allow up to 5% nulls for other numerical columns
+            null_kwargs = {"column": col, "mostly": 0.95}
+            
+        suite.add_expectation(
+            ExpectationConfiguration(
+                expectation_type="expect_column_values_to_not_be_null",
+                kwargs=null_kwargs,
+            )
+        )
 
-    context.add_or_update_expectation_suite(expectation_suite=suite_fraud)
+    # Categorical Expectations
+    string_columns = [
+        "cc_num", "merchant", "category", "first", "last", "gender",
+        "street", "city", "state", "zip", "job", "merch_zipcode"
+    ]
+    for col in string_columns:
+        suite.add_expectation(
+            ExpectationConfiguration(
+                expectation_type="expect_column_values_to_not_be_null",
+                kwargs={"column": col, "mostly": 0.95},
+            )
+        )
 
-    data_asset_name = "test"
+    suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_column_values_to_be_in_set",
+            kwargs={"column": "gender", "value_set": ["M", "F", "U"]},
+        )
+    )
+
+    expected_states = [
+        'MO', 'CA', 'OR', 'PA', 'VA', 'NE', 'IA', 'IL', 'WV', 'OK', 'GA',
+        'MN', 'NM', 'NY', 'NC', 'LA', 'ME', 'KS', 'NV', 'NJ', 'AL', 'TX',
+        'SD', 'MA', 'MI', 'SC', 'MT', 'FL', 'MS', 'IN', 'UT', 'CT', 'KY',
+        'OH', 'MD', 'ID', 'ND', 'TN', 'WI', 'VT', 'WY', 'CO', 'NH', 'AR',
+        'WA', 'AZ', 'HI', 'DC', 'RI', 'AK', 'DE'
+    ]
+    suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_column_values_to_be_in_set",
+            kwargs={"column": "state", "value_set": expected_states},
+        )
+    )
+
+    # Regex Expectations
+    # DateTime: Expecting format 'YYYY-MM-DD HH:MM:SS'
+    suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_column_values_to_match_strftime_format",
+            kwargs={"column": "datetime", "strftime_format": "%Y-%m-%d %H:%M:%S"},
+        )
+    )
+    # Zip code: US ZIP codes typically 5 digits or 5+4 digits
+    suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_column_values_to_match_regex",
+            kwargs={
+                "column": "zip",
+                "regex": r"^\d{5}(-\d{4})?$"
+            },
+        )
+    )
+    # Credit Card Number: Simplified numeric check of 13 to 19 digits
+    suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_column_values_to_match_regex",
+            kwargs={
+                "column": "cc_num",
+                "regex": r"^\d{13,19}$"
+            },
+        )
+    )
+
+    # Target Variable Expectation
+    suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_column_values_to_be_in_set",
+            kwargs={"column": target_col, "value_set": [0, 1]},
+        )
+    )
+    suite.add_expectation(
+        ExpectationConfiguration(
+            expectation_type="expect_column_values_to_not_be_null",
+            kwargs={"column": target_col},
+        )
+    )
+
+    # Save the expectation suite
+    context.add_or_update_expectation_suite(expectation_suite=suite)
+
+    # Run Validation
+    data_asset_name = "fraud_data_asset"
     try:
-        data_asset = datasource.add_dataframe_asset(name=data_asset_name, dataframe= df)
-    except:
-        logger.info("The data asset alread exists. The required one will be loaded.")
+        data_asset = datasource.add_dataframe_asset(name=data_asset_name, dataframe=df)
+    except Exception:
+        logger.info("Data asset already exists.")
         data_asset = datasource.get_asset(data_asset_name)
 
-    batch_request = data_asset.build_batch_request(dataframe= df)
-
+    batch_request = data_asset.build_batch_request(dataframe=df)
 
     checkpoint = gx.checkpoint.SimpleCheckpoint(
-        name="checkpoint_marital",
+        name="fraud_data_checkpoint",
         data_context=context,
-        validations=[
-            {
-                "batch_request": batch_request,
-                "expectation_suite_name": "fraud",
-            },
-        ],
+        validations=[{
+            "batch_request": batch_request,
+            "expectation_suite_name": "fraud",
+        }],
     )
     checkpoint_result = checkpoint.run()
 
-    df_validation = get_validation_results(checkpoint_result)
-    #base on these results you can make an assert to stop your pipeline
-
+    # Manual Assertions
     pd_df_ge = gx.from_pandas(df)
+    assert pd_df_ge.expect_column_values_to_be_of_type("amt", "float64").success
+    assert pd_df_ge.expect_column_values_to_be_in_set(target_col, [0, 1]).success
+    assert pd_df_ge.expect_column_values_to_not_be_null("trans_num").success
 
-    assert pd_df_ge.expect_column_values_to_be_of_type("duration", "int64").success == True
-    assert pd_df_ge.expect_column_values_to_be_of_type("marital", "str").success == True
-    #assert pd_df_ge.expect_table_column_count_to_equal(23).success == False
+    # Full Suite Assertion
+    if not checkpoint_result["success"]:
+        logger.warning("Great Expectations suite failed.")
+    else:
+        logger.info("Great Expectations suite passed successfully.")
 
-    log = logging.getLogger(__name__)
-    log.info("Data passed on the unit data tests")
-  
-
+    # Return Result DataFrame
+    df_validation = get_validation_results(checkpoint_result)
+    logger.info(f"Validation suite results: {df_validation['Success'].value_counts().to_dict()}")
+    logger.info("Fraud data validation completed successfully.")
+    
     return df_validation
