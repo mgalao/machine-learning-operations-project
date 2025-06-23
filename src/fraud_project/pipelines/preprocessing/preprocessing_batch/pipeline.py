@@ -6,14 +6,14 @@ generated using Kedro 0.18.8
 
 from kedro.pipeline import Pipeline, node, pipeline
 
-from .nodes import feature_engineer
+from .nodes import preprocessing_batch
 
 def create_pipeline(**kwargs) -> Pipeline:
     return pipeline(
         [
             node(
-                func= feature_engineer,
-                inputs=["ana_data","encoder_transform"],
+                func= preprocessing_batch,
+                inputs=["ana_data","params"],
                 outputs= "preprocessed_batch_data",
                 name="preprocessed_batch",
             ),
