@@ -10,3 +10,4 @@ from difflib import get_close_matches
 import plotly.express as px
 from scipy.stats import chi2_contingency
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
