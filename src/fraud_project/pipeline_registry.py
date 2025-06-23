@@ -26,17 +26,20 @@ from fraud_project.pipelines import (
     ingestion as data_ingestion,
     data_unit_tests as data_tests,
     profiling as data_profiling,
-    preprocessing_train as preprocess_train,
+    # preprocessing_train as preprocess_train,
     split_train_pipeline as split_train,
     model_selection as model_selection_pipeline,
     model_train as model_train_pipeline,
     feature_selection as feature_selection_pipeline,
     split_data,
-    preprocessing_batch,
+    # preprocessing_batch,
     model_predict,
     # data_drift
 
 )
+
+from fraud_project.pipelines.preprocessing import preprocessing_batch, preprocessing_train
+
 
 def register_pipelines() -> Dict[str, Pipeline]:
     """Register the project's pipelines.
@@ -48,7 +51,7 @@ def register_pipelines() -> Dict[str, Pipeline]:
     data_unit_tests_pipeline = data_tests.create_pipeline()
     profiling_pipeline = data_profiling.create_pipeline()
     split_data_pipeline = split_data.create_pipeline()
-    preprocess_train_pipeline = preprocess_train.create_pipeline()
+    preprocess_train_pipeline = preprocessing_train.create_pipeline()
     split_train_pipeline = split_train.create_pipeline()
     model_train = model_train_pipeline.create_pipeline()
     model_selection = model_selection_pipeline.create_pipeline()
