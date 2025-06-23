@@ -1,0 +1,54 @@
+id_features:
+- cc_num
+- trans_num
+
+target_feature:
+- is_fraud
+
+categorical_features:
+  - merchant
+  - category
+  - first
+  - last
+  - gender
+  - street
+  - city
+  - state
+  - zip
+  - job
+  - unix_time
+  - merch_zipcode
+
+categorical_features_low_cardinality:
+  - category
+  - gender
+
+categorical_features_high_cardinality:
+  - merchant
+  - first
+  - last
+  - street
+  - city
+  - state
+  - zip
+  - job
+  - unix_time
+  - merch_zipcode
+
+numerical_features:
+  - amt
+  - lat
+  - long
+  - city_pop
+  - age
+  - merch_lat
+  - merch_long
+
+temporal_features:
+- trans_date_trans_time
+
+encoding:
+  low_cardinality: onehot
+  high_cardinality: frequency
+
+scaling: standard
