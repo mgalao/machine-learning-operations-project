@@ -3,9 +3,11 @@ numpy>=1.24,<2
 ipython>=8.10
 notebook
 jupyterlab>=3.0
-
-statsmodels==0.14.0
-phik==0.12.3
+pandas==2.1.4
+matplotlib
+seaborn
+scipy
+plotly
 
 # Kedro
 kedro~=0.19.5
@@ -14,19 +16,26 @@ kedro-datasets
 kedro-mlflow
 kedro-viz
 
-# Data processing
-pandas==2.1.4
+# Statistical Modeling
+statsmodels==0.14.0
+phik==0.12.3
 shap
 nannyml
-evidently>=0.5.0 # need to update data_drift nodes to use dashboard instead of report
+evidently>=0.5.0  # consider upgrading data_drift nodes to use dashboard instead of report
 # evidently==0.2.2q
 
-# Validation
+# Validation & Profiling
 great-expectations==0.17.23
-
-# Profiling
 ydata-profiling==4.16.1
 visions>=0.7.4
+
+# Geospatial
+# folium
+# for MarkerCluster plugin
+# folium.plugins
+
+# Machine Learning
+scikit-learn
 
 # Testing
 pytest~=7.2
