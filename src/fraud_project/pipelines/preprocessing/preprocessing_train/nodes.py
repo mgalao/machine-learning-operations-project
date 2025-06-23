@@ -6,13 +6,13 @@ generated using Kedro 0.18.8
 from kedro.config import OmegaConfigLoader
 from kedro.framework.project import settings
 
-from fraud_project.utils import *
-from utils.encoding import *
-from utils.cleaning import *
-from utils.feature_engineering import *
-from utils.missing_values import *
-from utils.outliers import *
-from utils.scaling import *
+# from fraud_project.utils import *
+from fraud_project.pipelines.preprocessing.utils_preprocessing.encoding import *
+from fraud_project.pipelines.preprocessing.utils_preprocessing.cleaning import *
+from fraud_project.pipelines.preprocessing.utils_preprocessing.feature_engineering import *
+from fraud_project.pipelines.preprocessing.utils_preprocessing.missing_values import *
+from fraud_project.pipelines.preprocessing.utils_preprocessing.outliers import *
+from fraud_project.pipelines.preprocessing.utils_preprocessing.scaling import *
 
 
 
@@ -35,20 +35,16 @@ def log_feature_summary(features: dict, max_display: int = 5):
         logger.info(f"{key.capitalize()} features ({n}): {preview}")
 
 def clean_data(data: pd.DataFrame) -> pd.DataFrame:
+    logger.info(f"Columns in dataset: {list(data.columns)}")
+
     data = convert_datetime(data)
     data = convert_strings(data)
-    data = create_time_features(data)
     data = cap_min_age(data)
     data = impute_merch_zipcode(data)
     return data
 
 
 def feature_engineering_pipeline(data: pd.DataFrame) -> Tuple[pd.DataFrame, Dict[str, Any]]:
-    data = convert_datetime(data)
-    data = convert_strings(data)
-    data = create_time_features(data)
-    data = cap_min_age(data)
-    data = impute_merch_zipcode(data)
 
     features = {
         "numerical": list(params_from_yml["numerical_features"]),
@@ -60,6 +56,7 @@ def feature_engineering_pipeline(data: pd.DataFrame) -> Tuple[pd.DataFrame, Dict
 
     data, features = drop_columns(data, features)
     data, new_features = feature_engineering(data)
+    data, features = drop_columns(data, features, features_to_drop=["datetime"])
 
     for key in features:
         features[key] = list(set(features[key] + new_features[key]))
@@ -71,7 +68,6 @@ def feature_engineering_pipeline(data: pd.DataFrame) -> Tuple[pd.DataFrame, Dict
     data, features = encode_temporal(data, features)
 
     data, scaler = scale_numerical(data, features["numerical"])
-    data = clean_data(data)
 
     params = {
         "amt_cap_val": cap_value,
