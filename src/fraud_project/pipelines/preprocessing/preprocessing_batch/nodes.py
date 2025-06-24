@@ -26,8 +26,10 @@ logger = logging.getLogger(__name__)
 
 def preprocessing_batch(data: pd.DataFrame, params: Dict[str, Any]) -> pd.DataFrame:
 
-    # CORRIGIR!!!!!!!!!!!!!!!!!!
-    data = impute_merch_zipcode(data)
+    data = convert_datetime(data)
+    data = convert_strings(data)
+    data = cap_min_age(data)
+    data = impute_merch_zipcode(data, mappings=params["zipcode_mappings"])
 
     features = {
         "numerical": list(params_from_yml["numerical_features"]),
@@ -70,10 +72,12 @@ def preprocessing_batch(data: pd.DataFrame, params: Dict[str, Any]) -> pd.DataFr
 
     # Cap amount using training value
     data['amt'] = np.minimum(data['amt'], params["amt_cap_val"])
-    data['log_amt'] = np.log1p(data['amt'])
+    data['log_amt'] = np.log1p(data['amt']).astype(float)
 
     for key in features:
         features[key] = list(set(features[key] + new_features[key]))
+    
+    data, features = drop_columns(data, features, features_to_drop=["datetime"])
 
     # Low-cardinality encoding using fitted encoder
     data, _, features = encode_low_cardinality(data, features, encoder=params["low_card_encoder"])
