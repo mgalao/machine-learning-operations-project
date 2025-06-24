@@ -29,6 +29,7 @@ def preprocessing_batch(data: pd.DataFrame, params: Dict[str, Any]) -> pd.DataFr
     data = convert_datetime(data)
     data = convert_strings(data)
     data = cap_min_age(data)
+    data = clean_rest_data(data)
     data = impute_merch_zipcode(data, mappings=params["zipcode_mappings"])
 
     features = {
