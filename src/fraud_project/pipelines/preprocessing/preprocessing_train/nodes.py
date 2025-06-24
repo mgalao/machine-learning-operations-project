@@ -39,6 +39,7 @@ def clean_data(data: pd.DataFrame) -> Tuple[pd.DataFrame, Dict[str, Any]]:
     data = convert_datetime(data)
     data = convert_strings(data)
     data = cap_min_age(data)
+    data = clean_rest_data(data)
     data, zipcode_mappings = impute_merch_zipcode(data)
     params = {"zipcode_mappings": zipcode_mappings}
     return data, params
