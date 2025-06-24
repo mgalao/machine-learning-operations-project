@@ -4,7 +4,6 @@
 # Link: https://docs.kedro.org/en/stable/data/data_catalog.html
 
 
-
 fraud_raw_data:
   type: pandas.CSVDataset
   filepath: data/01_raw/data_v1.csv
@@ -14,7 +13,6 @@ fraud_raw_data:
 ingested_data:
   type: pandas.CSVDataset
   filepath: data/02_intermediate/ingested_data.csv
-
 
 ref_data:
   type: pandas.CSVDataset
@@ -43,11 +41,15 @@ preprocessed_batch_data:
   type: pandas.CSVDataset
   filepath: data/03_primary/preprocessed_batch_data.csv
 
-encoder_transform:
-  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
-  dataset:
-    type: pickle.PickleDataset
-    filepath: data/04_feature/encoder.pkl
+# encoder_transform:
+#   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+#   dataset:
+#     type: pickle.PickleDataset
+#     filepath: data/04_feature/encoder.pkl
+
+feature_engineering_params:
+  type: pickle.PickleDataset
+  filepath: data/04_feature/feature_engineering_params.pkl
 
 X_train_data:
   type: pandas.CSVDataset
