@@ -22,16 +22,19 @@ ana_data:
   type: pandas.CSVDataset
   filepath: data/02_intermediate/ana_data.csv
 
-
 reporting_data_train:
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
   dataset:
     type: json.JSONDataset
     filepath: data/08_reporting/reporting_data_train.json
 
-reporting_tests:
+manual_tests_results:
   type: pandas.CSVDataset
-  filepath: data/08_reporting/data_tests.csv
+  filepath: data/08_reporting/manual_tests_results.csv
+
+industry_profiling_results:
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/industry_profiling_results.csv
 
 preprocessed_training_data:
   type: pandas.CSVDataset

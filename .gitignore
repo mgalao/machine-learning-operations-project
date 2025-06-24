@@ -13,5 +13,6 @@ __pycache__/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# MLflow experiment tracking
+# MLflow experiment tracking and artifacts
 mlruns/
+ml_artifacts/

@@ -24,8 +24,7 @@ from kedro.pipeline import Pipeline, pipeline
 
 from fraud_project.pipelines import (
     ingestion as data_ingestion,
-    data_unit_tests as data_tests,
-    profiling as data_profiling,
+    data_quality as data_quality,
     # preprocessing_train as preprocess_train,
     split_train_pipeline as split_train,
     model_selection as model_selection_pipeline,
@@ -48,8 +47,7 @@ def register_pipelines() -> Dict[str, Pipeline]:
         A mapping from a pipeline name to a ``Pipeline`` object.
     """
     ingestion_pipeline = data_ingestion.create_pipeline()
-    data_unit_tests_pipeline = data_tests.create_pipeline()
-    profiling_pipeline = data_profiling.create_pipeline()
+    data_quality_pipeline = data_quality.create_pipeline()
     split_data_pipeline = split_data.create_pipeline()
     preprocess_train_pipeline = preprocessing_train.create_pipeline()
     split_train_pipeline = split_train.create_pipeline()
@@ -62,10 +60,8 @@ def register_pipelines() -> Dict[str, Pipeline]:
 
     return {
         "ingestion": ingestion_pipeline,
-        "data_unit_tests": data_unit_tests_pipeline,
-        "profiling": profiling_pipeline,
-        "validation": data_unit_tests_pipeline + profiling_pipeline,
-        "ingestion_and_validation": ingestion_pipeline + data_unit_tests_pipeline + profiling_pipeline,
+        "data_validation": data_quality_pipeline,
+        "ingestion_and_validation": ingestion_pipeline + data_quality_pipeline,
         "split_data": split_data_pipeline,
         "preprocess_train": preprocess_train_pipeline,
         "split_train": split_train_pipeline,
