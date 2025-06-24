@@ -13,10 +13,9 @@ def create_pipeline(**kwargs) -> Pipeline:
         [
             node(
                 func= preprocessing_batch,
-                inputs=["ana_data","params"],
+                inputs=["ana_data", "feature_engineering_params"],
                 outputs= "preprocessed_batch_data",
                 name="preprocessed_batch",
             ),
-
         ]
     )
