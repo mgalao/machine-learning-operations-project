@@ -1,1 +1,1 @@
-{"ref_data": {"rows": 72614, "columns": 22, "file_size": 18012272}, "ref_data_cleaned": {"rows": 72614, "columns": 23}, "preprocessed_training_data": {"rows": 72614, "columns": 46, "file_size": 46873599}}
+{"ana_data": {"rows": 18153, "columns": 22, "file_size": 4501285}, "preprocessed_batch_data": {"rows": 18153, "columns": 46, "file_size": 11682751}}
