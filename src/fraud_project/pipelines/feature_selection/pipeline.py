@@ -8,6 +8,7 @@ from .nodes import (
     feature_selection,
     calculate_feature_correlations,
     calculate_feature_importance,
+    plot_feature_importance,
     select_statistical_features,
     recursive_feature_elimination
 )
@@ -29,6 +30,12 @@ def create_pipeline(**kwargs) -> Pipeline:
                 name="calculate_feature_importance",
             ),
             node(
+                func=plot_feature_importance,
+                inputs=["feature_importance_scores", "parameters"],
+                outputs="feature_importance_plot",
+                name="plot_feature_importance",
+            ),
+            node(
                 func=select_statistical_features,
                 inputs=["X_train_data", "y_train_data", "parameters"],
                 outputs="statistical_features",
@@ -42,7 +49,13 @@ def create_pipeline(**kwargs) -> Pipeline:
             ),
             node(
                 func=feature_selection,
-                inputs=["X_train_data", "y_train_data", "parameters"],
+                inputs=[
+                    "feature_correlations",
+                    "feature_importance_scores",
+                    "statistical_features",
+                    "rfe_features",
+                    "parameters"
+                ],
                 outputs="feature_selection_results",
                 name="final_feature_selection",
             ),

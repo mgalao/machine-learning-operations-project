@@ -74,6 +74,11 @@ production_columns:
     type: pickle.PickleDataset
     filepath: data/06_models/production_cols.pkl
 
+feature_importance_plot:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/feature_importance_plot.png
 
 best_columns:
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset

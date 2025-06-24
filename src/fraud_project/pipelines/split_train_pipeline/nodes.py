@@ -28,7 +28,7 @@ def split_data(
     assert [col for col in data.columns if data[col].isnull().any()] == []
     y = data[parameters["target_column"]]
     X = data.drop(columns=parameters["target_column"], axis=1)
-    X = X.drop(columns="index", axis=1)
+    X = X.drop(columns="trans_num", axis=1)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=parameters["test_fraction"], random_state=parameters["random_state"])
 
