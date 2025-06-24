@@ -17,4 +17,4 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Union
