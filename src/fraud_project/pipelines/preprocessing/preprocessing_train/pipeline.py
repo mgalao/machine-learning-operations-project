@@ -13,13 +13,13 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func= clean_data,
                 inputs="ref_data",
-                outputs="ref_data_cleaned",
+                outputs=["ref_data_cleaned", "cleaning_params"],
                 name="clean_data",
             ),
             node(
                 func= feature_engineering_pipeline,
-                inputs="ref_data_cleaned",
-                outputs=["preprocessed_training_data","params"],
+                inputs=["ref_data_cleaned", "cleaning_params"],
+                outputs=["preprocessed_training_data","feature_engineering_params"],
                 name="preprocessed_training",
             ),
         ]
