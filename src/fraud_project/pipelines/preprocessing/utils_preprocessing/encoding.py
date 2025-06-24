@@ -2,14 +2,16 @@
 from fraud_project.utils import *
 
 # --------------- encoding ---------------------
+logger = logging.getLogger(__name__)
 
 def encode_low_cardinality(data: pd.DataFrame, features: dict, encoder: OneHotEncoder = None) -> Tuple[pd.DataFrame, OneHotEncoder, dict]:
-    low_card_cols = features["categorical_features_low_cardinality"]
 
     if encoder is None:
+        low_card_cols = features["categorical_features_low_cardinality"]
         encoder = OneHotEncoder(drop='first', handle_unknown='ignore')
         encoded_array = encoder.fit_transform(data[low_card_cols])
     else:
+        low_card_cols = low_card_cols = list(encoder.feature_names_in_)
         encoded_array = encoder.transform(data[low_card_cols])
 
     encoded_df = pd.DataFrame(
