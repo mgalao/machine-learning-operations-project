@@ -10,6 +10,12 @@ def convert_strings(data: pd.DataFrame) -> pd.DataFrame:
     data['zip'] = data['zip'].astype(str)
     return data
 
+def convert_float(data: pd.DataFrame) -> pd.DataFrame:
+    data['long'] = data['long'].astype(float)
+    data['amt'] = data['amt'].astype(float)
+    data['city_pop'] = data['city_pop'].astype(float)
+    return data
+
 def cap_min_age(data: pd.DataFrame, min_age: int = 16) -> pd.DataFrame:
     data = data.copy()
 
