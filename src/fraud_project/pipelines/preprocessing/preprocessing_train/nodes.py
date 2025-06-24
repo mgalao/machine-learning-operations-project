@@ -34,17 +34,17 @@ def log_feature_summary(features: dict, max_display: int = 5):
         preview = ', '.join(cols[:max_display]) + ('...' if n > max_display else '')
         logger.info(f"{key.capitalize()} features ({n}): {preview}")
 
-def clean_data(data: pd.DataFrame) -> pd.DataFrame:
+def clean_data(data: pd.DataFrame) -> Tuple[pd.DataFrame, Dict[str, Any]]:
     logger.info(f"Columns in dataset: {list(data.columns)}")
-
     data = convert_datetime(data)
     data = convert_strings(data)
     data = cap_min_age(data)
-    data = impute_merch_zipcode(data)
-    return data
+    data, zipcode_mappings = impute_merch_zipcode(data)
+    params = {"zipcode_mappings": zipcode_mappings}
+    return data, params
 
 
-def feature_engineering_pipeline(data: pd.DataFrame) -> Tuple[pd.DataFrame, Dict[str, Any]]:
+def feature_engineering_pipeline(data: pd.DataFrame, params: Dict[str, Any]) -> Tuple[pd.DataFrame, Dict[str, Any]]:
 
     features = {
         "numerical": list(params_from_yml["numerical_features"]),
@@ -70,6 +70,7 @@ def feature_engineering_pipeline(data: pd.DataFrame) -> Tuple[pd.DataFrame, Dict
     data, scaler = scale_numerical(data, features["numerical"])
 
     params = {
+        **params,
         "amt_cap_val": cap_value,
         "low_card_encoder": low_card_encoder,
         "high_card_mappings": high_card_mappings,
