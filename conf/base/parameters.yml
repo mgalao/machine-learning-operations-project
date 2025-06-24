@@ -40,7 +40,6 @@ categorical_features:
   - state
   - zip
   - job
-  - unix_time
   - merch_zipcode
 
 categorical_features_low_cardinality:
