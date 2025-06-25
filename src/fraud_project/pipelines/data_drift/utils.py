@@ -15,7 +15,6 @@ def calculate_psi(expected, actual, buckettype='bins', buckets=10, axis=0):
        github.com/mwburke
        worksofchart.com
     '''
-
     def psi(expected_array, actual_array, buckets):
         '''Calculate the PSI for a single variable
         Args:
@@ -25,53 +24,40 @@ def calculate_psi(expected, actual, buckettype='bins', buckets=10, axis=0):
         Returns:
            psi_value: calculated PSI value
         '''
-
-        def scale_range (input, min, max):
+        def scale_range(input, min_val, max_val):
             input += -(np.min(input))
-            input /= np.max(input) / (max - min)
-            input += min
+            input /= np.max(input) / (max_val - min_val)
+            input += min_val
             return input
 
-
-        breakpoints = np.arange(0, buckets + 1) / (buckets) * 100
+        breakpoints = np.arange(0, buckets + 1) / buckets * 100
 
         if buckettype == 'bins':
             breakpoints = scale_range(breakpoints, np.min(expected_array), np.max(expected_array))
         elif buckettype == 'quantiles':
-            breakpoints = np.stack([np.percentile(expected_array, b) for b in breakpoints])
-
-
+            breakpoints = np.percentile(expected_array, breakpoints)
 
         expected_percents = np.histogram(expected_array, breakpoints)[0] / len(expected_array)
         actual_percents = np.histogram(actual_array, breakpoints)[0] / len(actual_array)
 
         def sub_psi(e_perc, a_perc):
-            '''Calculate the actual PSI value from comparing the values.
-               Update the actual value to a very small number if equal to zero
-            '''
-            if a_perc == 0:
-                a_perc = 0.0001
-            if e_perc == 0:
-                e_perc = 0.0001
+            e_perc = max(e_perc, 0.0001)
+            a_perc = max(a_perc, 0.0001)
+            return (e_perc - a_perc) * np.log(e_perc / a_perc)
 
-            value = (e_perc - a_perc) * np.log(e_perc / a_perc)
-            return(value)
+        psi_value = np.sum([sub_psi(expected_percents[i], actual_percents[i]) for i in range(len(expected_percents))])
+        return psi_value
 
-        psi_value = np.sum(sub_psi(expected_percents[i], actual_percents[i]) for i in range(0, len(expected_percents)))
-
-        return(psi_value)
-
+    # Fix initialization
     if len(expected.shape) == 1:
-        psi_values = np.empty(len(expected.shape))
+        psi_values = np.array([psi(expected, actual, buckets)])
     else:
-        psi_values = np.empty(expected.shape[axis])
+        psi_values = np.zeros(expected.shape[1] if axis == 0 else expected.shape[0])
 
-    for i in range(0, len(psi_values)):
-        if len(psi_values) == 1:
-            psi_values = psi(expected, actual, buckets)
-        elif axis == 0:
-            psi_values[i] = psi(expected[:,i], actual[:,i], buckets)
-        elif axis == 1:
-            psi_values[i] = psi(expected[i,:], actual[i,:], buckets)
+        for i in range(len(psi_values)):
+            if axis == 0:
+                psi_values[i] = psi(expected[:, i], actual[:, i], buckets)
+            elif axis == 1:
+                psi_values[i] = psi(expected[i, :], actual[i, :], buckets)
 
-    return(psi_values)
+    return psi_values
