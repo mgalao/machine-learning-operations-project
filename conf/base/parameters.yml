@@ -8,10 +8,10 @@ feature_selection: "weighted"  # <- changed this
 
 # Detailed feature selection parameters
 feature_selection_params:
-  k_best_features: 15  # Number of features to select using statistical tests
-  n_features_to_select: 15  # Number of features to select using RFE
+  k_best_features: 10  # Number of features to select using statistical tests
+  n_features_to_select: 10  # Number of features to select using RFE
   combination_method: "weighted"  # Options are "union", "intersection", "weighted"
-  top_n_features: 20  # Number of top features to select when using weighted method
+  top_n_features: 10  # Number of top features to select when using weighted method
   correlation_threshold: 0.7  # Threshold for high correlation
 
 model_name: "fraud"

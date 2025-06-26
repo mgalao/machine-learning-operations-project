@@ -52,7 +52,7 @@ def plot_feature_importance(importance_df: pd.DataFrame, parameters: Dict) -> pl
         A matplotlib Figure
     """
     # Get top N features based on parameters
-    top_n = parameters.get("feature_selection_params", {}).get("top_n_features", 15)
+    top_n = parameters.get("feature_selection_params", {}).get("top_n_features", 10)
     top_features = importance_df.sort_values("importance", ascending=False).head(top_n)
 
     # Create horizontal bar plot
@@ -111,54 +111,6 @@ def recursive_feature_elimination(X_train_data: pd.DataFrame, y_train_data: pd.S
     selected_features = X_train_data.columns[rfe.support_]
     return list(selected_features)
 
-# def feature_selection(X_train_data: pd.DataFrame, y_train_data: pd.Series, 
-#                      parameters: Dict) -> Dict:
-#     """
-#     Main feature selection function that combines multiple methods
-    
-#     Args:
-#         X_train_data: Training features
-#         y_train_data: Target variable
-#         parameters: Pipeline parameters
-        
-#     Returns:
-#         Dictionary containing selected features and metadata
-#     """
-#     # Calculate feature correlations
-#     correlations = calculate_feature_correlations(X_train_data)
-    
-#     # Calculate feature importance
-#     importance = calculate_feature_importance(X_train_data, y_train_data)
-    
-#     # Statistical feature selection
-#     statistical_features = select_statistical_features(X_train_data, y_train_data, parameters)
-    
-#     # Recursive feature elimination
-#     rfe_features = recursive_feature_elimination(X_train_data, y_train_data, parameters)
-    
-#     # Combine results - use the method specified in parameters or default to "union"
-#     method = parameters.get("feature_selection_params", {}).get("combination_method", "union")
-
-    
-#     if method == "intersection":
-#         final_features = list(set(statistical_features).intersection(set(rfe_features)))
-#     elif method == "weighted":
-#         # Get top N features from importance
-#         top_n = parameters.get("feature_selection_params", {}).get("top_n_features", 15)
-#         importance_features = list(importance['feature'].head(top_n))
-#         final_features = list(set(importance_features + statistical_features + rfe_features))
-#     else:  # Default to union
-#         final_features = list(set(statistical_features).union(set(rfe_features)))
-    
-#     # Return the results including metadata for analysis
-#     return {
-#         "best_columns": final_features,
-#         "feature_importance": importance,
-#         "correlation_matrix": correlations,
-#         "statistical_features": statistical_features,
-#         "rfe_features": rfe_features
-#     }
-
 def feature_selection(
     feature_correlations: pd.DataFrame,
     feature_importance_scores: pd.DataFrame,
@@ -186,7 +138,7 @@ def feature_selection(
         final_features = list(set(statistical_features).intersection(set(rfe_features)))
     elif method == "weighted":
         # Get top N features from importance
-        top_n = parameters.get("feature_selection_params", {}).get("top_n_features", 15)
+        top_n = parameters.get("feature_selection_params", {}).get("top_n_features", 10)
         importance_features = list(feature_importance_scores['feature'].head(top_n))
         final_features = list(set(importance_features + statistical_features + rfe_features))
     else:  # Default to union

@@ -12,7 +12,8 @@ plotly
 # Kedro
 kedro~=0.19.5
 kedro-telemetry>=0.3.1
-kedro-datasets[pickle]       # Added support for PickleDataSet
+kedro-datasets[pickle]     # Added support for PickleDataSet
+kedro-datasets[pandas]     # Added support for PandasDataSet
 kedro-mlflow
 kedro-viz
 

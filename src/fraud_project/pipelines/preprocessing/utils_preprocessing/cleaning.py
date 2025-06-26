@@ -1,6 +1,6 @@
 from fraud_project.utils import *
 
-# --------------- initial cleaning and incoherences tretament ---------------------
+# --------------- initial cleaning and incoherences treatment ---------------------
 
 def convert_datetime(data: pd.DataFrame) -> pd.DataFrame:
     data['datetime'] = pd.to_datetime(data['datetime'], errors='coerce')
@@ -16,7 +16,6 @@ def cap_min_age(data: pd.DataFrame, min_age: int = 16) -> pd.DataFrame:
     data.loc[data['age'] < min_age, 'age'] = min_age
 
     return data
-
 
 def drop_columns(data: pd.DataFrame, features: Dict[str, List[str]], features_to_drop: List=['merchant', 'first']) -> Tuple[pd.DataFrame, Dict[str, List[str]]]:
     data = data.copy()
