@@ -5499,3 +5499,234 @@ could not convert string to float: '1b95848e9578254d88febb771e76dad9'
 2025-06-26 01:03:10,835 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
 
 2025-06-26 01:03:11,329 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:04:30,904 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:04:31,254 - py.warnings - WARNING - /opt/anaconda3/lib/python3.12/site-packages/kedro/io/data_catalog.py:165: KedroDeprecationWarning: `DataCatalog` has been deprecated and will be replaced by `KedroDataCatalog`, in Kedro 1.0.0.Currently some `KedroDataCatalog` APIs have been retained for compatibility with `DataCatalog`, including the `datasets` property and the `get_datasets`, `_get_datasets`, `add`,` list`, `add_feed_dict`, and `shallow_copy` methods. These will be removed or replaced with updated alternatives in Kedro 1.0.0. For more details, refer to the documentation: https://docs.kedro.org/en/stable/data/index.html#kedrodatacatalog-experimental-feature
+  warnings.warn(
+
+2025-06-26 11:04:36,864 - py.warnings - WARNING - /opt/anaconda3/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:04:36,935 - py.warnings - WARNING - /opt/anaconda3/lib/python3.12/site-packages/kedro/io/data_catalog.py:165: KedroDeprecationWarning: `DataCatalog` has been deprecated and will be replaced by `KedroDataCatalog`, in Kedro 1.0.0.Currently some `KedroDataCatalog` APIs have been retained for compatibility with `DataCatalog`, including the `datasets` property and the `get_datasets`, `_get_datasets`, `add`,` list`, `add_feed_dict`, and `shallow_copy` methods. These will be removed or replaced with updated alternatives in Kedro 1.0.0. For more details, refer to the documentation: https://docs.kedro.org/en/stable/data/index.html#kedrodatacatalog-experimental-feature
+  warnings.warn(
+
+2025-06-26 11:04:37,093 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:04:37,102 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:04:37,128 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:04:56,297 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:04:56,447 - py.warnings - WARNING - /opt/anaconda3/lib/python3.12/site-packages/kedro/io/data_catalog.py:165: KedroDeprecationWarning: `DataCatalog` has been deprecated and will be replaced by `KedroDataCatalog`, in Kedro 1.0.0.Currently some `KedroDataCatalog` APIs have been retained for compatibility with `DataCatalog`, including the `datasets` property and the `get_datasets`, `_get_datasets`, `add`,` list`, `add_feed_dict`, and `shallow_copy` methods. These will be removed or replaced with updated alternatives in Kedro 1.0.0. For more details, refer to the documentation: https://docs.kedro.org/en/stable/data/index.html#kedrodatacatalog-experimental-feature
+  warnings.warn(
+
+2025-06-26 11:04:58,413 - py.warnings - WARNING - /opt/anaconda3/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:04:58,506 - py.warnings - WARNING - /opt/anaconda3/lib/python3.12/site-packages/kedro/io/data_catalog.py:165: KedroDeprecationWarning: `DataCatalog` has been deprecated and will be replaced by `KedroDataCatalog`, in Kedro 1.0.0.Currently some `KedroDataCatalog` APIs have been retained for compatibility with `DataCatalog`, including the `datasets` property and the `get_datasets`, `_get_datasets`, `add`,` list`, `add_feed_dict`, and `shallow_copy` methods. These will be removed or replaced with updated alternatives in Kedro 1.0.0. For more details, refer to the documentation: https://docs.kedro.org/en/stable/data/index.html#kedrodatacatalog-experimental-feature
+  warnings.warn(
+
+2025-06-26 11:04:58,642 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:04:58,647 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:05:03,647 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:07:27,957 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:07:33,956 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:07:34,303 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-26 11:07:34,508 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:07:34,524 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:08:07,362 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-26 11:08:12,923 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:08:17,849 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:08:34,712 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:10:16,184 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:10:18,433 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:10:18,559 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-26 11:10:18,640 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:10:18,646 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:10:21,908 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-26 11:10:22,345 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:10:23,173 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:10:23,896 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:11:01,331 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:11:03,422 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:11:03,575 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-26 11:11:03,661 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:11:03,668 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:11:06,558 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-26 11:11:06,934 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:11:07,750 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:11:08,482 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:11:09,184 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'split_data' - '5b88ace1d4d943dd822718a3ecf30bd1' has started
+2025-06-26 11:11:09,197 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-26 11:11:09,199 - kedro.io.data_catalog - INFO - Loading data from ingested_data (CSVDataset)...
+2025-06-26 11:11:09,546 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'split_data' - '5b88ace1d4d943dd822718a3ecf30bd1' at node level for multi-threading
+2025-06-26 11:11:09,548 - kedro.pipeline.node - INFO - Running node: split_out_of_sample: split_random([ingested_data]) -> [ref_data;ana_data]
+2025-06-26 11:11:09,571 - kedro.io.data_catalog - INFO - Saving data to ref_data (CSVDataset)...
+2025-06-26 11:11:10,159 - kedro.io.data_catalog - INFO - Saving data to ana_data (CSVDataset)...
+2025-06-26 11:11:10,309 - kedro.runner.sequential_runner - INFO - Completed node: split_out_of_sample
+2025-06-26 11:11:10,310 - kedro.runner.sequential_runner - INFO - Completed 1 out of 1 tasks
+2025-06-26 11:11:10,311 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 1.1 sec.
+2025-06-26 11:13:12,089 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:13:14,445 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:13:14,573 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-26 11:13:14,806 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:13:14,816 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:13:17,951 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-26 11:13:18,358 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:13:19,160 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:13:23,664 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:13:39,049 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:13:40,880 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:13:41,038 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-26 11:13:41,110 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:13:41,115 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:13:43,835 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-26 11:13:44,274 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:13:45,054 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:13:55,087 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:14:08,918 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:14:10,915 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:14:11,046 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-26 11:14:11,129 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:14:11,135 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:14:13,974 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-26 11:14:14,406 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:14:15,223 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:14:17,597 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:14:18,365 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'data_drift_pipeline' - 'b8789babc44746508bd1bb1acbcc6030' has started
+2025-06-26 11:14:18,388 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-26 11:14:18,390 - kedro.io.data_catalog - INFO - Loading data from ref_data (CSVDataset)...
+2025-06-26 11:14:18,639 - kedro.io.data_catalog - INFO - Loading data from ana_data (CSVDataset)...
+2025-06-26 11:14:18,729 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'data_drift_pipeline' - 'b8789babc44746508bd1bb1acbcc6030' at node level for multi-threading
+2025-06-26 11:14:18,731 - kedro.pipeline.node - INFO - Running node: data_drift: data_drift([ref_data;ana_data]) -> [drift_result]
+2025-06-26 11:14:26,214 - kedro.io.data_catalog - INFO - Saving data to drift_result (CSVDataset)...
+2025-06-26 11:14:26,217 - kedro.runner.sequential_runner - WARNING - No nodes ran. Repeat the previous command to attempt a new run.
+2025-06-26 11:14:26,218 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'b8789babc44746508bd1bb1acbcc6030' was closed because of an error in the pipeline.
+2025-06-26 11:14:26,342 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'b8789babc44746508bd1bb1acbcc6030' was closed because of an error in the pipeline.
+2025-06-26 11:19:29,290 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:19:31,315 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:19:31,438 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-26 11:19:31,512 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:19:31,518 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:19:34,244 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-26 11:19:34,630 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:19:35,397 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:19:37,745 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:21:45,294 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:21:47,402 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:21:47,529 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-26 11:21:47,594 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:21:47,600 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:21:50,602 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-26 11:21:51,007 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:21:51,764 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:21:53,978 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:23:15,281 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:23:17,413 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:23:17,541 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-26 11:23:17,627 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:23:17,635 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:23:20,625 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-26 11:23:20,776 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:23:32,995 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:23:34,726 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:23:34,847 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-26 11:23:34,927 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:23:34,934 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:23:38,022 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-26 11:23:38,606 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:23:39,901 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:23:42,869 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:25:35,539 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-26 11:25:37,221 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-26 11:25:37,344 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-26 11:25:37,408 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-26 11:25:37,414 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-26 11:25:40,276 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-26 11:25:40,678 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:25:41,452 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-26 11:25:43,660 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-26 11:25:44,323 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'data_drift_pipeline' - 'c9067f360fe248cf85aa40cd7663e217' has started
+2025-06-26 11:25:44,342 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-26 11:25:44,344 - kedro.io.data_catalog - INFO - Loading data from ref_data (CSVDataset)...
+2025-06-26 11:25:44,589 - kedro.io.data_catalog - INFO - Loading data from ana_data (CSVDataset)...
+2025-06-26 11:25:44,691 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'data_drift_pipeline' - 'c9067f360fe248cf85aa40cd7663e217' at node level for multi-threading
+2025-06-26 11:25:44,692 - kedro.pipeline.node - INFO - Running node: data_drift_node: data_drift([ref_data;ana_data]) -> [psi_scores;pca_psi_scores;nannyml_drift;drifted_features]
+2025-06-26 11:25:51,599 - kedro.io.data_catalog - INFO - Saving data to psi_scores (CSVDataset)...
+2025-06-26 11:25:51,606 - kedro.io.data_catalog - INFO - Saving data to pca_psi_scores (CSVDataset)...
+2025-06-26 11:25:51,609 - kedro.io.data_catalog - INFO - Saving data to nannyml_drift (CSVDataset)...
+2025-06-26 11:25:51,619 - kedro.io.data_catalog - INFO - Saving data to drifted_features (JSONDataset)...
+2025-06-26 11:25:51,649 - kedro.runner.sequential_runner - INFO - Completed node: data_drift_node
+2025-06-26 11:25:51,650 - kedro.runner.sequential_runner - INFO - Completed 1 out of 1 tasks
+2025-06-26 11:25:51,651 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 7.3 sec.

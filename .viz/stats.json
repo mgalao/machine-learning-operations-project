@@ -1,1 +1,1 @@
-{"X_train_data": {"rows": 50829, "columns": 44, "file_size": 29821975}, "feature_correlations": {"rows": 44, "columns": 44}, "y_train_data": {"rows": 50829, "columns": 1, "file_size": 101667}, "feature_importance_scores": {"rows": 44, "columns": 2}}
+{"ref_data": {"rows": 72614, "columns": 22, "file_size": 18012272}, "ana_data": {"rows": 18153, "columns": 22, "file_size": 4501285}, "nannyml_drift": {"rows": 364, "columns": 35, "file_size": 89965}}

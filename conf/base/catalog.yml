@@ -33,8 +33,24 @@ manual_tests_results:
   filepath: data/08_reporting/manual_tests_results.csv
 
 industry_profiling_results:
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
   filepath: data/08_reporting/industry_profiling_results.csv
+
+psi_scores:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/psi_scores.csv
+
+pca_psi_scores:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/pca_psi_scores.csv
+
+nannyml_drift:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/nannyml_drift.csv
+  
+drifted_features:
+  type: kedro_datasets.json.JSONDataset
+  filepath: data/08_reporting/drifted_features.json
 
 preprocessed_training_data:
   type: pandas.CSVDataset

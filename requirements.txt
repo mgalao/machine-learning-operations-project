@@ -12,8 +12,10 @@ plotly
 # Kedro
 kedro~=0.19.5
 kedro-telemetry>=0.3.1
+kedro-datasets
 kedro-datasets[pickle]     # Added support for PickleDataSet
 kedro-datasets[pandas]     # Added support for PandasDataSet
+kedro-datasets[json]     # Added support for JSONDataSet
 kedro-mlflow
 kedro-viz
 
@@ -22,7 +24,7 @@ statsmodels==0.14.0
 phik==0.12.3
 shap
 nannyml
-evidently>=0.5.0  # consider upgrading data_drift nodes to use dashboard instead of report
+evidently==0.6.6  # consider upgrading data_drift nodes to use dashboard instead of report
 # evidently==0.2.2q
 
 # Validation & Profiling

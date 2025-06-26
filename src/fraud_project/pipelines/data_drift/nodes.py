@@ -77,9 +77,4 @@ def data_drift(data_reference: pd.DataFrame, data_analysis: pd.DataFrame) -> dic
     if (psi_pca > 0.1).any():
         logger.warning("Significant drift in PCA components detected: \n%s", psi_pca[psi_pca > 0.1])
 
-    return {
-        "psi_scores": psi_series.to_dict(),
-        "pca_psi_scores": psi_pca.to_dict(),
-        "nannyml_drift": drift_df.to_dict(orient="records"),
-        "drifted_features": drifted_features.index.tolist()
-    }
+    return psi_series, psi_pca, drift_df, drifted_features.tolist()

@@ -11,12 +11,11 @@ from .nodes import data_drift
 def create_pipeline(**kwargs) -> Pipeline:
     return pipeline(
          [
-             node(
-                 func= data_drift,
-                 inputs=["ref_data","ana_data"],
-                 outputs= "drift_result",
-                 name="data_drift",
-             ),
-
+            node(
+                func=data_drift,
+                inputs=["ref_data", "ana_data"],
+                outputs=["psi_scores", "pca_psi_scores", "nannyml_drift", "drifted_features"],
+                name="data_drift_node"
+            )
          ]
      )
