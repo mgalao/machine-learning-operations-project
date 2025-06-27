@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 def data_drift(data_reference: pd.DataFrame, data_analysis: pd.DataFrame) -> dict:
     numerical_features = ['amt', 'lat', 'long', 'city_pop', 'merch_lat', 'merch_long']
-    categorical_features = ['merchant', 'category', 'gender', 'city', 'state', 'zip', 'job']
+    categorical_features = ['category', 'gender', 'city', 'state', 'zip']
 
     # ----------- PSI SECTION -----------
     psi_scores = calculate_psi(
@@ -46,11 +46,11 @@ def data_drift(data_reference: pd.DataFrame, data_analysis: pd.DataFrame) -> dic
     report.save_html("data/08_reporting/data_drift_evidently.html")
 
     # ----------- NANNYML CATEGORICAL DRIFT -----------
-    threshold = nml.thresholds.ConstantThreshold(lower=None, upper=0.2)
+    threshold = nml.thresholds.ConstantThreshold(lower=None, upper=0.25)
     calc = nml.UnivariateDriftCalculator(
         column_names=categorical_features,
         treat_as_categorical=categorical_features,
-        chunk_size=50,
+        chunk_size=1000,
         categorical_methods=['jensen_shannon'],
         thresholds={"jensen_shannon": threshold}
     )
