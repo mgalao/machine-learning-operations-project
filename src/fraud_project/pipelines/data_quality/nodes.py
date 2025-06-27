@@ -384,13 +384,13 @@ def industry_profiling(
     # Save reports
     Path(output_folder).mkdir(parents=True, exist_ok=True)
 
-    html_path = Path(output_folder) / f"{name_prefix}_profiling_report.html"
-    csv_path = Path(output_folder) / f"{name_prefix}_profiling_results.csv"
+    html_path = Path(output_folder) / f"{name_prefix}_report.html"
+    csv_path = Path(output_folder) / f"{name_prefix}_results.csv"
 
     profile.to_file(html_path)
     df_validation.to_csv(csv_path, index=False)
 
-    logger.info(f"YProfiling profiling report saved: {html_path}")
-    logger.info(f"YProfiling profiling results saved: {csv_path}")
+    logger.info(f"YProfiling report saved: {html_path}")
+    logger.info(f"YProfiling results saved: {csv_path}")
 
     return None
