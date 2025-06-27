@@ -107,9 +107,23 @@ def test_recursive_feature_elimination(sample_data, parameters):
 def test_feature_selection_main(sample_data, parameters):
     """Test the main feature selection function."""
     X, y = sample_data
-    results = feature_selection()
-    
-    # check output type and structure
+
+    # Generate all required inputs
+    feature_correlations = calculate_feature_correlations(X)
+    feature_importance_scores = calculate_feature_importance(X, y)
+    statistical_features = select_statistical_features(X, y, parameters)
+    rfe_features = recursive_feature_elimination(X, y, parameters)
+
+    # Pass all 5 required arguments
+    results = feature_selection(
+        feature_correlations,
+        feature_importance_scores,
+        statistical_features,
+        rfe_features,
+        parameters
+    )
+
+    # Check structure
     assert isinstance(results, dict)
     assert "best_columns" in results
     assert "feature_importance" in results
@@ -117,18 +131,16 @@ def test_feature_selection_main(sample_data, parameters):
     assert "statistical_features" in results
     assert "rfe_features" in results
     assert isinstance(results["best_columns"], list)
-    
-    # should include all features from statistical and RFE
+
+    # Validate contents
     stat_features = results["statistical_features"]
     rfe_features = results["rfe_features"]
     best_columns = results["best_columns"]
-    
-    # all features from both methods should be included
+
     for feature in stat_features:
         assert feature in best_columns
     for feature in rfe_features:
         assert feature in best_columns
-
 
 def test_feature_selection_intersection(sample_data):
     """Test the feature selection with intersection method."""
