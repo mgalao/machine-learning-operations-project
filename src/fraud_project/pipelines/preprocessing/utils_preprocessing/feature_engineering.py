@@ -124,9 +124,4 @@ def feature_engineering(data: pd.DataFrame) -> Tuple[pd.DataFrame, dict]:
     new_features['categorical'].append('invalid_zip')
     new_features['categorical_features_low_cardinality'].append('invalid_zip')
 
-    # Invalid credit card number flag
-    data = add_flag_invalid_cc_num(data)
-    new_features['categorical'].append('invalid_cc_num')
-    new_features['categorical_features_low_cardinality'].append('invalid_cc_num')
-
     return data, new_features

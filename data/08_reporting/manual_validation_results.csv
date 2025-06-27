@@ -1,0 +1,58 @@
+Success,Expectation Type,Column,Column Pair,Max Value,Min Value,Element Count,Unexpected Count,Unexpected Percent,Value Set,Unexpected Value,Observed Value
+False,expect_column_values_to_not_be_null,cc_num,"('', '')",,,,,,,[],
+False,expect_column_values_to_match_regex,cc_num,"('', '')",,,,,,,[],
+True,expect_table_columns_to_match_set,,"('', '')",,,,,,,"['merchant', 'category', 'amt', 'first', 'last', 'gender', 'street', 'city', 'state', 'zip', 'lat', 'long', 'city_pop', 'job', 'trans_num', 'merch_lat', 'merch_long', 'is_fraud', 'merch_zipcode', 'datetime', 'cc_num_hashed', 'age']","['merchant', 'category', 'amt', 'first', 'last', 'gender', 'street', 'city', 'state', 'zip', 'lat', 'long', 'city_pop', 'job', 'trans_num', 'merch_lat', 'merch_long', 'is_fraud', 'merch_zipcode', 'datetime', 'cc_num_hashed', 'age']"
+True,expect_column_values_to_be_of_type,trans_num,"('', '')",,,,,,,[],object_
+True,expect_column_values_to_be_unique,trans_num,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,age,"('', '')",,,,,,,[],int64
+False,expect_column_values_to_be_between,age,"('', '')",120,16,18153,145,0.7987660441800253,,[],
+True,expect_column_values_to_not_be_null,age,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,amt,"('', '')",,,,,,,[],float64
+True,expect_column_values_to_be_between,amt,"('', '')",1000000,0,18153,0,0.0,,[],
+True,expect_column_values_to_not_be_null,amt,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,lat,"('', '')",,,,,,,[],float64
+True,expect_column_values_to_be_between,lat,"('', '')",90,-90,18153,0,0.0,,[],
+True,expect_column_values_to_not_be_null,lat,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,long,"('', '')",,,,,,,[],float64
+True,expect_column_values_to_be_between,long,"('', '')",180,-180,18153,0,0.0,,[],
+True,expect_column_values_to_not_be_null,long,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,city_pop,"('', '')",,,,,,,[],int64
+True,expect_column_values_to_be_between,city_pop,"('', '')",100000000,0,18153,0,0.0,,[],
+True,expect_column_values_to_not_be_null,city_pop,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,merch_lat,"('', '')",,,,,,,[],float64
+True,expect_column_values_to_be_between,merch_lat,"('', '')",90,-90,18153,0,0.0,,[],
+True,expect_column_values_to_not_be_null,merch_lat,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,merch_long,"('', '')",,,,,,,[],float64
+True,expect_column_values_to_be_between,merch_long,"('', '')",180,-180,18153,0,0.0,,[],
+True,expect_column_values_to_not_be_null,merch_long,"('', '')",,,18153,0,0.0,,[],
+False,expect_column_values_to_be_of_type,cc_num,"('', '')",,,,,,,[],
+True,expect_column_values_to_be_of_type,merchant,"('', '')",,,,,,,[],object_
+True,expect_column_values_to_not_be_null,merchant,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,category,"('', '')",,,,,,,[],object_
+True,expect_column_values_to_not_be_null,category,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,first,"('', '')",,,,,,,[],object_
+True,expect_column_values_to_not_be_null,first,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,last,"('', '')",,,,,,,[],object_
+True,expect_column_values_to_not_be_null,last,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,gender,"('', '')",,,,,,,[],object_
+True,expect_column_values_to_not_be_null,gender,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_in_set,gender,"('', '')",,,18153,0,0.0,"['M', 'F', 'U']",[],
+True,expect_column_values_to_be_of_type,street,"('', '')",,,,,,,[],object_
+True,expect_column_values_to_not_be_null,street,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,city,"('', '')",,,,,,,[],object_
+True,expect_column_values_to_not_be_null,city,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,state,"('', '')",,,,,,,[],object_
+True,expect_column_values_to_not_be_null,state,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_in_set,state,"('', '')",,,18153,0,0.0,"['MO', 'CA', 'OR', 'PA', 'VA', 'NE', 'IA', 'IL', 'WV', 'OK', 'GA', 'MN', 'NM', 'NY', 'NC', 'LA', 'ME', 'KS', 'NV', 'NJ', 'AL', 'TX', 'SD', 'MA', 'MI', 'SC', 'MT', 'FL', 'MS', 'IN', 'UT', 'CT', 'KY', 'OH', 'MD', 'ID', 'ND', 'TN', 'WI', 'VT', 'WY', 'CO', 'NH', 'AR', 'WA', 'AZ', 'HI', 'DC', 'RI', 'AK', 'DE']",[],
+False,expect_column_values_to_be_of_type,zip,"('', '')",,,,,,,[],int64
+True,expect_column_values_to_not_be_null,zip,"('', '')",,,18153,0,0.0,,[],
+False,expect_column_values_to_match_regex,zip,"('', '')",,,18153,1147,6.3185148460309595,,[],
+True,expect_column_values_to_be_of_type,job,"('', '')",,,,,,,[],object_
+True,expect_column_values_to_not_be_null,job,"('', '')",,,18153,0,0.0,,[],
+False,expect_column_values_to_be_of_type,merch_zipcode,"('', '')",,,,,,,[],float64
+False,expect_column_values_to_not_be_null,merch_zipcode,"('', '')",,,18153,2711,14.934170660496887,,[],
+False,expect_column_values_to_be_of_type,datetime,"('', '')",,,18153,18153,100.0,,[],
+True,expect_column_values_to_match_strftime_format,datetime,"('', '')",,,18153,0,0.0,,[],
+True,expect_column_values_to_be_of_type,is_fraud,"('', '')",,,,,,,[],int64
+True,expect_column_values_to_be_in_set,is_fraud,"('', '')",,,18153,0,0.0,"[0, 1]",[],
+True,expect_column_values_to_not_be_null,is_fraud,"('', '')",,,18153,0,0.0,,[],

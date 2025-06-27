@@ -76,11 +76,6 @@ def preprocessing_batch(data: pd.DataFrame, params: Dict[str, Any]) -> pd.DataFr
     new_features['categorical'].append('invalid_zip')
     new_features['categorical_features_low_cardinality'].append('invalid_zip')
 
-    # Invalid credit card number flag
-    data = add_flag_invalid_cc_num(data)
-    new_features['categorical'].append('invalid_cc_num')
-    new_features['categorical_features_low_cardinality'].append('invalid_cc_num')
-
     # Cap amount using training value
     data['amt'] = np.minimum(data['amt'], params["amt_cap_val"])
     data['log_amt'] = np.log1p(data['amt']).astype(float)

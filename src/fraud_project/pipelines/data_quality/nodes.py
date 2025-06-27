@@ -85,7 +85,7 @@ def manual_tests(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
 
     # Column existence
     expected_columns = [
-        "cc_num", "merchant", "category", "first", "last", "gender", "street", "city", "state", "zip", "job",
+        "cc_num_hashed", "merchant", "category", "first", "last", "gender", "street", "city", "state", "zip", "job",
         "merch_zipcode", "age", "amt", "lat", "long", "city_pop", "merch_lat", "merch_long", "datetime",
         "trans_num", target_col
     ]
