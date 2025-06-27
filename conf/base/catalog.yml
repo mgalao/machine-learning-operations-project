@@ -27,15 +27,7 @@ reporting_data_train:
   dataset:
     type: json.JSONDataset
     filepath: data/08_reporting/reporting_data_train.json
-
-manual_tests_results:
-  type: pandas.CSVDataset
-  filepath: data/08_reporting/manual_tests_results.csv
-
-industry_profiling_results:
-  type: pandas.CSVDataset
-  filepath: data/08_reporting/industry_profiling_results.csv
-
+    
 psi_scores:
   type: pandas.CSVDataset
   filepath: data/08_reporting/psi_scores.csv

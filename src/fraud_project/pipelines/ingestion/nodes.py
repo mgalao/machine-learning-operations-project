@@ -288,12 +288,13 @@ def ingestion(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
             df[col] = df[col].astype(str)
     logger.info("Parsed successfully categorical columns to string.")
 
-    # Hash credit card numbers
-    df["cc_num_hashed"] = df["cc_num"].astype(str).apply(
-        lambda x: hashlib.sha256(x.encode("utf-8")).hexdigest()
-    )
-    df.drop(columns=["cc_num"], inplace=True)
-    logger.info("Hashed 'cc_num' to 'cc_num_hashed' for anonymization.")
+    # Hash cc_num, first and last names
+    for col in ["cc_num", "first", "last"]:
+        df[f"{col}_hashed"] = df[col].astype(str).apply(
+            lambda x: hashlib.sha256(x.encode("utf-8")).hexdigest()
+        )
+        df.drop(columns=[col], inplace=True)
+        logger.info(f"Hashed '{col}' to '{col}_hashed' for anonymization.")
 
     # Create age feature from dob and drop dob
     df["dob"] = pd.to_datetime(df["dob"], errors="coerce")
@@ -325,7 +326,7 @@ def ingestion(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
 
     # Expected columns
     expected_numeric_columns = ['trans_num', 'datetime', 'age', 'amt', 'lat', 'long', 'city_pop', 'merch_lat', 'merch_long']
-    expected_categorical_columns = ['trans_num', 'datetime', 'cc_num_hashed', 'merchant', 'category', 'first', 'last', 'gender', 'street', 'city', 'state', 'zip', 'job', 'merch_zipcode']
+    expected_categorical_columns = ['trans_num', 'datetime', 'cc_num_hashed', 'merchant', 'category', 'first_hashed', 'last_hashed', 'gender', 'street', 'city', 'state', 'zip', 'job', 'merch_zipcode']
     expected_target_columns = ['trans_num', 'datetime', target_col]
 
     # Validate schemas

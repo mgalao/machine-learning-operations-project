@@ -67,7 +67,7 @@ def get_validation_results(checkpoint_result):
         
     return df_validation
 
-def manual_tests(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
+def manual_tests(df: pd.DataFrame, parameters: Dict[str, Any]):
     logger = logging.getLogger(__name__)
     context = gx.get_context(context_root_dir="../gx")
     datasource_name = "fraud_datasource"
@@ -290,8 +290,8 @@ def manual_tests(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
     output_folder = Path("data/08_reporting")
     output_folder.mkdir(parents=True, exist_ok=True)
 
-    csv_path = output_folder / "manual_validation_results.csv"
-    html_path = output_folder / "manual_validation_report.html"
+    csv_path = output_folder / "manual_tests_results.csv"
+    html_path = output_folder / "manual_tests_report.html"
 
     df_validation.to_csv(csv_path, index=False)
 
@@ -301,40 +301,40 @@ def manual_tests(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
     logger.info(f"Manual validation report saved at: {html_path}")
     logger.info(f"Manual validation CSV saved at: {csv_path}")
 
-    return df_validation
+    return None
 
 def industry_profiling(
     df: pd.DataFrame,
-    report_type: str = "manual",  # or "industry"
     output_folder: str = "data/08_reporting",
     datasource_name: str = "profiling_datasource",
     data_asset_name: str = "profiling_asset",
     suite_name: Optional[str] = None,
     checkpoint_name: Optional[str] = None,
-) -> pd.DataFrame:
+):
     """
-    Generate a ydata_profiling report, convert it to a Great Expectations suite,
-    run validation, and save reports (HTML and CSV) depending on report_type.
+    Generate a lightweight ydata_profiling report, convert it to a Great Expectations suite,
+    run validation, and save reports (HTML and CSV) with professional naming.
 
     Args:
         df: Input DataFrame to profile and validate.
-        report_type: 'manual' or 'industry' (affects filenames and possibly parameters).
         output_folder: Folder where reports will be saved.
-        suite_name: Name for the GE expectation suite. Defaults based on report_type.
-        checkpoint_name: Name for the checkpoint. Defaults based on report_type.
+        suite_name: Name for the GE expectation suite.
+        checkpoint_name: Name for the checkpoint.
 
     Returns:
-        DataFrame containing validation results.
+        None
     """
-    if suite_name is None:
-        suite_name = f"{report_type}_profiling_suite"
-    if checkpoint_name is None:
-        checkpoint_name = f"{report_type}_profiling_checkpoint"
+    name_prefix = "yprofiling"
 
-    # Generate profile report (you could tweak minimal/full based on report_type)
-    minimal = True if report_type == "manual" else False
-    profile = ProfileReport(df, title=f"{report_type.capitalize()} Profiling Report", minimal=minimal)
-    logger.info(f"{report_type.capitalize()} ProfileReport generated")
+    if suite_name is None:
+        suite_name = f"{name_prefix}_profiling_suite"
+    if checkpoint_name is None:
+        checkpoint_name = f"{name_prefix}_profiling_checkpoint"
+
+    # Generate profile report
+    minimal = True
+    profile = ProfileReport(df, title="YProfiling Report", minimal=minimal)
+    logger.info("YProfiling ProfileReport generated")
 
     # Great Expectations context and datasource
     context = gx.get_context(context_root_dir="gx")
@@ -379,18 +379,18 @@ def industry_profiling(
     logger.info(f"Checkpoint '{checkpoint_name}' run completed.")
 
     df_validation = get_validation_results(checkpoint_result)
-    logger.info(f"{report_type.capitalize()} validation results extracted.")
+    logger.info("YProfiling validation results extracted.")
 
     # Save reports
     Path(output_folder).mkdir(parents=True, exist_ok=True)
 
-    html_path = Path(output_folder) / f"{report_type}_profiling_report.html"
-    csv_path = Path(output_folder) / f"{report_type}_profiling_results.csv"
+    html_path = Path(output_folder) / f"{name_prefix}_profiling_report.html"
+    csv_path = Path(output_folder) / f"{name_prefix}_profiling_results.csv"
 
     profile.to_file(html_path)
     df_validation.to_csv(csv_path, index=False)
 
-    logger.info(f"{report_type.capitalize()} profiling report saved: {html_path}")
-    logger.info(f"{report_type.capitalize()} profiling results saved: {csv_path}")
+    logger.info(f"YProfiling profiling report saved: {html_path}")
+    logger.info(f"YProfiling profiling results saved: {csv_path}")
 
-    return df_validation
+    return None

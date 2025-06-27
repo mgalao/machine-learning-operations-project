@@ -13,13 +13,13 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func=manual_tests,
                 inputs=["ana_data", "parameters"],
-                outputs="manual_tests_results",
+                outputs=None,
                 name="manual_tests_node",
             ),
             node(
                 func=industry_profiling,
                 inputs="ana_data",
-                outputs="industry_profiling_results",
+                outputs=None,
                 name="industry_profiling_node",
             ),
         ]
