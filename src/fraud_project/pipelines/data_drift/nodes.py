@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 import logging
 
-from .utils import calculate_psi
+from .utils import calculate_psi, find_optimal_bins_with_knee
 from evidently.report import Report
 from evidently.metric_preset import DataDriftPreset
 import nannyml as nml
@@ -21,14 +21,24 @@ def data_drift(data_reference: pd.DataFrame, data_analysis: pd.DataFrame) -> dic
     numerical_features = ['amt', 'lat', 'long', 'city_pop', 'merch_lat', 'merch_long']
     categorical_features = ['category', 'gender', 'city', 'state', 'zip']
 
-    # ----------- PSI SECTION -----------
-    psi_scores = calculate_psi(
-        expected=data_reference[numerical_features].values,
-        actual=data_analysis[numerical_features].values,
-        buckettype='quantiles',
-        buckets=10,
-        axis=0
+    # ----------- PSI SECTION with Optimal Bins -----------
+    optimal_bins_per_feature, _ = find_optimal_bins_with_knee(
+        data_reference[numerical_features],
+        data_analysis[numerical_features],
+        buckettype='quantiles'
     )
+
+    psi_scores = {}
+    for feature in numerical_features:
+        optimal_bins = optimal_bins_per_feature.get(feature, 10)
+        psi_value = calculate_psi(
+            expected=data_reference[feature].values,
+            actual=data_analysis[feature].values,
+            buckettype='quantiles',
+            buckets=optimal_bins,
+            axis=0
+        )[0]
+        psi_scores[feature] = psi_value
 
     psi_series = pd.Series(psi_scores, index=numerical_features)
     drifted_features = psi_series[psi_series > 0.1]
