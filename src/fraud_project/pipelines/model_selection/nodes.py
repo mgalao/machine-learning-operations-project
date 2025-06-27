@@ -56,14 +56,12 @@ def model_selection(X_train: pd.DataFrame,
 
     initial_results = {}
 
-    # Load experiment name and ID from config
     with open('conf/local/mlflow.yml') as f:
         experiment_name = parameters["mlflow_model_selection_experiment"]
         experiment_id = _get_or_create_experiment_id(experiment_name)
 
     logger.info('Initial model comparison...')
 
-    # Baseline comparison
     for model_name, model in models_dict.items():
         with mlflow.start_run(experiment_id=experiment_id, nested=True, run_name=f"Baseline_{model_name}"):
             mlflow.set_tag("stage", "baseline_comparison")
@@ -73,33 +71,44 @@ def model_selection(X_train: pd.DataFrame,
 
             y_train_flat = np.ravel(y_train)
             model.fit(X_train, y_train_flat)
-            pred = model.predict(X_test)
 
-            # Calculate all evaluation metrics
-            accuracy = accuracy_score(y_test, pred)
-            macro_precision = precision_score(y_test, pred, average='macro')
-            macro_recall = recall_score(y_test, pred, average='macro')
-            macro_f1 = f1_score(y_test, pred, average='macro')
+            # Validation predictions
+            pred_val = model.predict(X_test)
+            val_accuracy = accuracy_score(y_test, pred_val)
+            val_precision = precision_score(y_test, pred_val, average='macro')
+            val_recall = recall_score(y_test, pred_val, average='macro')
+            val_f1 = f1_score(y_test, pred_val, average='macro')
 
-            # Log metrics to MLflow
-            mlflow.log_metric("accuracy", accuracy)
-            mlflow.log_metric("macro_precision", macro_precision)
-            mlflow.log_metric("macro_recall", macro_recall)
-            mlflow.log_metric("macro_f1", macro_f1)
+            # Training predictions
+            pred_train = model.predict(X_train)
+            train_accuracy = accuracy_score(y_train, pred_train)
+            train_precision = precision_score(y_train, pred_train, average='macro')
+            train_recall = recall_score(y_train, pred_train, average='macro')
+            train_f1 = f1_score(y_train, pred_train, average='macro')
 
-            # Save macro F1-score for model comparison
-            initial_results[model_name] = macro_f1
-            logger.info(f"Logged model {model_name} with macro F1-score = {macro_f1:.4f}")
+            # Log validation metrics
+            mlflow.log_metric("val_accuracy", val_accuracy)
+            mlflow.log_metric("val_macro_precision", val_precision)
+            mlflow.log_metric("val_macro_recall", val_recall)
+            mlflow.log_metric("val_macro_f1", val_f1)
 
-    # Select best model by macro F1-score
+            # Log training metrics
+            mlflow.log_metric("train_accuracy", train_accuracy)
+            mlflow.log_metric("train_macro_precision", train_precision)
+            mlflow.log_metric("train_macro_recall", train_recall)
+            mlflow.log_metric("train_macro_f1", train_f1)
+
+            initial_results[model_name] = val_f1
+            logger.info(f"Logged model {model_name} with val_macro_f1 = {val_f1:.4f} and train_macro_f1 = {train_f1:.4f}")
+
     best_model_name = max(initial_results, key=initial_results.get)
     best_model_cls = type(models_dict[best_model_name])
-    logger.info(f"Best baseline model: {best_model_name} with macro F1-score = {initial_results[best_model_name]:.4f}")
+    logger.info(f"Best baseline model: {best_model_name} with val_macro_f1 = {initial_results[best_model_name]:.4f}")
 
     logger.info('Optuna hyperparameter tuning...')
 
     def objective(trial):
-        """Objective function for Optuna hyperparameter tuning."""
+        """Objective function for Optuna hyperparameter tuning with detailed MLflow logging."""
         search_space = parameters_optuna['optuna_search']['search_spaces'][best_model_name]
         trial_params = {}
 
@@ -111,33 +120,54 @@ def model_selection(X_train: pd.DataFrame,
             elif param_config['type'] == 'categorical':
                 trial_params[param_name] = trial.suggest_categorical(param_name, param_config['choices'])
 
-        # Train model using sampled hyperparameters
         model = best_model_cls(**trial_params)
         model.fit(X_train, y_train.values.ravel())
-        pred = model.predict(X_test)
 
-        # Return macro F1-score as the objective metric
-        return f1_score(y_test, pred, average='macro')  # Optimize macro F1-score
+        pred_val = model.predict(X_test)
+        pred_train = model.predict(X_train)
 
-    # Read tuning config
+        val_accuracy = accuracy_score(y_test, pred_val)
+        val_precision = precision_score(y_test, pred_val, average='macro')
+        val_recall = recall_score(y_test, pred_val, average='macro')
+        val_f1 = f1_score(y_test, pred_val, average='macro')
+
+        train_accuracy = accuracy_score(y_train, pred_train)
+        train_precision = precision_score(y_train, pred_train, average='macro')
+        train_recall = recall_score(y_train, pred_train, average='macro')
+        train_f1 = f1_score(y_train, pred_train, average='macro')
+
+        with mlflow.start_run(experiment_id=experiment_id, nested=True, run_name=f"Optuna_Trial_{trial.number}"):
+            mlflow.set_tag("stage", "optuna_trial")
+            mlflow.set_tag("model_type", best_model_name)
+            mlflow.log_params(trial_params)
+
+            mlflow.log_metric("val_accuracy", val_accuracy)
+            mlflow.log_metric("val_macro_precision", val_precision)
+            mlflow.log_metric("val_macro_recall", val_recall)
+            mlflow.log_metric("val_macro_f1", val_f1)
+
+            mlflow.log_metric("train_accuracy", train_accuracy)
+            mlflow.log_metric("train_macro_precision", train_precision)
+            mlflow.log_metric("train_macro_recall", train_recall)
+            mlflow.log_metric("train_macro_f1", train_f1)
+
+        return val_f1
+
     direction = parameters_optuna['optuna_search'].get('direction', 'maximize')
     n_trials = parameters_optuna['optuna_search'].get('n_trials', 30)
 
-    # Run Optuna study
     study = optuna.create_study(direction=direction, sampler=TPESampler())
     study.optimize(objective, n_trials=n_trials)
 
-    # Get best model and hyperparameters
     best_params = study.best_params
     best_score = study.best_value
     logger.info(f"Best hyperparameters: {best_params}")
-    logger.info(f"Best trial macro F1-score: {best_score:.4f}")
+    logger.info(f"Best trial val_macro_f1: {best_score:.4f}")
 
-    # Log tuning info to MLflow
     with mlflow.start_run(experiment_id=experiment_id, nested=True, run_name=f"Optuna_{best_model_name}"):
         mlflow.set_tag("stage", "optuna_tuning")
         mlflow.set_tag("model_type", best_model_name)
         mlflow.log_params(best_params)
-        mlflow.log_metric("macro_f1", best_score)
+        mlflow.log_metric("val_macro_f1", best_score)
 
     return best_model_cls, best_params, best_score
