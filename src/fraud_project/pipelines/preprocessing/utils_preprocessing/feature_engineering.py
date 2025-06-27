@@ -69,14 +69,14 @@ def rare_label_encoder(data: pd.DataFrame, col: str, threshold: float = 0.01) ->
     
     return data
 
-ZIP_REGEX = re.compile(r"^\d{5}(-\d{4})?$")
 def add_flag_invalid_zip(data: pd.DataFrame) -> pd.DataFrame:
+    ZIP_REGEX = re.compile(r"^\d{5}(-\d{4})?$")
     data = data.copy()
     data['invalid_zip'] = (~data['zip'].astype(str).apply(lambda x: bool(ZIP_REGEX.match(x)))).astype(float)
     return data
 
-CC_NUM_REGEX = re.compile(r"^\d{13,19}$")
 def add_flag_invalid_cc_num(data: pd.DataFrame) -> pd.DataFrame:
+    CC_NUM_REGEX = re.compile(r"^\d{13,19}$")
     data = data.copy()
     data['invalid_cc_num'] = (~data['cc_num'].astype(str).apply(lambda x: bool(CC_NUM_REGEX.match(x)))).astype(float)
     return data
@@ -121,12 +121,12 @@ def feature_engineering(data: pd.DataFrame) -> Tuple[pd.DataFrame, dict]:
 
     # Invalid zip code flag
     data = add_flag_invalid_zip(data)
-    new_features['numerical'].append('invalid_zip')
-    new_features['binary'].append('invalid_zip')
+    new_features['categorical'].append('invalid_zip')
+    new_features['categorical_features_low_cardinality'].append('invalid_zip')
 
     # Invalid credit card number flag
     data = add_flag_invalid_cc_num(data)
-    new_features['numerical'].append('invalid_cc_num')
-    new_features['binary'].append('invalid_cc_num')
+    new_features['categorical'].append('invalid_cc_num')
+    new_features['categorical_features_low_cardinality'].append('invalid_cc_num')
 
     return data, new_features
