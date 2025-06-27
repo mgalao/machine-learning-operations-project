@@ -67,7 +67,7 @@ def model_selection(X_train: pd.DataFrame,
             mlflow.set_tag("stage", "baseline_comparison")
             mlflow.set_tag("model_type", model_name)
 
-            mlflow.sklearn.autolog(log_model_signatures=True, log_input_examples=True)
+            #mlflow.sklearn.autolog(log_model_signatures=True, log_input_examples=True)
 
             y_train_flat = np.ravel(y_train)
             model.fit(X_train, y_train_flat)
@@ -107,8 +107,9 @@ def model_selection(X_train: pd.DataFrame,
 
     logger.info('Optuna hyperparameter tuning...')
 
+    # --- Optuna Tuning without logging each trial ---
     def objective(trial):
-        """Objective function for Optuna hyperparameter tuning with detailed MLflow logging."""
+        """Objective function for Optuna (no MLflow logging per trial)."""
         search_space = parameters_optuna['optuna_search']['search_spaces'][best_model_name]
         trial_params = {}
 
@@ -124,50 +125,55 @@ def model_selection(X_train: pd.DataFrame,
         model.fit(X_train, y_train.values.ravel())
 
         pred_val = model.predict(X_test)
-        pred_train = model.predict(X_train)
-
-        val_accuracy = accuracy_score(y_test, pred_val)
-        val_precision = precision_score(y_test, pred_val, average='macro')
-        val_recall = recall_score(y_test, pred_val, average='macro')
         val_f1 = f1_score(y_test, pred_val, average='macro')
-
-        train_accuracy = accuracy_score(y_train, pred_train)
-        train_precision = precision_score(y_train, pred_train, average='macro')
-        train_recall = recall_score(y_train, pred_train, average='macro')
-        train_f1 = f1_score(y_train, pred_train, average='macro')
-
-        with mlflow.start_run(experiment_id=experiment_id, nested=True, run_name=f"Optuna_Trial_{trial.number}"):
-            mlflow.set_tag("stage", "optuna_trial")
-            mlflow.set_tag("model_type", best_model_name)
-            mlflow.log_params(trial_params)
-
-            mlflow.log_metric("val_accuracy", val_accuracy)
-            mlflow.log_metric("val_macro_precision", val_precision)
-            mlflow.log_metric("val_macro_recall", val_recall)
-            mlflow.log_metric("val_macro_f1", val_f1)
-
-            mlflow.log_metric("train_accuracy", train_accuracy)
-            mlflow.log_metric("train_macro_precision", train_precision)
-            mlflow.log_metric("train_macro_recall", train_recall)
-            mlflow.log_metric("train_macro_f1", train_f1)
 
         return val_f1
 
+    # --- Run Optuna study ---
     direction = parameters_optuna['optuna_search'].get('direction', 'maximize')
     n_trials = parameters_optuna['optuna_search'].get('n_trials', 30)
 
     study = optuna.create_study(direction=direction, sampler=TPESampler())
     study.optimize(objective, n_trials=n_trials)
 
+    # --- Get best trial and log it ---
     best_params = study.best_params
     best_score = study.best_value
     logger.info(f"Best hyperparameters: {best_params}")
     logger.info(f"Best trial val_macro_f1: {best_score:.4f}")
 
-    with mlflow.start_run(experiment_id=experiment_id, nested=True, run_name=f"Optuna_{best_model_name}"):
+    # Re-train best model and log full metrics
+    best_model = best_model_cls(**best_params)
+    best_model.fit(X_train, y_train.values.ravel())
+
+    pred_val = best_model.predict(X_test)
+    pred_train = best_model.predict(X_train)
+
+    val_accuracy = accuracy_score(y_test, pred_val)
+    val_precision = precision_score(y_test, pred_val, average='macro')
+    val_recall = recall_score(y_test, pred_val, average='macro')
+    val_f1 = f1_score(y_test, pred_val, average='macro')
+
+    train_accuracy = accuracy_score(y_train, pred_train)
+    train_precision = precision_score(y_train, pred_train, average='macro')
+    train_recall = recall_score(y_train, pred_train, average='macro')
+    train_f1 = f1_score(y_train, pred_train, average='macro')
+
+    with mlflow.start_run(experiment_id=experiment_id, nested=True, run_name=f"Optuna_Best_{best_model_name}"):
         mlflow.set_tag("stage", "optuna_tuning")
         mlflow.set_tag("model_type", best_model_name)
         mlflow.log_params(best_params)
-        mlflow.log_metric("val_macro_f1", best_score)
+
+        # Log best training metrics
+        mlflow.log_metric("train_accuracy", train_accuracy)
+        mlflow.log_metric("train_macro_precision", train_precision)
+        mlflow.log_metric("train_macro_recall", train_recall)
+        mlflow.log_metric("train_macro_f1", train_f1)
+
+        # Log best validation metrics
+        mlflow.log_metric("val_accuracy", val_accuracy)
+        mlflow.log_metric("val_macro_precision", val_precision)
+        mlflow.log_metric("val_macro_recall", val_recall)
+        mlflow.log_metric("val_macro_f1", val_f1)
 
     return best_model_cls, best_params, best_score
