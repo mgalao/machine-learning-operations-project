@@ -35,7 +35,6 @@ def log_feature_summary(features: dict, max_display: int = 5):
         logger.info(f"{key.capitalize()} features ({n}): {preview}")
 
 def clean_data(data: pd.DataFrame) -> Tuple[pd.DataFrame, Dict[str, Any]]:
-    logger.info(f"Columns in dataset: {list(data.columns)}")
     data = convert_datetime(data)
     data = convert_strings(data)
     data = cap_min_age(data)
@@ -68,7 +67,9 @@ def feature_engineering_pipeline(data: pd.DataFrame, params: Dict[str, Any]) -> 
     data, high_card_mappings, features = encode_high_cardinality(data, features)
     data, features = encode_temporal(data, features)
 
-    data, scaler = scale_numerical(data, features["numerical"])
+    binary_cols = new_features.get("binary", [])
+    numerical_to_scale = [col for col in features["numerical"] if col not in binary_cols]
+    data, scaler = scale_numerical(data, numerical_to_scale)
 
     params = {
         **params,

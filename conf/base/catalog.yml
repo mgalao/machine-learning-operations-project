@@ -105,6 +105,10 @@ best_columns:
     type: pickle.PickleDataset
     filepath: data/06_models/best_cols.pkl
 
+parameters_optuna:
+  type: kedro_datasets.yaml.YAMLDataset
+  filepath: conf/base/parameters_optuna.yml
+
 production_model:
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
   dataset:

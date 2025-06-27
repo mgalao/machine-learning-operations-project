@@ -3,8 +3,8 @@ to_feature_store: True
 test_fraction: 0.3
 random_state: 2021
 run_name: "fraud_project"
-use_feature_selection: True  # <- changed this
-feature_selection: "weighted"  # <- changed this
+use_feature_selection: True
+feature_selection: "weighted"
 
 # Detailed feature selection parameters
 feature_selection_params:
@@ -14,12 +14,19 @@ feature_selection_params:
   top_n_features: 10  # Number of top features to select when using weighted method
   correlation_threshold: 0.7  # Threshold for high correlation
 
+# Model selection experiment
+mlflow_model_selection_experiment: "fraud_project_model_selection"
+
+# Model parameters
 model_name: "fraud"
 baseline_model_params:
   n_estimators: 100
   max_depth: 6
   max_features: 20
   random_state: 2021
+
+# Champion model path
+champion_model_path: "data/06_models/champion_model.pkl"
 
 # Features before preprocessing
 id_features:

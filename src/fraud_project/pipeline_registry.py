@@ -20,57 +20,86 @@
 
 """Project pipelines."""
 from typing import Dict
-from kedro.pipeline import Pipeline, pipeline
+from kedro.pipeline import Pipeline
 
 from fraud_project.pipelines import (
-    ingestion as data_ingestion,
-    data_quality as data_quality,
-    # preprocessing_train as preprocess_train,
-    split_train_pipeline as split_train,
-    model_selection as model_selection_pipeline,
-    model_train as model_train_pipeline,
-    feature_selection as feature_selection_pipeline,
+    ingestion,
+    data_quality,
     split_data,
-    # preprocessing_batch,
+    split_train_pipeline,
+    feature_selection,
+    model_selection,
+    model_train,
     model_predict,
-    data_drift
-
+    data_drift,
 )
-
-from fraud_project.pipelines.preprocessing import preprocessing_batch, preprocessing_train
-
+from fraud_project.pipelines.preprocessing import (
+    preprocessing_train,
+    preprocessing_batch,
+)
 
 def register_pipelines() -> Dict[str, Pipeline]:
     """Register the project's pipelines.
 
     Returns:
-        A mapping from a pipeline name to a ``Pipeline`` object.
+        A mapping from pipeline names to ``Pipeline`` objects.
     """
-    ingestion_pipeline = data_ingestion.create_pipeline()
-    data_quality_pipeline = data_quality.create_pipeline()
-    split_data_pipeline = split_data.create_pipeline()
-    preprocess_train_pipeline = preprocessing_train.create_pipeline()
-    split_train_pipeline = split_train.create_pipeline()
-    model_train = model_train_pipeline.create_pipeline()
-    model_selection = model_selection_pipeline.create_pipeline()
-    feature_selection = feature_selection_pipeline.create_pipeline()
-    preprocess_batch_pipeline = preprocessing_batch.create_pipeline()
-    model_predict_pipeline = model_predict.create_pipeline()
-    data_drift_pipeline = data_drift.create_pipeline()
+    # Ingestion & Validation
+    pipeline_ingest = ingestion.create_pipeline()
+    pipeline_validate = data_quality.create_pipeline()
+
+    # Data Preparation
+    pipeline_split_raw = split_data.create_pipeline()
+    pipeline_preprocess_train = preprocessing_train.create_pipeline()
+    pipeline_preprocess_batch = preprocessing_batch.create_pipeline()
+
+    # Training & Evaluation
+    pipeline_split_train = split_train_pipeline.create_pipeline()
+    pipeline_feature_selection = feature_selection.create_pipeline()
+    pipeline_model_selection = model_selection.create_pipeline()
+    pipeline_model_train = model_train.create_pipeline()
+
+    # Inference
+    pipeline_predict = model_predict.create_pipeline()
+
+    # Monitoring
+    pipeline_drift_detection = data_drift.create_pipeline()
 
     return {
-        "ingestion": ingestion_pipeline,
-        "data_validation": data_quality_pipeline,
-        "ingestion_and_validation": ingestion_pipeline + data_quality_pipeline,
-        "split_data": split_data_pipeline,
-        "preprocess_train": preprocess_train_pipeline,
-        "split_train": split_train_pipeline,
-        "model_selection": model_selection,
-        "model_train": model_train,
-        "feature_selection":feature_selection,
-        "production_full_train_process" : preprocess_train_pipeline + split_train_pipeline + model_train,
-        "preprocess_batch": preprocess_batch_pipeline,
-        "inference" : model_predict_pipeline,
-        "production_full_prediction_process" : preprocess_batch_pipeline + model_predict_pipeline,
-        "data_drift_pipeline" : data_drift_pipeline
+        # Individual pipelines
+        "ingest": pipeline_ingest,
+        "validate": pipeline_validate,
+        "split_raw_data": pipeline_split_raw,
+        "preprocess_train": pipeline_preprocess_train,
+        "preprocess_batch": pipeline_preprocess_batch,
+        "split_train_data": pipeline_split_train,
+        "feature_selection": pipeline_feature_selection,
+        "model_selection": pipeline_model_selection,
+        "train_model": pipeline_model_train,
+        "predict": pipeline_predict,
+        "monitor_drift": pipeline_drift_detection,
+
+        # Combined pipelines
+        "ingest_and_validate": pipeline_ingest + pipeline_validate,
+        "train_full": (
+            pipeline_preprocess_train
+            + pipeline_split_train
+            + pipeline_model_train
+        ),
+        "predict_full": (
+            pipeline_preprocess_batch
+            + pipeline_predict
+        ),
+
+        # Full production process (train + predict + monitor)
+        "__default__": (
+            pipeline_ingest
+            + pipeline_validate
+            + pipeline_split_raw
+            + pipeline_preprocess_train
+            + pipeline_split_train
+            + pipeline_model_train
+            + pipeline_predict
+            + pipeline_drift_detection
+        )
     }
