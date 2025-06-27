@@ -93,7 +93,7 @@ def preprocessing_batch(data: pd.DataFrame, params: Dict[str, Any]) -> pd.DataFr
     data, _ = scale_numerical(data, features["numerical"], scaler=params["scaler"])
 
     # Fill missing values
-    data = clean_data(data)
+    data = clean_rest_data(data)
 
     logger.info(f"Batch preprocessing complete. Final shape: {data.shape}")
     
