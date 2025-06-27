@@ -1,9 +1,6 @@
 # """Project pipelines."""
 # from __future__ import annotations
 
-# from kedro.framework.project import find_pipelines
-# from kedro.pipeline import Pipeline
-
 
 # def register_pipelines() -> dict[str, Pipeline]:
 #     """Register the project's pipelines.
@@ -34,7 +31,7 @@ from fraud_project.pipelines import (
     data_drift,
 )
 from fraud_project.pipelines.preprocessing import (
-    preprocessing_train,
+    preprocessing_train, 
     preprocessing_batch,
 )
 
