@@ -107,7 +107,7 @@ def test_recursive_feature_elimination(sample_data, parameters):
 def test_feature_selection_main(sample_data, parameters):
     """Test the main feature selection function."""
     X, y = sample_data
-    results = feature_selection(X, y, parameters)
+    results = feature_selection()
     
     # check output type and structure
     assert isinstance(results, dict)
@@ -141,7 +141,20 @@ def test_feature_selection_intersection(sample_data):
         }
     }
     
-    results = feature_selection(X, y, parameters)
+    # calculate all required inputs for feature_selection
+    feature_correlations = calculate_feature_correlations(X)
+    feature_importance_scores = calculate_feature_importance(X, y)
+    statistical_features = select_statistical_features(X, y, parameters)
+    rfe_features = recursive_feature_elimination(X, y, parameters)
+    
+    # call feature_selection with all required parameters
+    results = feature_selection(
+        feature_correlations,
+        feature_importance_scores,
+        statistical_features,
+        rfe_features,
+        parameters
+    )
     
     # best columns should the intersection of statistical and RFE features
     stat_features = set(results["statistical_features"])
@@ -163,7 +176,20 @@ def test_feature_selection_weighted(sample_data):
         }
     }
     
-    results = feature_selection(X, y, parameters)
+    # calculate all required inputs for feature_selection
+    feature_correlations = calculate_feature_correlations(X)
+    feature_importance_scores = calculate_feature_importance(X, y)
+    statistical_features = select_statistical_features(X, y, parameters)
+    rfe_features = recursive_feature_elimination(X, y, parameters)
+    
+    # call feature_selection with all required parameters
+    results = feature_selection(
+        feature_correlations,
+        feature_importance_scores,
+        statistical_features,
+        rfe_features,
+        parameters
+    )
     
     # all best columns must include top features from importance
     importance_df = results["feature_importance"]
