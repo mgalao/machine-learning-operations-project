@@ -6,6 +6,7 @@ from src.fraud_project.pipelines.data_drift.nodes import data_drift
 
 @pytest.fixture
 def sample_data():
+    np.random.seed(42)
     # Sampel Reference data from various U.S. states
     ref_data = pd.DataFrame({
         "amt": np.random.normal(100, 10, 200),
