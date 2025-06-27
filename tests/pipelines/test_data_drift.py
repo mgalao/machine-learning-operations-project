@@ -2,7 +2,7 @@ import pytest
 import pandas as pd
 import numpy as np
 from pathlib import Path
-from your_package_name.nodes import data_drift  # Adjust the import path to your project
+from src.fraud_project.pipelines.data_drift.nodes import data_drift
 
 @pytest.fixture
 def sample_data():
