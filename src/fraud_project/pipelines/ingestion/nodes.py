@@ -8,6 +8,7 @@ from typing import Any, Dict, Tuple
 
 import numpy as np
 import pandas as pd
+import hashlib  
 
 from great_expectations.core import ExpectationSuite, ExpectationConfiguration
 
@@ -285,8 +286,14 @@ def ingestion(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
             df[col] = df[col].astype("Int64").astype(str)
         else:
             df[col] = df[col].astype(str)
-
     logger.info("Parsed successfully categorical columns to string.")
+
+    # Hash credit card numbers
+    df["cc_num_hashed"] = df["cc_num"].astype(str).apply(
+        lambda x: hashlib.sha256(x.encode("utf-8")).hexdigest()
+    )
+    df.drop(columns=["cc_num"], inplace=True)
+    logger.info("Hashed 'cc_num' to 'cc_num_hashed' for anonymization.")
 
     # Create age feature from dob and drop dob
     df["dob"] = pd.to_datetime(df["dob"], errors="coerce")
@@ -318,7 +325,7 @@ def ingestion(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
 
     # Expected columns
     expected_numeric_columns = ['trans_num', 'datetime', 'age', 'amt', 'lat', 'long', 'city_pop', 'merch_lat', 'merch_long']
-    expected_categorical_columns = ['trans_num', 'datetime', 'cc_num', 'merchant', 'category', 'first', 'last', 'gender', 'street', 'city', 'state', 'zip', 'job', 'merch_zipcode']
+    expected_categorical_columns = ['trans_num', 'datetime', 'cc_num_hashed', 'merchant', 'category', 'first', 'last', 'gender', 'street', 'city', 'state', 'zip', 'job', 'merch_zipcode']
     expected_target_columns = ['trans_num', 'datetime', target_col]
 
     # Validate schemas
@@ -365,7 +372,7 @@ def ingestion(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
     ]
 
     categorical_feature_descriptions = [
-        {"name": "cc_num", "description": "Credit card number as string."},
+        {"name": "cc_num_hashed", "description": "SHA-256 hashed credit card number for anonymization."},
         {"name": "merchant", "description": "Merchant or store where the transaction occurred."},
         {"name": "category", "description": "Merchant category where the transaction occurred."},
         {"name": "first", "description": "First name of the cardholder."},
