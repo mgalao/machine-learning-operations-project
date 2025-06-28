@@ -8,7 +8,7 @@ def filter_test_data_by_state(ana_data: pd.DataFrame, state: str = 'NY') -> pd.D
 
 def evaluate_predictions(df_with_predict: pd.DataFrame, target_column: str = "is_fraud") -> pd.DataFrame:
     y_true = df_with_predict[target_column]
-    y_pred = df_with_predict["prediction"]
+    y_pred = df_with_predict["y_pred"]
 
     metrics = {
         "accuracy": accuracy_score(y_true, y_pred),

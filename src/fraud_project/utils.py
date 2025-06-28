@@ -16,6 +16,7 @@ import logging
 from typing import Tuple, Dict, Any
 import pandas as pd
 import numpy as np
+from kneed import KneeLocator
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from pathlib import Path
 from typing import List, Tuple, Union

@@ -29,6 +29,7 @@ from fraud_project.pipelines import (
     model_train,
     model_predict,
     data_drift,
+    batch_sample_drift
 )
 from fraud_project.pipelines.preprocessing import (
     preprocessing_train, 
@@ -61,7 +62,8 @@ def register_pipelines() -> Dict[str, Pipeline]:
 
     # Monitoring
     pipeline_drift_detection = data_drift.create_pipeline()
-
+    pipeline_batch_sample_drift = batch_sample_drift.create_pipeline()
+ 
     return {
         # Individual pipelines
         "ingest": pipeline_ingest,
@@ -75,6 +77,7 @@ def register_pipelines() -> Dict[str, Pipeline]:
         "train_model": pipeline_model_train,
         "predict": pipeline_predict,
         "monitor_drift": pipeline_drift_detection,
+        "batch_sample_drift": pipeline_batch_sample_drift,
 
         # Combined pipelines
         "ingest_and_validate": pipeline_ingest + pipeline_validate,

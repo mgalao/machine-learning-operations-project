@@ -24,7 +24,6 @@ def model_predict(X: pd.DataFrame,
     """
 
     # Predict
-    
     y_pred = model.predict(X[columns])
 
     # Create dataframe with predictions
