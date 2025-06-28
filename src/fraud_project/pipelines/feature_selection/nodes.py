@@ -5,6 +5,10 @@ from sklearn.feature_selection import SelectKBest, f_classif, RFE
 from sklearn.ensemble import RandomForestClassifier
 from typing import Dict, List
 
+def filter_drifted_features(X_train_data: pd.DataFrame, drifted_features: List[str]) -> pd.DataFrame:
+    stable_features = [feat for feat in X_train_data.columns if feat not in drifted_features]
+    return X_train_data[stable_features]
+
 def calculate_feature_correlations(X_train_data: pd.DataFrame) -> pd.DataFrame:
     """
     Calculate correlation matrix for features
