@@ -8,7 +8,7 @@ from typing import Any, Dict, Tuple
 
 import numpy as np
 import pandas as pd
-import hashlib  
+import hashlib
 
 from great_expectations.core import ExpectationSuite, ExpectationConfiguration
 

@@ -10230,3 +10230,31 @@ You can resume the pipeline run from the nearest nodes with persisted inputs by 
   color_warning(
 
 2025-06-28 19:08:45,520 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 20:51:50,812 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 20:51:52,373 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 20:51:52,448 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 20:51:52,505 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 20:51:52,509 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 20:51:55,734 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 20:51:56,999 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 20:51:57,700 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 20:52:00,815 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 20:52:01,440 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'split_raw_data' - '0c7e92485ae5475a9b0fe0345d7146f4' has started
+2025-06-28 20:52:01,475 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 20:52:01,477 - kedro.io.data_catalog - INFO - Loading data from ingested_data (CSVDataset)...
+2025-06-28 20:52:01,701 - kedro.io.data_catalog - INFO - Loading data from params:target_column (MemoryDataset)...
+2025-06-28 20:52:01,720 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'split_raw_data' - '0c7e92485ae5475a9b0fe0345d7146f4' at node level for multi-threading
+2025-06-28 20:52:01,731 - kedro.pipeline.node - INFO - Running node: split_out_of_sample: stratified_split_by_target([ingested_data;params:target_column]) -> [ref_data;ana_data]
+2025-06-28 20:52:01,762 - kedro.io.data_catalog - INFO - Saving data to ref_data (CSVDataset)...
+2025-06-28 20:52:02,180 - kedro.io.data_catalog - INFO - Saving data to ana_data (CSVDataset)...
+2025-06-28 20:52:02,290 - kedro.runner.sequential_runner - INFO - Completed node: split_out_of_sample
+2025-06-28 20:52:02,290 - kedro.runner.sequential_runner - INFO - Completed 1 out of 1 tasks
+2025-06-28 20:52:02,290 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 0.8 sec.
+2025-06-28 20:52:02,299 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
