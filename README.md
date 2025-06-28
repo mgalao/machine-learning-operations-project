@@ -32,27 +32,36 @@ This end-to-end pipeline is designed not only to train and serve models, but als
 ├── Dockerfile    # Contains instructions to build a Docker image for the project.
 ├── README.md     # Main markdown file describing the project — purpose, setup instructions, usage, etc.
 ├── info.log      # Likely a generated log file capturing runtime info or debugging messages.
-├── kedro_viz.cmd
-A Windows batch script to run Kedro-Viz, the interactive pipeline visualization tool.
-
-perfect_readme.txt
-Possibly a draft or checklist for building a strong README — not used by the system directly.
-
-pyproject.toml
-A configuration file that defines your Python project metadata, dependencies, and build system (used by tools like Poetry or PEP 517-compliant builders).
-
-requirements.txt
-Lists the core Python dependencies needed to run your project.
-
-requirements-serving.txt
-Specifies extra dependencies required for model serving (e.g., FastAPI, gunicorn, etc.).
-
-uv.lock
-Lock file created by uv, a fast Python package manager. Ensures reproducible installs.
-├── README.md                           # Project documentation and overview
-└── requirements.txt                    # Python package dependencies required to run the project
+├── kedro_viz.cmd # A Windows batch script to run Kedro-Viz, the interactive pipeline visualization tool.
+├── pyproject.toml # A configuration file that defines your Python project metadata, dependencies, and build system.
+├── requirements.txt # Lists the core Python dependencies needed to run your project.
+├── requirements-serving.txt # Specifies extra dependencies required for model serving (e.g., FastAPI, gunicorn, etc.).
+└── uv.lock        # Lock file created by uv, a fast Python package manager. Ensures reproducible installs.
 ```
 
-## How to clone and use this repository
+## 🚀 Getting Started
 
-1. 
+Follow these steps to clone and use this repository:
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
+   ```
+2. Install uv
+   ```bash
+   pip install uv
+   ```
+3. Install the requirements to run the project:
+  - With pip only
+   ```bash
+   pip install -r requirements.txt
+   ```
+  - Or with uv (recommended):
+   ```bash
+   uv pip install -r requirements.txt
+   ```
+4. Explore the project and make changes as you see fit
+   - Navigate through the pipelines.
+   - Modify components as needed to suit your use case.
+   - Run the project using Kedro as orchestration tool
