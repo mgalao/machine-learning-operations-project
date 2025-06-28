@@ -1,1 +1,1 @@
-{"X_train_data": {"rows": 63536, "columns": 43, "file_size": 35299526}, "X_train_stable": {"rows": 63536, "columns": 43}, "feature_correlations": {"rows": 43, "columns": 43}, "y_train_data": {"rows": 63536, "columns": 1, "file_size": 127081}, "feature_importance_scores": {"rows": 43, "columns": 2}}
+{"raw_data": {"rows": 90767, "columns": 22}, "ref_data_cleaned": {"rows": 90767, "columns": 23}, "preprocessed_training_data": {"rows": 90767, "columns": 46, "file_size": 57868280}}
