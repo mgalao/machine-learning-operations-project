@@ -81,3 +81,27 @@ encoding:
   high_cardinality: frequency
 
 scaling: standard
+
+feature_store_groups:
+  numerical:
+    name: "numerical_features"
+    version: 1
+  categorical:
+    name: "categorical_features"
+    version: 1
+  target:
+    name: "target_features"
+    version: 1
+
+feature_store_preprocessed_groups:
+  upload_features: false
+  numerical:
+    name: "preprocessed_numerical_features"
+    version: 1
+    description: "Numerical features after preprocessing"
+  categorical:
+    name: "preprocessed_categorical_features"
+    version: 1
+    description: "Categorical features after preprocessing"
+
+preprocessed_output_path: "data/03_primary/preprocessed_train_data.csv"

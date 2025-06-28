@@ -83,7 +83,7 @@ def preprocessing_batch(data: pd.DataFrame, params: Dict[str, Any]) -> pd.DataFr
     for key in features:
         features[key] = list(set(features[key] + new_features[key]))
     
-    data, features = drop_columns(data, features, features_to_drop=["datetime", "cc_num_hashed", "first_hashed", "last_hashed"])
+    data, features = drop_columns(data, features, features_to_drop=["cc_num_hashed", "first_hashed", "last_hashed"])
 
     # Low-cardinality encoding using fitted encoder
     data, _, features = encode_low_cardinality(data, features, encoder=params["low_card_encoder"])

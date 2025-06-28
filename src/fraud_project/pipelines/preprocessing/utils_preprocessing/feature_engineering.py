@@ -75,11 +75,11 @@ def add_flag_invalid_zip(data: pd.DataFrame) -> pd.DataFrame:
     data['invalid_zip'] = (~data['zip'].astype(str).apply(lambda x: bool(ZIP_REGEX.match(x)))).astype(float)
     return data
 
-def add_flag_invalid_cc_num(data: pd.DataFrame) -> pd.DataFrame:
-    CC_NUM_REGEX = re.compile(r"^\d{13,19}$")
-    data = data.copy()
-    data['invalid_cc_num'] = (~data['cc_num'].astype(str).apply(lambda x: bool(CC_NUM_REGEX.match(x)))).astype(float)
-    return data
+# def add_flag_invalid_cc_num(data: pd.DataFrame) -> pd.DataFrame:
+#     CC_NUM_REGEX = re.compile(r"^\d{13,19}$")
+#     data = data.copy()
+#     data['invalid_cc_num'] = (~data['cc_num'].astype(str).apply(lambda x: bool(CC_NUM_REGEX.match(x)))).astype(float)
+#     return data
 
 def feature_engineering(data: pd.DataFrame) -> Tuple[pd.DataFrame, dict]:
     data = data.copy()

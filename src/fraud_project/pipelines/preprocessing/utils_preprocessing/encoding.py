@@ -16,7 +16,10 @@ def encode_low_cardinality(data: pd.DataFrame, features: dict, encoder: OneHotEn
 
     encoded_df = pd.DataFrame(
         encoded_array.toarray() if hasattr(encoded_array, "toarray") else encoded_array,
-        columns=encoder.get_feature_names_out(low_card_cols),
+        columns=[
+            "invalid_zip" if name.startswith("invalid_zip") else name
+            for name in encoder.get_feature_names_out(low_card_cols)
+        ],
         index=data.index
     )
     

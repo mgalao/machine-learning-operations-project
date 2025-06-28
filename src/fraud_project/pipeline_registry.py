@@ -34,6 +34,7 @@ from fraud_project.pipelines import (
 from fraud_project.pipelines.preprocessing import (
     preprocessing_train, 
     preprocessing_batch,
+    load_preprocessed_fs
 )
 
 def register_pipelines() -> Dict[str, Pipeline]:
@@ -50,6 +51,7 @@ def register_pipelines() -> Dict[str, Pipeline]:
     pipeline_split_raw = split_data.create_pipeline()
     pipeline_preprocess_train = preprocessing_train.create_pipeline()
     pipeline_preprocess_batch = preprocessing_batch.create_pipeline()
+    pipeline_load_preprocessed_fs = load_preprocessed_fs.create_pipeline()
 
     # Training & Evaluation
     pipeline_split_train = split_train_pipeline.create_pipeline()
@@ -71,6 +73,7 @@ def register_pipelines() -> Dict[str, Pipeline]:
         "split_raw_data": pipeline_split_raw,
         "preprocess_train": pipeline_preprocess_train,
         "preprocess_batch": pipeline_preprocess_batch,
+        "load_preprocessed_fs": pipeline_load_preprocessed_fs,
         "split_train_data": pipeline_split_train,
         "feature_selection": pipeline_feature_selection,
         "model_selection": pipeline_model_selection,
