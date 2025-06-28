@@ -39,8 +39,8 @@ target_feature:
 categorical_features:
   - merchant
   - category
-  - first
-  - last
+  # - first
+  # - last
   - gender
   - street
   - city
@@ -55,8 +55,8 @@ categorical_features_low_cardinality:
 
 categorical_features_high_cardinality:
   - merchant
-  - first
-  - last
+  # - first
+  # - last
   - street
   - city
   - state

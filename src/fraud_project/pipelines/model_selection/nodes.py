@@ -1,4 +1,6 @@
 import pandas as pd
+import os
+import re
 import logging
 from typing import Dict, Any
 import numpy as np
@@ -29,6 +31,16 @@ def _get_or_create_experiment_id(experiment_name: str) -> str:
         return mlflow.create_experiment(experiment_name)
     return exp.experiment_id
 
+def _get_next_model_version(path: str, prefix: str = "champion_model_", ext: str = ".pkl") -> str:
+    """Return the next versioned filename based on existing files in the path."""
+    os.makedirs(path, exist_ok=True)
+    existing_files = [f for f in os.listdir(path) if re.match(rf"{prefix}(\d+){ext}", f)]
+    if existing_files:
+        versions = [int(re.findall(rf"{prefix}(\d+){ext}", f)[0]) for f in existing_files]
+        next_version = max(versions) + 1
+    else:
+        next_version = 1
+    return os.path.join(path, f"{prefix}{next_version}{ext}")
 
 def model_selection(X_train: pd.DataFrame,
                     X_test: pd.DataFrame,
@@ -175,5 +187,11 @@ def model_selection(X_train: pd.DataFrame,
         mlflow.log_metric("val_macro_precision", val_precision)
         mlflow.log_metric("val_macro_recall", val_recall)
         mlflow.log_metric("val_macro_f1", val_f1)
+
+    # Save the best model to a versioned file
+    model_save_path = _get_next_model_version("data/06_models")
+    with open(model_save_path, "wb") as f:
+        pickle.dump(best_model, f)
+    logger.info(f"Saved best model to: {model_save_path}")
 
     return best_model_cls, best_params, best_score

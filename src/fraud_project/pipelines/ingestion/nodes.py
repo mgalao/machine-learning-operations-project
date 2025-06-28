@@ -373,11 +373,11 @@ def ingestion(df: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
     ]
 
     categorical_feature_descriptions = [
-        {"name": "cc_num_hashed", "description": "SHA-256 hashed credit card number for anonymization."},
+        {"name": "cc_num_hashed", "description": "Hashed credit card number."},
         {"name": "merchant", "description": "Merchant or store where the transaction occurred."},
         {"name": "category", "description": "Merchant category where the transaction occurred."},
-        {"name": "first", "description": "First name of the cardholder."},
-        {"name": "last", "description": "Last name of the cardholder."},
+        {"name": "first_hashed", "description": "Hashed first name of the cardholder."},
+        {"name": "last_hashed", "description": "Hashed last name of the cardholder."},
         {"name": "gender", "description": "Gender of the cardholder."},
         {"name": "street", "description": "Street address of the cardholder."},
         {"name": "city", "description": "Name of the city where the cardholder resides."},

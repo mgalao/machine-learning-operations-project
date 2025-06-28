@@ -4,7 +4,7 @@ from pathlib import Path
 import re
 
 # Path to the models directory
-MODEL_DIR = Path(__file__).resolve().parent.parent / "models"
+MODEL_DIR = Path("/app/models")
 
 def get_latest_model_path():
     """Find the most recent champion_model_XXX_.pkl file by version number."""
@@ -18,12 +18,12 @@ def get_latest_model_path():
     return latest
 
 def load_model():
-    """Load the latest champion model and the corresponding production columns."""
+    """Load the latest champion model and the corresponding best columns."""
     model_path = get_latest_model_path()
-    columns_path = MODEL_DIR / "production_cols.pkl"
+    columns_path = MODEL_DIR / "best_cols.pkl"
 
     if not columns_path.exists():
-        raise FileNotFoundError("production_cols.pkl not found in models directory.")
+        raise FileNotFoundError("best_cols.pkl not found in models directory.")
 
     model = joblib.load(model_path)
     columns = joblib.load(columns_path)

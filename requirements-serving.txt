@@ -4,6 +4,8 @@ pydantic
 joblib
 scikit-learn
 numpy<2
+pandas
+xgboost
 
 # fastapi
 # uvicorn

@@ -56,7 +56,7 @@ def feature_engineering_pipeline(data: pd.DataFrame, params: Dict[str, Any]) -> 
 
     data, features = drop_columns(data, features)
     data, new_features = feature_engineering(data)
-    data, features = drop_columns(data, features, features_to_drop=["datetime"])
+    data, features = drop_columns(data, features, features_to_drop=["datetime", "cc_num_hashed", "first_hashed", "last_hashed"])
 
     for key in features:
         features[key] = list(set(features[key] + new_features[key]))

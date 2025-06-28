@@ -78,6 +78,13 @@ def register_pipelines() -> Dict[str, Pipeline]:
 
         # Combined pipelines
         "ingest_and_validate": pipeline_ingest + pipeline_validate,
+        "test": (
+            pipeline_split_raw
+            + pipeline_split_train
+            + pipeline_preprocess_train
+            + pipeline_preprocess_batch
+            + pipeline_feature_selection
+        ),
         "train_full": (
             pipeline_preprocess_train
             + pipeline_split_train
