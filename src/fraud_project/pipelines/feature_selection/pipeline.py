@@ -10,7 +10,8 @@ from .nodes import (
     calculate_feature_importance,
     plot_feature_importance,
     select_statistical_features,
-    recursive_feature_elimination
+    recursive_feature_elimination,
+    filter_drifted_features
 )
 
 
@@ -18,14 +19,20 @@ def create_pipeline(**kwargs) -> Pipeline:
     return pipeline(
         [
             node(
+                func=filter_drifted_features,
+                inputs=["X_train_data", "drifted_features"],
+                outputs="X_train_stable",
+                name="filter_drifted_features",
+            ),
+            node(
                 func=calculate_feature_correlations,
-                inputs="X_train_data",
+                inputs="X_train_stable",
                 outputs="feature_correlations",
                 name="calculate_feature_correlations",
             ),
             node(
                 func=calculate_feature_importance,
-                inputs=["X_train_data", "y_train_data"],
+                inputs=["X_train_stable", "y_train_data"],
                 outputs="feature_importance_scores",
                 name="calculate_feature_importance",
             ),
@@ -37,13 +44,13 @@ def create_pipeline(**kwargs) -> Pipeline:
             ),
             node(
                 func=select_statistical_features,
-                inputs=["X_train_data", "y_train_data", "parameters"],
+                inputs=["X_train_stable", "y_train_data", "parameters"],
                 outputs="statistical_features",
                 name="select_statistical_features",
             ),
             node(
                 func=recursive_feature_elimination,
-                inputs=["X_train_data", "y_train_data", "parameters"],
+                inputs=["X_train_stable", "y_train_data", "parameters"],
                 outputs="rfe_features",
                 name="recursive_feature_elimination",
             ),
