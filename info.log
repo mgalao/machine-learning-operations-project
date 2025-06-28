@@ -10181,3 +10181,47 @@ You can resume the pipeline run from the nearest nodes with persisted inputs by 
 2025-06-28 18:22:34,769 - kedro.runner.sequential_runner - INFO - Completed 4 out of 4 tasks
 2025-06-28 18:22:34,770 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 24.4 sec.
 2025-06-28 18:22:34,786 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
+2025-06-28 18:42:34,983 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 18:42:36,424 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 18:42:36,498 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 18:42:36,558 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 18:42:36,563 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 18:42:38,587 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 18:42:38,974 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 18:42:39,383 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 18:42:40,941 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 18:44:06,568 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 18:44:07,928 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 18:44:08,003 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 18:44:08,051 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 18:44:08,055 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 18:44:09,918 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 18:44:10,289 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 18:44:10,682 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 18:44:12,250 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 18:44:12,900 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'load_preprocessed_fs' - '9872da2d9fe54da280faaf370be98fae' has started
+2025-06-28 18:44:12,914 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 18:44:12,915 - kedro.io.data_catalog - INFO - Loading data from params:feature_store_preprocessed_groups (MemoryDataset)...
+2025-06-28 18:44:12,916 - kedro.io.data_catalog - INFO - Loading data from params:preprocessed_output_path (MemoryDataset)...
+2025-06-28 18:44:12,944 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'load_preprocessed_fs' - '9872da2d9fe54da280faaf370be98fae' at node level for multi-threading
+2025-06-28 18:44:12,951 - kedro.pipeline.node - INFO - Running node: load_and_save_preprocessed_data_node: load_and_save_preprocessed_data([params:feature_store_preprocessed_groups;params:preprocessed_output_path]) -> None
+2025-06-28 18:44:21,238 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Loaded 90767 rows from feature group 'preprocessed_numerical_features@1'
+2025-06-28 18:44:27,527 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Loaded 90767 rows from feature group 'preprocessed_categorical_features@1'
+2025-06-28 18:44:29,313 - kedro.runner.sequential_runner - INFO - Completed node: load_and_save_preprocessed_data_node
+2025-06-28 18:44:29,314 - kedro.runner.sequential_runner - INFO - Completed 1 out of 1 tasks
+2025-06-28 18:44:29,314 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 16.4 sec.
+2025-06-28 18:44:29,337 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...

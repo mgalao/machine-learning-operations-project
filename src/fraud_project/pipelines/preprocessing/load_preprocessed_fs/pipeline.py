@@ -5,11 +5,6 @@ generated using Kedro 0.18.8
 """
 
 from kedro.pipeline import Pipeline, node, pipeline
-
-from .nodes import  split_random
-
-
-from kedro.pipeline import Pipeline, node, pipeline
 from .nodes import load_and_save_preprocessed_data
 
 def create_pipeline(**kwargs) -> Pipeline:
