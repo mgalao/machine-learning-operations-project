@@ -17,7 +17,8 @@ from sklearn.decomposition import PCA
 
 logger = logging.getLogger(__name__)
 
-def data_drift(data_reference: pd.DataFrame, data_analysis: pd.DataFrame) -> dict:
+
+def data_drift(data_reference: pd.DataFrame, data_analysis: pd.DataFrame) -> tuple:
     numerical_features = ['amt', 'lat', 'long', 'city_pop', 'merch_lat', 'merch_long']
     categorical_features = ['category', 'gender', 'city', 'state', 'zip']
 
@@ -41,13 +42,17 @@ def data_drift(data_reference: pd.DataFrame, data_analysis: pd.DataFrame) -> dic
         psi_scores[feature] = psi_value
 
     psi_series = pd.Series(psi_scores, index=numerical_features)
-    drifted_features = psi_series[psi_series > 0.1]
     psi_df = pd.DataFrame({
         "feature": psi_series.index,
         "psi_score": psi_series.values
     })
 
-    if not drifted_features.empty:
+    # Drift detection
+    drifted_features = psi_df[psi_df["psi_score"] > 0.1]["feature"].tolist()
+    stable_features = psi_df[psi_df["psi_score"] <= 0.1]["feature"].tolist()
+    trigger_retraining = len(drifted_features) > 0
+
+    if drifted_features:
         logger.warning("Significant data drift detected via PSI:\n%s", drifted_features)
 
     # ----------- EVIDENTLY REPORT -----------
@@ -91,4 +96,11 @@ def data_drift(data_reference: pd.DataFrame, data_analysis: pd.DataFrame) -> dic
     if (psi_pca > 0.1).any():
         logger.warning("Significant drift in PCA components detected: \n%s", psi_pca[psi_pca > 0.1])
 
-    return psi_df, psi_pca, drift_df, drifted_features.tolist()
+    return (
+        psi_df,               # DataFrame with 'feature' and 'psi_score'
+        psi_pca,              # Series with PCA PSI
+        drift_df,             # NannyML categorical drift output
+        drifted_features,     # Features with drift detected
+        stable_features,      # Features with no significant drift
+        trigger_retraining    # Boolean flag: True if drift detected
+    )
