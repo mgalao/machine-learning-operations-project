@@ -16,8 +16,6 @@ def create_pipeline(**kwargs) -> Pipeline:
                     "X_test_data",
                     "y_train_data",
                     "y_test_data",
-                    "model_cls",
-                    "model_params",
                     "parameters",
                     "best_columns"
                 ],
