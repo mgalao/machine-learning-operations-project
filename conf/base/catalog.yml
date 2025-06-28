@@ -125,16 +125,16 @@ output_plot:
     filepath: data/08_reporting/shap_plot.png
 
 ana_data_NY:
-  type: MemoryDataSet
+  type: MemoryDataset
 
 df_with_predict:
-  type: MemoryDataSet
+  type: MemoryDataset
 
 evaluation_metrics:
-  type: MemoryDataSet
+  type: MemoryDataset
 
 evaluation_metrics_df:
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
   filepath: data/08_reporting/eval_metric_drift_data.csv
   save_args:
     index: False

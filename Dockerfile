@@ -1,27 +1,43 @@
-ARG BASE_IMAGE=python:3.9-slim
-FROM $BASE_IMAGE as runtime-environment
+FROM python:3.11-slim
 
-# install project requirements
-COPY requirements.txt /tmp/requirements.txt
-RUN python -m pip install -U "pip>=21.2,<23.2"
-RUN pip install --no-cache-dir -r /tmp/requirements.txt && rm -f /tmp/requirements.txt
+WORKDIR /app
 
-# add kedro user
-ARG KEDRO_UID=999
-ARG KEDRO_GID=0
-RUN groupadd -f -g ${KEDRO_GID} kedro_group && \
-useradd -m -d /home/kedro_docker -s /bin/bash -g ${KEDRO_GID} -u ${KEDRO_UID} kedro_docker
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /home/kedro_docker
-USER kedro_docker
+COPY requirements-serving.txt .
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements-serving.txt
 
-FROM runtime-environment
+COPY app/ /app/app/
+COPY data/06_models/ /app/models/
 
-# copy the whole project except what is in .dockerignore
-ARG KEDRO_UID=999
-ARG KEDRO_GID=0
-COPY --chown=${KEDRO_UID}:${KEDRO_GID} . .
+EXPOSE 8000
 
-EXPOSE 8888
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
-CMD ["kedro", "run"]
+
+# FROM python:3.11-slim
+
+# RUN apt-get update && apt-get install -y \
+#     gcc \
+#     g++ \
+#     python3-dev \
+#     build-essential \
+#     && rm -rf /var/lib/apt/lists/*
+
+
+# WORKDIR /app
+
+# RUN pip install uv
+# COPY requirements.txt .
+# RUN uv pip install --no-cache-dir -r requirements.txt --system
+
+# COPY . .
+
+# EXPOSE 8000
+# CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+

@@ -1,1 +1,1 @@
-{"ana_data": {"rows": 18153, "columns": 22, "file_size": 5383053}}
+{"preprocessed_training_data": {"rows": 72614, "columns": 47, "file_size": 50688232}, "X_train_data": {"rows": 50829, "columns": 45, "file_size": 32497785}, "X_test_data": {"rows": 21785, "columns": 45, "file_size": 13930627}}

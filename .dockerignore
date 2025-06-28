@@ -1,0 +1,80 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter notebooks
+*.ipynb
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# OS metadata
+.DS_Store
+
+# Git
+.git
+.gitignore
+
+# Logs, archives
+*.log
+*.zip
+
+# Exclude raw data, but allow model artifacts
+data/01_raw/
+data/02_intermediate/
+data/03_primary/
+data/04_feature/
+data/05_model_input/
+data/07_model_output/
+data/08_reporting/
+
+# Keep trained models
+!data/06_models/
+!data/06_models/*.pkl
+
+# __pycache__ in nested folders
+**/__pycache__/
+
+# Optional: Exclude tests and notebooks
+notebooks/
+tests/
+
+# Docker files themselves
+Dockerfile
+.dockerignore
+
+
+# # Byte-compiled / optimized / DLL files
+# __pycache__/
+# *.py[cod]
+# *$py.class
+
+# # Jupyter notebooks (optional)
+# *.ipynb
+
+# # Virtual environment folders
+# .venv/
+# env/
+# venv/
+
+# # OS metadata
+# .DS_Store
+
+# # Git-related
+# .git
+# .gitignore
+
+# # Avoid uploading large or sensitive files unintentionally
+# *.log
+# *.zip
+
+
+# # CSV data 
+# data/
+
+# # Docker files themselves
+# Dockerfile
+# .dockerignore

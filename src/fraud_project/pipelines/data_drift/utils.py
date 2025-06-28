@@ -1,4 +1,4 @@
-import numpy as np
+from fraud_project.utils import *
 
 
 def calculate_psi(expected, actual, buckettype='quantiles', buckets=50, axis=0):
