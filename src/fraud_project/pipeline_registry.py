@@ -83,31 +83,33 @@ def register_pipelines() -> Dict[str, Pipeline]:
         "batch_sample_drift": pipeline_batch_sample_drift,
 
         # Combined pipelines
-        "ingest_and_validate": pipeline_ingest + pipeline_validate,
-        "test": (
-            pipeline_split_raw
-            + pipeline_split_train
-            + pipeline_preprocess_train
-            + pipeline_preprocess_batch
-            + pipeline_feature_selection
+        "ingest_to_validate": (
+            pipeline_ingest
+            + pipeline_split_raw
+            + pipeline_validate
         ),
-        "train_full": (
+        "preproc_to_model_selection": (
             pipeline_preprocess_train
+            + pipeline_preprocess_batch
             + pipeline_split_train
-            + pipeline_model_train
+            + pipeline_feature_selection
+            + pipeline_model_selection
         ),
-        "predict_full": (
-            pipeline_preprocess_batch
+        "model_train_predict": (
+            pipeline_model_train
             + pipeline_predict
         ),
 
-        # Full production process (train + predict + monitor)
+        # Full production process
         "__default__": (
             pipeline_ingest
-            + pipeline_validate
             + pipeline_split_raw
+            + pipeline_validate
             + pipeline_preprocess_train
+            + pipeline_preprocess_batch
             + pipeline_split_train
+            + pipeline_feature_selection
+            + pipeline_model_selection
             + pipeline_model_train
             + pipeline_predict
             + pipeline_drift_detection

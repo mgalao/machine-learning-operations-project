@@ -10258,3 +10258,645 @@ You can resume the pipeline run from the nearest nodes with persisted inputs by 
 2025-06-28 20:52:02,290 - kedro.runner.sequential_runner - INFO - Completed 1 out of 1 tasks
 2025-06-28 20:52:02,290 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 0.8 sec.
 2025-06-28 20:52:02,299 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
+2025-06-28 21:14:10,416 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 21:14:12,506 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 21:14:12,635 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 21:14:12,718 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 21:14:12,725 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 21:14:15,600 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 21:14:16,146 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:14:16,797 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:14:19,397 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 21:14:20,044 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'ingest_to_validate' - 'fda5c862e40e4eeb93b419ec211a117f' has started
+2025-06-28 21:14:20,075 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 21:14:20,079 - kedro.io.data_catalog - INFO - Loading data from fraud_raw_data (CSVDataset)...
+2025-06-28 21:14:20,421 - kedro.io.data_catalog - INFO - Loading data from parameters (MemoryDataset)...
+2025-06-28 21:14:20,467 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'ingest_to_validate' - 'fda5c862e40e4eeb93b419ec211a117f' at node level for multi-threading
+2025-06-28 21:14:20,475 - kedro.pipeline.node - INFO - Running node: ingestion: ingestion([fraud_raw_data;parameters]) -> [ingested_data]
+2025-06-28 21:14:20,476 - fraud_project.pipelines.ingestion.nodes - INFO - Starting data ingestion pipeline...
+2025-06-28 21:14:20,598 - fraud_project.pipelines.ingestion.nodes - INFO - Dataset loaded with shape: (90767, 23)
+2025-06-28 21:14:20,646 - fraud_project.pipelines.ingestion.nodes - INFO - Created 'datetime' column from 'trans_date_trans_time'.
+2025-06-28 21:14:20,647 - fraud_project.pipelines.ingestion.nodes - INFO - Dropped 'unix_time' column as it is redundant.
+2025-06-28 21:14:20,730 - fraud_project.pipelines.ingestion.nodes - INFO - Parsed successfully categorical columns to string.
+2025-06-28 21:14:20,813 - fraud_project.pipelines.ingestion.nodes - INFO - Hashed 'cc_num' to 'cc_num_hashed' for anonymization.
+2025-06-28 21:14:20,891 - fraud_project.pipelines.ingestion.nodes - INFO - Hashed 'first' to 'first_hashed' for anonymization.
+2025-06-28 21:14:20,970 - fraud_project.pipelines.ingestion.nodes - INFO - Hashed 'last' to 'last_hashed' for anonymization.
+2025-06-28 21:14:21,001 - fraud_project.pipelines.ingestion.nodes - INFO - Created 'age' feature from 'dob'.
+2025-06-28 21:14:21,061 - fraud_project.pipelines.ingestion.nodes - INFO - [numerical_features] Schema validation passed.
+2025-06-28 21:14:21,062 - fraud_project.pipelines.ingestion.nodes - INFO - [categorical_features] Schema validation passed.
+2025-06-28 21:14:21,063 - fraud_project.pipelines.ingestion.nodes - INFO - [target_features] Schema validation passed.
+2025-06-28 21:14:21,063 - fraud_project.pipelines.ingestion.nodes - INFO - All schema validations passed.
+2025-06-28 21:14:21,065 - fraud_project.pipelines.ingestion.nodes - INFO - Building expectation suite for: numerical_features
+2025-06-28 21:14:21,070 - fraud_project.pipelines.ingestion.nodes - INFO - Building expectation suite for: categorical_features
+2025-06-28 21:14:21,072 - fraud_project.pipelines.ingestion.nodes - INFO - Building expectation suite for: target
+2025-06-28 21:14:21,073 - fraud_project.pipelines.ingestion.nodes - INFO - Uploading to Hopsworks feature store...
+2025-06-28 21:14:21,075 - fraud_project.pipelines.ingestion.nodes - INFO - Pushing 'numerical_features' to feature store...
+2025-06-28 21:17:08,550 - fraud_project.pipelines.ingestion.nodes - INFO - Inserted 90767 rows into feature group: numerical_features
+2025-06-28 21:20:07,604 - fraud_project.pipelines.ingestion.nodes - INFO - Pushing 'categorical_features' to feature store...
+2025-06-28 21:23:23,632 - fraud_project.pipelines.ingestion.nodes - INFO - Inserted 90767 rows into feature group: categorical_features
+2025-06-28 21:23:32,927 - fraud_project.pipelines.ingestion.nodes - INFO - Pushing 'target_features' to feature store...
+2025-06-28 21:26:40,624 - fraud_project.pipelines.ingestion.nodes - INFO - Inserted 90767 rows into feature group: target_features
+2025-06-28 21:28:34,624 - fraud_project.pipelines.ingestion.nodes - INFO - Data uploaded to Hopsworks successfully.
+2025-06-28 21:28:34,712 - kedro.io.data_catalog - INFO - Saving data to ingested_data (CSVDataset)...
+2025-06-28 21:28:35,893 - kedro.runner.sequential_runner - INFO - Completed node: ingestion
+2025-06-28 21:28:35,894 - kedro.runner.sequential_runner - INFO - Completed 1 out of 4 tasks
+2025-06-28 21:28:35,895 - kedro.io.data_catalog - INFO - Loading data from ingested_data (CSVDataset)...
+2025-06-28 21:28:36,301 - kedro.io.data_catalog - INFO - Loading data from params:target_column (MemoryDataset)...
+2025-06-28 21:28:36,415 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'ingest_to_validate' - 'fda5c862e40e4eeb93b419ec211a117f' at node level for multi-threading
+2025-06-28 21:28:36,428 - kedro.pipeline.node - INFO - Running node: split_out_of_sample: stratified_split_by_target([ingested_data;params:target_column]) -> [ref_data;ana_data]
+2025-06-28 21:28:36,532 - kedro.io.data_catalog - INFO - Saving data to ref_data (CSVDataset)...
+2025-06-28 21:28:37,298 - kedro.io.data_catalog - INFO - Saving data to ana_data (CSVDataset)...
+2025-06-28 21:28:37,540 - kedro.runner.sequential_runner - INFO - Completed node: split_out_of_sample
+2025-06-28 21:28:37,543 - kedro.runner.sequential_runner - INFO - Completed 2 out of 4 tasks
+2025-06-28 21:28:37,544 - kedro.io.data_catalog - INFO - Loading data from ana_data (CSVDataset)...
+2025-06-28 21:28:37,643 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'ingest_to_validate' - 'fda5c862e40e4eeb93b419ec211a117f' at node level for multi-threading
+2025-06-28 21:28:37,644 - kedro.pipeline.node - INFO - Running node: industry_profiling_node: industry_profiling([ana_data]) -> None
+2025-06-28 21:28:38,155 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling ProfileReport generated
+2025-06-28 21:28:38,193 - great_expectations.data_context.types.base - WARNING - You appear to be using a legacy capability with the latest config version (3.0).
+    Your data context with this configuration version uses validation_operators, which are being deprecated.  Please consult the V3 API migration guide https://docs.greatexpectations.io/docs/guides/miscellaneous/migration_guide#migrating-to-the-batch-request-v3-api and update your configuration to be compatible with the version number 3.
+    (This message will appear repeatedly until your configuration is updated.)
+
+2025-06-28 21:28:38,307 - fraud_project.pipelines.data_quality.nodes - INFO - Datasource 'profiling_datasource' already exists.
+2025-06-28 21:28:38,307 - fraud_project.pipelines.data_quality.nodes - INFO - Data asset 'profiling_asset' already exists.
+2025-06-28 21:28:38,311 - fraud_project.pipelines.data_quality.nodes - INFO - Deleted existing expectation suite 'yprofiling_profiling_suite'.
+2025-06-28 21:28:42,728 - fraud_project.pipelines.data_quality.nodes - INFO - Expectation suite 'yprofiling_profiling_suite' saved.
+2025-06-28 21:28:45,532 - fraud_project.pipelines.data_quality.nodes - INFO - Checkpoint 'yprofiling_profiling_checkpoint' run completed.
+2025-06-28 21:28:45,567 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling validation results extracted.
+2025-06-28 21:28:52,450 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling report saved: data/08_reporting/yprofiling_report.html
+2025-06-28 21:28:52,455 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling results saved: data/08_reporting/yprofiling_results.csv
+2025-06-28 21:28:52,467 - kedro.runner.sequential_runner - INFO - Completed node: industry_profiling_node
+2025-06-28 21:28:52,468 - kedro.runner.sequential_runner - INFO - Completed 3 out of 4 tasks
+2025-06-28 21:28:52,469 - kedro.io.data_catalog - INFO - Loading data from ana_data (CSVDataset)...
+2025-06-28 21:28:52,560 - kedro.io.data_catalog - INFO - Loading data from parameters (MemoryDataset)...
+2025-06-28 21:28:52,624 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'ingest_to_validate' - 'fda5c862e40e4eeb93b419ec211a117f' at node level for multi-threading
+2025-06-28 21:28:52,635 - kedro.pipeline.node - INFO - Running node: manual_tests_node: manual_tests([ana_data;parameters]) -> None
+2025-06-28 21:28:52,695 - fraud_project.pipelines.data_quality.nodes - INFO - Datasource created.
+2025-06-28 21:28:55,165 - kedro.pipeline.node - ERROR - Node manual_tests_node: manual_tests([ana_data;parameters]) -> None failed with error: 
+
+2025-06-28 21:28:55,168 - kedro.runner.sequential_runner - WARNING - There are 1 nodes that have not run.
+You can resume the pipeline run from the nearest nodes with persisted inputs by adding the following argument to your previous command:
+  --from-nodes "manual_tests_node"
+2025-06-28 21:28:55,170 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'fda5c862e40e4eeb93b419ec211a117f' was closed because of an error in the pipeline.
+2025-06-28 21:28:55,232 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'fda5c862e40e4eeb93b419ec211a117f' was closed because of an error in the pipeline.
+2025-06-28 21:28:55,267 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'fda5c862e40e4eeb93b419ec211a117f' was closed because of an error in the pipeline.
+2025-06-28 21:28:55,287 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'fda5c862e40e4eeb93b419ec211a117f' was closed because of an error in the pipeline.
+2025-06-28 21:28:55,308 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'fda5c862e40e4eeb93b419ec211a117f' was closed because of an error in the pipeline.
+2025-06-28 21:30:18,965 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 21:30:21,319 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 21:30:21,451 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 21:30:21,933 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 21:30:21,942 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 21:30:25,522 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 21:30:26,090 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:30:26,735 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:30:29,277 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 21:30:29,922 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'validate' - '0b7244e0519942a68e52a8dc51704c2a' has started
+2025-06-28 21:30:29,947 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 21:30:29,949 - kedro.io.data_catalog - INFO - Loading data from ana_data (CSVDataset)...
+2025-06-28 21:30:30,047 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'validate' - '0b7244e0519942a68e52a8dc51704c2a' at node level for multi-threading
+2025-06-28 21:30:30,048 - kedro.pipeline.node - INFO - Running node: industry_profiling_node: industry_profiling([ana_data]) -> None
+2025-06-28 21:30:30,253 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling ProfileReport generated
+2025-06-28 21:30:30,282 - great_expectations.data_context.types.base - WARNING - You appear to be using a legacy capability with the latest config version (3.0).
+    Your data context with this configuration version uses validation_operators, which are being deprecated.  Please consult the V3 API migration guide https://docs.greatexpectations.io/docs/guides/miscellaneous/migration_guide#migrating-to-the-batch-request-v3-api and update your configuration to be compatible with the version number 3.
+    (This message will appear repeatedly until your configuration is updated.)
+
+2025-06-28 21:30:30,382 - fraud_project.pipelines.data_quality.nodes - INFO - Datasource 'profiling_datasource' already exists.
+2025-06-28 21:30:30,383 - fraud_project.pipelines.data_quality.nodes - INFO - Data asset 'profiling_asset' already exists.
+2025-06-28 21:30:30,392 - fraud_project.pipelines.data_quality.nodes - INFO - Deleted existing expectation suite 'yprofiling_profiling_suite'.
+2025-06-28 21:30:35,515 - fraud_project.pipelines.data_quality.nodes - INFO - Expectation suite 'yprofiling_profiling_suite' saved.
+2025-06-28 21:30:38,358 - fraud_project.pipelines.data_quality.nodes - INFO - Checkpoint 'yprofiling_profiling_checkpoint' run completed.
+2025-06-28 21:30:38,398 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling validation results extracted.
+2025-06-28 21:30:44,281 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling report saved: data/08_reporting/yprofiling_report.html
+2025-06-28 21:30:44,284 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling results saved: data/08_reporting/yprofiling_results.csv
+2025-06-28 21:30:44,292 - kedro.runner.sequential_runner - INFO - Completed node: industry_profiling_node
+2025-06-28 21:30:44,293 - kedro.runner.sequential_runner - INFO - Completed 1 out of 2 tasks
+2025-06-28 21:30:44,294 - kedro.io.data_catalog - INFO - Loading data from ana_data (CSVDataset)...
+2025-06-28 21:30:44,376 - kedro.io.data_catalog - INFO - Loading data from parameters (MemoryDataset)...
+2025-06-28 21:30:44,416 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'validate' - '0b7244e0519942a68e52a8dc51704c2a' at node level for multi-threading
+2025-06-28 21:30:44,427 - kedro.pipeline.node - INFO - Running node: manual_tests_node: manual_tests([ana_data;parameters]) -> None
+2025-06-28 21:30:44,503 - fraud_project.pipelines.data_quality.nodes - INFO - Datasource already exists.
+2025-06-28 21:30:44,556 - fraud_project.pipelines.data_quality.nodes - INFO - Data asset already exists.
+2025-06-28 21:30:47,615 - fraud_project.pipelines.data_quality.nodes - WARNING - 13 expectations failed:
+                       Expectation Type         Column Unexpected Percent
+0   expect_column_values_to_not_be_null         cc_num                   
+1   expect_column_values_to_match_regex         cc_num                   
+2   expect_column_values_to_not_be_null          first                   
+3   expect_column_values_to_not_be_null           last                   
+8    expect_column_values_to_be_between            age           0.782197
+28   expect_column_values_to_be_of_type         cc_num                   
+33   expect_column_values_to_be_of_type          first                   
+34   expect_column_values_to_be_of_type           last                   
+45   expect_column_values_to_be_of_type            zip                   
+47  expect_column_values_to_match_regex            zip           6.571554
+50   expect_column_values_to_be_of_type  merch_zipcode                   
+51  expect_column_values_to_not_be_null  merch_zipcode          15.192244
+52   expect_column_values_to_be_of_type       datetime              100.0
+2025-06-28 21:30:47,619 - fraud_project.pipelines.data_quality.nodes - INFO - Validation summary: {True: 44, False: 13}
+2025-06-28 21:30:47,633 - fraud_project.pipelines.data_quality.nodes - INFO - Manual validation report saved at: data/08_reporting/manual_tests_report.html
+2025-06-28 21:30:47,633 - fraud_project.pipelines.data_quality.nodes - INFO - Manual validation CSV saved at: data/08_reporting/manual_tests_results.csv
+2025-06-28 21:30:47,634 - kedro.runner.sequential_runner - INFO - Completed node: manual_tests_node
+2025-06-28 21:30:47,635 - kedro.runner.sequential_runner - INFO - Completed 2 out of 2 tasks
+2025-06-28 21:30:47,635 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 17.7 sec.
+2025-06-28 21:30:47,680 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
+2025-06-28 21:30:58,837 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 21:31:01,038 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 21:31:01,167 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 21:31:01,238 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 21:31:01,245 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 21:31:04,642 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 21:31:05,561 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:31:06,258 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:31:09,455 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 21:31:23,720 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 21:31:25,664 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 21:31:25,792 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 21:31:25,897 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 21:31:25,905 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 21:31:28,821 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 21:31:29,486 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:31:30,108 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:31:33,764 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 21:31:34,405 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'split_raw_data' - '2ec74d7db26a4758ab56b5386ecbe5e7' has started
+2025-06-28 21:31:34,418 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 21:31:34,420 - kedro.io.data_catalog - INFO - Loading data from ingested_data (CSVDataset)...
+2025-06-28 21:31:34,835 - kedro.io.data_catalog - INFO - Loading data from params:target_column (MemoryDataset)...
+2025-06-28 21:31:34,852 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'split_raw_data' - '2ec74d7db26a4758ab56b5386ecbe5e7' at node level for multi-threading
+2025-06-28 21:31:34,858 - kedro.pipeline.node - INFO - Running node: split_out_of_sample: stratified_split_by_target([ingested_data;params:target_column]) -> [ref_data;ana_data]
+2025-06-28 21:31:34,906 - kedro.io.data_catalog - INFO - Saving data to ref_data (CSVDataset)...
+2025-06-28 21:31:35,599 - kedro.io.data_catalog - INFO - Saving data to ana_data (CSVDataset)...
+2025-06-28 21:31:35,792 - kedro.runner.sequential_runner - INFO - Completed node: split_out_of_sample
+2025-06-28 21:31:35,793 - kedro.runner.sequential_runner - INFO - Completed 1 out of 1 tasks
+2025-06-28 21:31:35,793 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 1.4 sec.
+2025-06-28 21:31:35,816 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
+2025-06-28 21:31:47,754 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 21:31:50,146 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 21:31:50,278 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 21:31:50,841 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 21:31:50,850 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 21:31:53,926 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 21:31:54,499 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:31:55,131 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:31:57,691 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 21:31:58,331 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'validate' - 'ba27f256404447b4a54c4279cbbf5612' has started
+2025-06-28 21:31:58,346 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 21:31:58,347 - kedro.io.data_catalog - INFO - Loading data from ana_data (CSVDataset)...
+2025-06-28 21:31:58,461 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'validate' - 'ba27f256404447b4a54c4279cbbf5612' at node level for multi-threading
+2025-06-28 21:31:58,462 - kedro.pipeline.node - INFO - Running node: industry_profiling_node: industry_profiling([ana_data]) -> None
+2025-06-28 21:31:58,715 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling ProfileReport generated
+2025-06-28 21:31:58,741 - great_expectations.data_context.types.base - WARNING - You appear to be using a legacy capability with the latest config version (3.0).
+    Your data context with this configuration version uses validation_operators, which are being deprecated.  Please consult the V3 API migration guide https://docs.greatexpectations.io/docs/guides/miscellaneous/migration_guide#migrating-to-the-batch-request-v3-api and update your configuration to be compatible with the version number 3.
+    (This message will appear repeatedly until your configuration is updated.)
+
+2025-06-28 21:31:58,831 - fraud_project.pipelines.data_quality.nodes - INFO - Datasource 'profiling_datasource' already exists.
+2025-06-28 21:31:58,832 - fraud_project.pipelines.data_quality.nodes - INFO - Data asset 'profiling_asset' already exists.
+2025-06-28 21:31:58,835 - fraud_project.pipelines.data_quality.nodes - INFO - Deleted existing expectation suite 'yprofiling_profiling_suite'.
+2025-06-28 21:32:03,803 - fraud_project.pipelines.data_quality.nodes - INFO - Expectation suite 'yprofiling_profiling_suite' saved.
+2025-06-28 21:32:06,654 - fraud_project.pipelines.data_quality.nodes - INFO - Checkpoint 'yprofiling_profiling_checkpoint' run completed.
+2025-06-28 21:32:06,702 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling validation results extracted.
+2025-06-28 21:32:13,458 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling report saved: data/08_reporting/yprofiling_report.html
+2025-06-28 21:32:13,461 - fraud_project.pipelines.data_quality.nodes - INFO - YProfiling results saved: data/08_reporting/yprofiling_results.csv
+2025-06-28 21:32:13,472 - kedro.runner.sequential_runner - INFO - Completed node: industry_profiling_node
+2025-06-28 21:32:13,473 - kedro.runner.sequential_runner - INFO - Completed 1 out of 2 tasks
+2025-06-28 21:32:13,474 - kedro.io.data_catalog - INFO - Loading data from ana_data (CSVDataset)...
+2025-06-28 21:32:13,561 - kedro.io.data_catalog - INFO - Loading data from parameters (MemoryDataset)...
+2025-06-28 21:32:13,623 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'validate' - 'ba27f256404447b4a54c4279cbbf5612' at node level for multi-threading
+2025-06-28 21:32:13,629 - kedro.pipeline.node - INFO - Running node: manual_tests_node: manual_tests([ana_data;parameters]) -> None
+2025-06-28 21:32:13,704 - fraud_project.pipelines.data_quality.nodes - INFO - Datasource already exists.
+2025-06-28 21:32:13,759 - fraud_project.pipelines.data_quality.nodes - INFO - Data asset already exists.
+2025-06-28 21:32:17,965 - fraud_project.pipelines.data_quality.nodes - WARNING - 13 expectations failed:
+                       Expectation Type         Column Unexpected Percent
+0   expect_column_values_to_not_be_null         cc_num                   
+1   expect_column_values_to_match_regex         cc_num                   
+2   expect_column_values_to_not_be_null          first                   
+3   expect_column_values_to_not_be_null           last                   
+8    expect_column_values_to_be_between            age           0.782197
+28   expect_column_values_to_be_of_type         cc_num                   
+33   expect_column_values_to_be_of_type          first                   
+34   expect_column_values_to_be_of_type           last                   
+45   expect_column_values_to_be_of_type            zip                   
+47  expect_column_values_to_match_regex            zip           6.571554
+50   expect_column_values_to_be_of_type  merch_zipcode                   
+51  expect_column_values_to_not_be_null  merch_zipcode          15.192244
+52   expect_column_values_to_be_of_type       datetime              100.0
+2025-06-28 21:32:17,969 - fraud_project.pipelines.data_quality.nodes - INFO - Validation summary: {True: 44, False: 13}
+2025-06-28 21:32:17,981 - fraud_project.pipelines.data_quality.nodes - INFO - Manual validation report saved at: data/08_reporting/manual_tests_report.html
+2025-06-28 21:32:17,982 - fraud_project.pipelines.data_quality.nodes - INFO - Manual validation CSV saved at: data/08_reporting/manual_tests_results.csv
+2025-06-28 21:32:17,982 - kedro.runner.sequential_runner - INFO - Completed node: manual_tests_node
+2025-06-28 21:32:17,983 - kedro.runner.sequential_runner - INFO - Completed 2 out of 2 tasks
+2025-06-28 21:32:17,984 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 19.6 sec.
+2025-06-28 21:32:18,016 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
+2025-06-28 21:32:46,717 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 21:32:48,798 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 21:32:48,924 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 21:32:49,036 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 21:32:49,045 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 21:32:52,242 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 21:32:52,797 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:32:53,425 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:32:56,043 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 21:32:56,691 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'preprocess_train' - '9a9422c4a5194f8489a6253d193436aa' has started
+2025-06-28 21:32:56,704 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 21:32:56,706 - kedro.io.data_catalog - INFO - Loading data from params:feature_store_groups (MemoryDataset)...
+2025-06-28 21:32:56,726 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - '9a9422c4a5194f8489a6253d193436aa' at node level for multi-threading
+2025-06-28 21:32:56,740 - kedro.pipeline.node - INFO - Running node: load_and_merge_feature_groups: load_and_merge_feature_groups([params:feature_store_groups]) -> [raw_data]
+2025-06-28 21:33:29,054 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 21:33:30,995 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 21:33:31,127 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 21:33:31,194 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 21:33:31,200 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 21:33:33,894 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 21:33:34,468 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:33:35,071 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:33:37,446 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 21:33:38,087 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'preprocess_train' - 'af34bd9a1fbf48b49f5623b2f4919c8c' has started
+2025-06-28 21:33:38,098 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 21:33:38,100 - kedro.io.data_catalog - INFO - Loading data from params:feature_store_groups (MemoryDataset)...
+2025-06-28 21:33:38,114 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - 'af34bd9a1fbf48b49f5623b2f4919c8c' at node level for multi-threading
+2025-06-28 21:33:38,119 - kedro.pipeline.node - INFO - Running node: load_and_merge_feature_groups: load_and_merge_feature_groups([params:feature_store_groups]) -> [raw_data]
+2025-06-28 21:33:44,419 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Loaded 90767 rows from feature group 'numerical_features@1'
+2025-06-28 21:33:52,587 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Loaded 90767 rows from feature group 'categorical_features@1'
+2025-06-28 21:33:58,836 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Loaded 90767 rows from feature group 'target_features@1'
+2025-06-28 21:33:58,976 - kedro.io.data_catalog - INFO - Saving data to raw_data (MemoryDataset)...
+2025-06-28 21:33:58,983 - kedro.runner.sequential_runner - INFO - Completed node: load_and_merge_feature_groups
+2025-06-28 21:33:58,985 - kedro.runner.sequential_runner - INFO - Completed 1 out of 4 tasks
+2025-06-28 21:33:58,986 - kedro.io.data_catalog - INFO - Loading data from raw_data (MemoryDataset)...
+2025-06-28 21:33:59,024 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - 'af34bd9a1fbf48b49f5623b2f4919c8c' at node level for multi-threading
+2025-06-28 21:33:59,025 - kedro.pipeline.node - INFO - Running node: clean_data: clean_data([raw_data]) -> [ref_data_cleaned;cleaning_params]
+2025-06-28 21:33:59,192 - kedro.io.data_catalog - INFO - Saving data to ref_data_cleaned (MemoryDataset)...
+2025-06-28 21:33:59,198 - kedro.io.data_catalog - INFO - Saving data to cleaning_params (MemoryDataset)...
+2025-06-28 21:33:59,208 - kedro.runner.sequential_runner - INFO - Completed node: clean_data
+2025-06-28 21:33:59,209 - kedro.runner.sequential_runner - INFO - Completed 2 out of 4 tasks
+2025-06-28 21:33:59,212 - kedro.io.data_catalog - INFO - Loading data from ref_data_cleaned (MemoryDataset)...
+2025-06-28 21:33:59,216 - kedro.io.data_catalog - INFO - Loading data from cleaning_params (MemoryDataset)...
+2025-06-28 21:33:59,238 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - 'af34bd9a1fbf48b49f5623b2f4919c8c' at node level for multi-threading
+2025-06-28 21:33:59,240 - kedro.pipeline.node - INFO - Running node: feature_engineering: feature_engineering_pipeline([ref_data_cleaned;cleaning_params]) -> [preprocessed_training_data;feature_engineering_params]
+2025-06-28 21:33:59,700 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Preprocessing complete. Shape: (90767, 46) | Numerical: 11 | Low-card categorical: 16 | High-card categorical: 7 | Temporal: 8
+2025-06-28 21:33:59,701 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Numerical features (11): city_pop, age, merch_lat, distance, log_city_pop...
+2025-06-28 21:33:59,702 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Categorical features (23): gender_M, is_weekend_1, category_food_dining, category_gas_transport, category_grocery_net...
+2025-06-28 21:33:59,702 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Categorical_features_low_cardinality features (16): gender_M, is_weekend_1, category_food_dining, category_gas_transport, category_grocery_net...
+2025-06-28 21:33:59,703 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Categorical_features_high_cardinality features (7): state_grouped_freq, city_freq, state_freq, merch_zipcode_freq, zip_freq...
+2025-06-28 21:33:59,704 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Temporal features (8): hour_sin, hour_cos, weekday_sin, weekday_cos, month_sin...
+2025-06-28 21:33:59,705 - kedro.io.data_catalog - INFO - Saving data to preprocessed_training_data (CSVDataset)...
+2025-06-28 21:34:02,919 - kedro.io.data_catalog - INFO - Saving data to feature_engineering_params (PickleDataset)...
+2025-06-28 21:34:02,953 - kedro.runner.sequential_runner - INFO - Completed node: feature_engineering
+2025-06-28 21:34:02,956 - kedro.runner.sequential_runner - INFO - Completed 3 out of 4 tasks
+2025-06-28 21:34:02,980 - kedro.io.data_catalog - INFO - Loading data from preprocessed_training_data (CSVDataset)...
+2025-06-28 21:34:03,532 - kedro.io.data_catalog - INFO - Loading data from params:feature_store_preprocessed_groups (MemoryDataset)...
+2025-06-28 21:34:03,577 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - 'af34bd9a1fbf48b49f5623b2f4919c8c' at node level for multi-threading
+2025-06-28 21:34:03,581 - kedro.pipeline.node - INFO - Running node: upload_preprocessed_features: upload_preprocessed_features([preprocessed_training_data;params:feature_store_preprocessed_groups]) -> None
+2025-06-28 21:34:04,177 - kedro.runner.sequential_runner - INFO - Completed node: upload_preprocessed_features
+2025-06-28 21:34:04,178 - kedro.runner.sequential_runner - INFO - Completed 4 out of 4 tasks
+2025-06-28 21:34:04,179 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 26.1 sec.
+2025-06-28 21:34:04,243 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
+2025-06-28 21:35:31,430 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 21:35:34,140 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 21:35:34,300 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 21:35:34,400 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 21:35:34,407 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 21:35:37,523 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 21:35:38,249 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:35:39,195 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:35:43,373 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 21:35:44,042 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'preprocess_train' - 'b676eb68ef864143a794e28b380f3c24' has started
+2025-06-28 21:35:44,056 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 21:35:44,058 - kedro.io.data_catalog - INFO - Loading data from params:feature_store_groups (MemoryDataset)...
+2025-06-28 21:35:44,096 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - 'b676eb68ef864143a794e28b380f3c24' at node level for multi-threading
+2025-06-28 21:35:44,102 - kedro.pipeline.node - INFO - Running node: load_and_merge_feature_groups: load_and_merge_feature_groups([params:feature_store_groups]) -> [raw_data]
+2025-06-28 21:35:50,470 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Loaded 90767 rows from feature group 'numerical_features@1'
+2025-06-28 21:35:58,323 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Loaded 90767 rows from feature group 'categorical_features@1'
+2025-06-28 21:36:04,752 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Loaded 90767 rows from feature group 'target_features@1'
+2025-06-28 21:36:04,959 - kedro.io.data_catalog - INFO - Saving data to raw_data (MemoryDataset)...
+2025-06-28 21:36:04,970 - kedro.runner.sequential_runner - INFO - Completed node: load_and_merge_feature_groups
+2025-06-28 21:36:04,972 - kedro.runner.sequential_runner - INFO - Completed 1 out of 4 tasks
+2025-06-28 21:36:04,976 - kedro.io.data_catalog - INFO - Loading data from raw_data (MemoryDataset)...
+2025-06-28 21:36:05,015 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - 'b676eb68ef864143a794e28b380f3c24' at node level for multi-threading
+2025-06-28 21:36:05,016 - kedro.pipeline.node - INFO - Running node: clean_data: clean_data([raw_data]) -> [ref_data_cleaned;cleaning_params]
+2025-06-28 21:36:05,216 - kedro.io.data_catalog - INFO - Saving data to ref_data_cleaned (MemoryDataset)...
+2025-06-28 21:36:05,222 - kedro.io.data_catalog - INFO - Saving data to cleaning_params (MemoryDataset)...
+2025-06-28 21:36:05,227 - kedro.runner.sequential_runner - INFO - Completed node: clean_data
+2025-06-28 21:36:05,228 - kedro.runner.sequential_runner - INFO - Completed 2 out of 4 tasks
+2025-06-28 21:36:05,231 - kedro.io.data_catalog - INFO - Loading data from ref_data_cleaned (MemoryDataset)...
+2025-06-28 21:36:05,235 - kedro.io.data_catalog - INFO - Loading data from cleaning_params (MemoryDataset)...
+2025-06-28 21:36:05,262 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - 'b676eb68ef864143a794e28b380f3c24' at node level for multi-threading
+2025-06-28 21:36:05,263 - kedro.pipeline.node - INFO - Running node: feature_engineering: feature_engineering_pipeline([ref_data_cleaned;cleaning_params]) -> [preprocessed_training_data;feature_engineering_params]
+2025-06-28 21:36:05,711 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Preprocessing complete. Shape: (90767, 46) | Numerical: 11 | Low-card categorical: 16 | High-card categorical: 7 | Temporal: 8
+2025-06-28 21:36:05,712 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Numerical features (11): merch_long, log_city_pop, log_amt, amt_per_km, long...
+2025-06-28 21:36:05,713 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Categorical features (23): gender_M, invalid_zip, is_weekend_1, category_food_dining, category_gas_transport...
+2025-06-28 21:36:05,714 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Categorical_features_low_cardinality features (16): gender_M, invalid_zip, is_weekend_1, category_food_dining, category_gas_transport...
+2025-06-28 21:36:05,715 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Categorical_features_high_cardinality features (7): zip_freq, city_freq, state_freq, state_grouped_freq, job_freq...
+2025-06-28 21:36:05,715 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Temporal features (8): hour_sin, hour_cos, weekday_sin, weekday_cos, month_sin...
+2025-06-28 21:36:05,716 - kedro.io.data_catalog - INFO - Saving data to preprocessed_training_data (CSVDataset)...
+2025-06-28 21:36:08,746 - kedro.io.data_catalog - INFO - Saving data to feature_engineering_params (PickleDataset)...
+2025-06-28 21:36:08,769 - kedro.runner.sequential_runner - INFO - Completed node: feature_engineering
+2025-06-28 21:36:08,770 - kedro.runner.sequential_runner - INFO - Completed 3 out of 4 tasks
+2025-06-28 21:36:08,774 - kedro.io.data_catalog - INFO - Loading data from preprocessed_training_data (CSVDataset)...
+2025-06-28 21:36:09,329 - kedro.io.data_catalog - INFO - Loading data from params:feature_store_preprocessed_groups (MemoryDataset)...
+2025-06-28 21:36:09,361 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - 'b676eb68ef864143a794e28b380f3c24' at node level for multi-threading
+2025-06-28 21:36:09,367 - kedro.pipeline.node - INFO - Running node: upload_preprocessed_features: upload_preprocessed_features([preprocessed_training_data;params:feature_store_preprocessed_groups]) -> None
+2025-06-28 21:36:10,016 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Uploading 'preprocessed_numerical_features' to feature store (version 1)...
+2025-06-28 21:45:34,082 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - ERROR - Failed to upload 'preprocessed_numerical_features': ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-06-28 21:45:34,093 - kedro.pipeline.node - ERROR - Node upload_preprocessed_features: upload_preprocessed_features([preprocessed_training_data;params:feature_store_preprocessed_groups]) -> None failed with error: 
+('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-06-28 21:45:34,096 - kedro.runner.sequential_runner - WARNING - There are 1 nodes that have not run.
+You can resume the pipeline run from the nearest nodes with persisted inputs by adding the following argument to your previous command:
+  --from-nodes "upload_preprocessed_features"
+2025-06-28 21:45:34,099 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'b676eb68ef864143a794e28b380f3c24' was closed because of an error in the pipeline.
+2025-06-28 21:45:34,149 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'b676eb68ef864143a794e28b380f3c24' was closed because of an error in the pipeline.
+2025-06-28 21:45:34,174 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'b676eb68ef864143a794e28b380f3c24' was closed because of an error in the pipeline.
+2025-06-28 21:45:34,187 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'b676eb68ef864143a794e28b380f3c24' was closed because of an error in the pipeline.
+2025-06-28 21:45:34,223 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - The run 'b676eb68ef864143a794e28b380f3c24' was closed because of an error in the pipeline.
+2025-06-28 21:49:22,123 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 21:49:24,740 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 21:49:25,870 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 21:49:27,625 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 21:49:27,997 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/io/core.py:354: KedroDeprecationWarning: The MatplotlibWriter class has been renamed to MatplotlibDataset. The MatplotlibWriter name is deprecated and will be removed in a future release.
+  init_func(self, *args, **kwargs)
+
+2025-06-28 21:49:31,010 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 21:49:35,271 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 21:52:58,915 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 21:53:00,963 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 21:53:01,098 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 21:53:01,202 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 21:53:01,209 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 21:53:04,105 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 21:53:04,664 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:53:05,294 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 21:53:07,838 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 21:53:08,487 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'preprocess_train' - '7d7474825fe843b6a9df9d01213ef088' has started
+2025-06-28 21:53:08,504 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 21:53:08,505 - kedro.io.data_catalog - INFO - Loading data from params:feature_store_groups (MemoryDataset)...
+2025-06-28 21:53:08,580 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - '7d7474825fe843b6a9df9d01213ef088' at node level for multi-threading
+2025-06-28 21:53:08,590 - kedro.pipeline.node - INFO - Running node: load_and_merge_feature_groups: load_and_merge_feature_groups([params:feature_store_groups]) -> [raw_data]
+2025-06-28 21:53:15,403 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Loaded 90767 rows from feature group 'numerical_features@1'
+2025-06-28 21:53:22,787 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Loaded 90767 rows from feature group 'categorical_features@1'
+2025-06-28 21:53:29,056 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Loaded 90767 rows from feature group 'target_features@1'
+2025-06-28 21:53:29,200 - kedro.io.data_catalog - INFO - Saving data to raw_data (MemoryDataset)...
+2025-06-28 21:53:29,209 - kedro.runner.sequential_runner - INFO - Completed node: load_and_merge_feature_groups
+2025-06-28 21:53:29,210 - kedro.runner.sequential_runner - INFO - Completed 1 out of 4 tasks
+2025-06-28 21:53:29,211 - kedro.io.data_catalog - INFO - Loading data from raw_data (MemoryDataset)...
+2025-06-28 21:53:29,251 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - '7d7474825fe843b6a9df9d01213ef088' at node level for multi-threading
+2025-06-28 21:53:29,252 - kedro.pipeline.node - INFO - Running node: clean_data: clean_data([raw_data]) -> [ref_data_cleaned;cleaning_params]
+2025-06-28 21:53:29,418 - kedro.io.data_catalog - INFO - Saving data to ref_data_cleaned (MemoryDataset)...
+2025-06-28 21:53:29,423 - kedro.io.data_catalog - INFO - Saving data to cleaning_params (MemoryDataset)...
+2025-06-28 21:53:29,428 - kedro.runner.sequential_runner - INFO - Completed node: clean_data
+2025-06-28 21:53:29,429 - kedro.runner.sequential_runner - INFO - Completed 2 out of 4 tasks
+2025-06-28 21:53:29,433 - kedro.io.data_catalog - INFO - Loading data from ref_data_cleaned (MemoryDataset)...
+2025-06-28 21:53:29,437 - kedro.io.data_catalog - INFO - Loading data from cleaning_params (MemoryDataset)...
+2025-06-28 21:53:29,455 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - '7d7474825fe843b6a9df9d01213ef088' at node level for multi-threading
+2025-06-28 21:53:29,456 - kedro.pipeline.node - INFO - Running node: feature_engineering: feature_engineering_pipeline([ref_data_cleaned;cleaning_params]) -> [preprocessed_training_data;feature_engineering_params]
+2025-06-28 21:53:29,886 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Preprocessing complete. Shape: (90767, 46) | Numerical: 11 | Low-card categorical: 16 | High-card categorical: 7 | Temporal: 8
+2025-06-28 21:53:29,888 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Numerical features (11): log_amt, city_pop, age, long, amt...
+2025-06-28 21:53:29,888 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Categorical features (23): invalid_zip, gender_M, category_food_dining, category_gas_transport, category_grocery_net...
+2025-06-28 21:53:29,889 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Categorical_features_low_cardinality features (16): invalid_zip, gender_M, category_food_dining, category_gas_transport, category_grocery_net...
+2025-06-28 21:53:29,890 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Categorical_features_high_cardinality features (7): merch_zipcode_freq, city_freq, street_freq, state_freq, zip_freq...
+2025-06-28 21:53:29,891 - fraud_project.pipelines.preprocessing.preprocessing_train.nodes - INFO - Temporal features (8): hour_sin, hour_cos, weekday_sin, weekday_cos, month_sin...
+2025-06-28 21:53:29,891 - kedro.io.data_catalog - INFO - Saving data to preprocessed_training_data (CSVDataset)...
+2025-06-28 21:53:32,940 - kedro.io.data_catalog - INFO - Saving data to feature_engineering_params (PickleDataset)...
+2025-06-28 21:53:32,965 - kedro.runner.sequential_runner - INFO - Completed node: feature_engineering
+2025-06-28 21:53:32,966 - kedro.runner.sequential_runner - INFO - Completed 3 out of 4 tasks
+2025-06-28 21:53:32,969 - kedro.io.data_catalog - INFO - Loading data from preprocessed_training_data (CSVDataset)...
+2025-06-28 21:53:33,541 - kedro.io.data_catalog - INFO - Loading data from params:feature_store_preprocessed_groups (MemoryDataset)...
+2025-06-28 21:53:33,577 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_train' - '7d7474825fe843b6a9df9d01213ef088' at node level for multi-threading
+2025-06-28 21:53:33,583 - kedro.pipeline.node - INFO - Running node: upload_preprocessed_features: upload_preprocessed_features([preprocessed_training_data;params:feature_store_preprocessed_groups]) -> None
+2025-06-28 21:53:34,267 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Uploading 'preprocessed_numerical_features' to feature store (version 1)...
+2025-06-28 22:03:59,029 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Finished uploading 'preprocessed_numerical_features'. Rows inserted: 90767
+2025-06-28 22:03:59,086 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Uploading 'preprocessed_categorical_features' to feature store (version 1)...
+2025-06-28 22:06:55,444 - fraud_project.pipelines.preprocessing.utils_preprocessing.feature_store - INFO - Finished uploading 'preprocessed_categorical_features'. Rows inserted: 90767
+2025-06-28 22:06:55,708 - kedro.runner.sequential_runner - INFO - Completed node: upload_preprocessed_features
+2025-06-28 22:06:55,713 - kedro.runner.sequential_runner - INFO - Completed 4 out of 4 tasks
+2025-06-28 22:06:55,725 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 827.2 sec.
+2025-06-28 22:06:55,829 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
+2025-06-28 22:08:49,509 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 22:08:51,849 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 22:08:51,978 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 22:08:52,087 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 22:08:52,093 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 22:08:55,643 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 22:08:56,332 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 22:08:56,975 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 22:08:59,786 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 22:09:58,467 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 22:10:00,511 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 22:10:00,677 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 22:10:00,755 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 22:10:00,761 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 22:10:04,833 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 22:10:05,518 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 22:10:06,274 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 22:10:09,244 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 22:10:09,933 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'preprocess_batch' - '1f8192cef1b94a18a9aa4b5ea94e37e7' has started
+2025-06-28 22:10:09,955 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 22:10:09,957 - kedro.io.data_catalog - INFO - Loading data from ana_data (CSVDataset)...
+2025-06-28 22:10:10,054 - kedro.io.data_catalog - INFO - Loading data from feature_engineering_params (PickleDataset)...
+2025-06-28 22:10:10,101 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'preprocess_batch' - '1f8192cef1b94a18a9aa4b5ea94e37e7' at node level for multi-threading
+2025-06-28 22:10:10,102 - kedro.pipeline.node - INFO - Running node: preprocessed_batch: preprocessing_batch([ana_data;feature_engineering_params]) -> [preprocessed_batch_data]
+2025-06-28 22:10:10,252 - fraud_project.pipelines.preprocessing.preprocessing_batch.nodes - INFO - Batch preprocessing complete. Final shape: (18154, 46)
+2025-06-28 22:10:10,253 - kedro.io.data_catalog - INFO - Saving data to preprocessed_batch_data (CSVDataset)...
+2025-06-28 22:10:10,787 - kedro.runner.sequential_runner - INFO - Completed node: preprocessed_batch
+2025-06-28 22:10:10,789 - kedro.runner.sequential_runner - INFO - Completed 1 out of 1 tasks
+2025-06-28 22:10:10,790 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 0.8 sec.
+2025-06-28 22:10:10,807 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
+2025-06-28 22:10:32,249 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 22:10:34,282 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 22:10:34,407 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 22:10:34,493 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 22:10:34,499 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 22:10:37,171 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 22:10:37,704 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 22:10:38,336 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 22:10:40,697 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 22:10:56,070 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 22:10:57,840 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 22:10:57,966 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 22:10:58,054 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 22:10:58,070 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 22:11:01,591 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 22:11:02,512 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 22:11:03,328 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 22:11:06,475 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 22:11:07,328 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'split_train_data' - 'ce59bd48bd7e4daea98f935e0828a1fc' has started
+2025-06-28 22:11:07,357 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 22:11:07,364 - kedro.io.data_catalog - INFO - Loading data from preprocessed_training_data (CSVDataset)...
+2025-06-28 22:11:08,049 - kedro.io.data_catalog - INFO - Loading data from parameters (MemoryDataset)...
+2025-06-28 22:11:08,084 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'split_train_data' - 'ce59bd48bd7e4daea98f935e0828a1fc' at node level for multi-threading
+2025-06-28 22:11:08,090 - kedro.pipeline.node - INFO - Running node: split: split_data([preprocessed_training_data;parameters]) -> [X_train_data;X_test_data;y_train_data;y_test_data;best_columns]
+2025-06-28 22:11:08,189 - kedro.io.data_catalog - INFO - Saving data to X_train_data (CSVDataset)...
+2025-06-28 22:11:09,819 - kedro.io.data_catalog - INFO - Saving data to X_test_data (CSVDataset)...
+2025-06-28 22:11:10,518 - kedro.io.data_catalog - INFO - Saving data to y_train_data (CSVDataset)...
+2025-06-28 22:11:10,560 - kedro.io.data_catalog - INFO - Saving data to y_test_data (CSVDataset)...
+2025-06-28 22:11:10,576 - kedro.io.data_catalog - INFO - Saving data to best_columns (MlflowPickleDataset)...
+2025-06-28 22:11:10,618 - kedro.runner.sequential_runner - INFO - Completed node: split
+2025-06-28 22:11:10,619 - kedro.runner.sequential_runner - INFO - Completed 1 out of 1 tasks
+2025-06-28 22:11:10,620 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 3.3 sec.
+2025-06-28 22:11:10,640 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
+2025-06-28 22:11:22,641 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 22:11:24,904 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 22:11:25,036 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/kedro/framework/cli/utils.py:111: KedroDeprecationWarning: DeprecationWarning: 'kedro run' flag '--namespace' is deprecated and will be replaced with '--namespaces' from Kedro 1.0.0 to allow running multiple namespaces. 
+  warnings.warn(message, KedroDeprecationWarning)
+
+2025-06-28 22:11:25,131 - kedro.framework.session.session - INFO - Kedro project machine-learning-operations-project
+2025-06-28 22:11:25,139 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Registering new custom resolver: 'km.random_name'
+2025-06-28 22:11:28,087 - py.warnings - WARNING - DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+
+2025-06-28 22:11:28,762 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 22:11:29,402 - py.warnings - WARNING - DeprecationWarning: the load_module() method is deprecated and slated for removal in Python 3.12; use exec_module() instead
+
+2025-06-28 22:11:32,226 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
+2025-06-28 22:11:32,887 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Mlflow run 'feature_selection' - '32b1bed684084f4994c250c206c40024' has started
+2025-06-28 22:11:32,904 - kedro.runner.sequential_runner - INFO - Using synchronous mode for loading and saving data. Use the --async flag for potential performance gains. https://docs.kedro.org/en/stable/nodes_and_pipelines/run_a_pipeline.html#load-and-save-asynchronously
+2025-06-28 22:11:32,905 - kedro.io.data_catalog - INFO - Loading data from X_train_data (CSVDataset)...
+2025-06-28 22:11:33,249 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
+2025-06-28 22:11:33,274 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'feature_selection' - '32b1bed684084f4994c250c206c40024' at node level for multi-threading
+2025-06-28 22:11:33,275 - kedro.pipeline.node - INFO - Running node: filter_drifted_features: filter_drifted_features([X_train_data;drifted_features]) -> [X_train_stable]
+2025-06-28 22:11:33,298 - kedro.io.data_catalog - INFO - Saving data to X_train_stable (MemoryDataset)...
+2025-06-28 22:11:33,303 - kedro.runner.sequential_runner - INFO - Completed node: filter_drifted_features
+2025-06-28 22:11:33,303 - kedro.runner.sequential_runner - INFO - Completed 1 out of 7 tasks
+2025-06-28 22:11:33,304 - kedro.io.data_catalog - INFO - Loading data from X_train_stable (MemoryDataset)...
+2025-06-28 22:11:33,328 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'feature_selection' - '32b1bed684084f4994c250c206c40024' at node level for multi-threading
+2025-06-28 22:11:33,329 - kedro.pipeline.node - INFO - Running node: calculate_feature_correlations: calculate_feature_correlations([X_train_stable]) -> [feature_correlations]
+2025-06-28 22:11:33,638 - kedro.io.data_catalog - INFO - Saving data to feature_correlations (MemoryDataset)...
+2025-06-28 22:11:33,640 - kedro.runner.sequential_runner - INFO - Completed node: calculate_feature_correlations
+2025-06-28 22:11:33,640 - kedro.runner.sequential_runner - INFO - Completed 2 out of 7 tasks
+2025-06-28 22:11:33,641 - kedro.io.data_catalog - INFO - Loading data from X_train_stable (MemoryDataset)...
+2025-06-28 22:11:33,647 - kedro.io.data_catalog - INFO - Loading data from y_train_data (CSVDataset)...
+2025-06-28 22:11:33,687 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'feature_selection' - '32b1bed684084f4994c250c206c40024' at node level for multi-threading
+2025-06-28 22:11:33,688 - kedro.pipeline.node - INFO - Running node: calculate_feature_importance: calculate_feature_importance([X_train_stable;y_train_data]) -> [feature_importance_scores]
+2025-06-28 22:11:44,360 - kedro.io.data_catalog - INFO - Saving data to feature_importance_scores (MemoryDataset)...
+2025-06-28 22:11:44,366 - kedro.runner.sequential_runner - INFO - Completed node: calculate_feature_importance
+2025-06-28 22:11:44,367 - kedro.runner.sequential_runner - INFO - Completed 3 out of 7 tasks
+2025-06-28 22:11:44,367 - kedro.io.data_catalog - INFO - Loading data from X_train_stable (MemoryDataset)...
+2025-06-28 22:11:44,377 - kedro.io.data_catalog - INFO - Loading data from y_train_data (CSVDataset)...
+2025-06-28 22:11:44,386 - kedro.io.data_catalog - INFO - Loading data from parameters (MemoryDataset)...
+2025-06-28 22:11:44,516 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'feature_selection' - '32b1bed684084f4994c250c206c40024' at node level for multi-threading
+2025-06-28 22:11:44,525 - kedro.pipeline.node - INFO - Running node: recursive_feature_elimination: recursive_feature_elimination([X_train_stable;y_train_data;parameters]) -> [rfe_features]
+2025-06-28 22:18:22,572 - kedro.io.data_catalog - INFO - Saving data to rfe_features (MemoryDataset)...
+2025-06-28 22:18:22,584 - kedro.runner.sequential_runner - INFO - Completed node: recursive_feature_elimination
+2025-06-28 22:18:22,585 - kedro.runner.sequential_runner - INFO - Completed 4 out of 7 tasks
+2025-06-28 22:18:22,585 - kedro.io.data_catalog - INFO - Loading data from X_train_stable (MemoryDataset)...
+2025-06-28 22:18:22,598 - kedro.io.data_catalog - INFO - Loading data from y_train_data (CSVDataset)...
+2025-06-28 22:18:22,623 - kedro.io.data_catalog - INFO - Loading data from parameters (MemoryDataset)...
+2025-06-28 22:18:22,747 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'feature_selection' - '32b1bed684084f4994c250c206c40024' at node level for multi-threading
+2025-06-28 22:18:22,756 - kedro.pipeline.node - INFO - Running node: select_statistical_features: select_statistical_features([X_train_stable;y_train_data;parameters]) -> [statistical_features]
+2025-06-28 22:18:22,805 - kedro.io.data_catalog - INFO - Saving data to statistical_features (MemoryDataset)...
+2025-06-28 22:18:22,807 - kedro.runner.sequential_runner - INFO - Completed node: select_statistical_features
+2025-06-28 22:18:22,808 - kedro.runner.sequential_runner - INFO - Completed 5 out of 7 tasks
+2025-06-28 22:18:22,809 - kedro.io.data_catalog - INFO - Loading data from feature_correlations (MemoryDataset)...
+2025-06-28 22:18:22,810 - kedro.io.data_catalog - INFO - Loading data from feature_importance_scores (MemoryDataset)...
+2025-06-28 22:18:22,811 - kedro.io.data_catalog - INFO - Loading data from statistical_features (MemoryDataset)...
+2025-06-28 22:18:22,812 - kedro.io.data_catalog - INFO - Loading data from rfe_features (MemoryDataset)...
+2025-06-28 22:18:22,812 - kedro.io.data_catalog - INFO - Loading data from parameters (MemoryDataset)...
+2025-06-28 22:18:22,828 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'feature_selection' - '32b1bed684084f4994c250c206c40024' at node level for multi-threading
+2025-06-28 22:18:22,833 - kedro.pipeline.node - INFO - Running node: final_feature_selection: feature_selection([feature_correlations;feature_importance_scores;statistical_features;rfe_features;parameters]) -> [feature_selection_results]
+2025-06-28 22:18:22,835 - kedro.io.data_catalog - INFO - Saving data to feature_selection_results (MemoryDataset)...
+2025-06-28 22:18:22,837 - kedro.runner.sequential_runner - INFO - Completed node: final_feature_selection
+2025-06-28 22:18:22,837 - kedro.runner.sequential_runner - INFO - Completed 6 out of 7 tasks
+2025-06-28 22:18:22,838 - kedro.io.data_catalog - INFO - Loading data from feature_importance_scores (MemoryDataset)...
+2025-06-28 22:18:22,839 - kedro.io.data_catalog - INFO - Loading data from parameters (MemoryDataset)...
+2025-06-28 22:18:22,861 - kedro_mlflow.framework.hooks.mlflow_hook - INFO - Restarting mlflow run 'feature_selection' - '32b1bed684084f4994c250c206c40024' at node level for multi-threading
+2025-06-28 22:18:22,868 - kedro.pipeline.node - INFO - Running node: plot_feature_importance: plot_feature_importance([feature_importance_scores;parameters]) -> [feature_importance_plot]
+2025-06-28 22:18:23,641 - kedro.io.data_catalog - INFO - Saving data to feature_importance_plot (MlflowMatplotlibWriter)...
+2025-06-28 22:18:23,732 - kedro.runner.sequential_runner - INFO - Completed node: plot_feature_importance
+2025-06-28 22:18:23,733 - kedro.runner.sequential_runner - INFO - Completed 7 out of 7 tasks
+2025-06-28 22:18:23,734 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 410.8 sec.
+2025-06-28 22:18:23,734 - kedro.io.data_catalog - INFO - Loading data from feature_selection_results (MemoryDataset)...
+2025-06-28 22:18:23,751 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...

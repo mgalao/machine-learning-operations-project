@@ -1,4 +1,3 @@
-import re
 import pandas as pd
 import logging
 from typing import Dict, Tuple, Any
@@ -104,17 +103,7 @@ def model_train(X_train: pd.DataFrame,
 
         # Champion model comparison
         is_new_champion = True
-        champion_path = parameters.get("champion_model_path", os.path.join(os.getcwd(), 'data', '06_models', 'champion_model_000_.pkl'))
-        # Use regex to extract the number reliably
-        model_name = os.path.basename(champion_path)
-        match = re.search(r'champion_model_(\d+)_\.pkl', model_name)
-        if match:
-            champion_model_number = match.group(1)
-        else:
-            champion_model_number = "000"  # Default if pattern doesn't match
-        champion_plus_one = str(int(champion_model_number) + 1).zfill(3)
-        challenger_path = champion_path.replace(f"_{champion_model_number}_", f"_{champion_plus_one}_")
-        
+        champion_path = parameters.get("champion_model_path", os.path.join(os.getcwd(), 'data', '06_models', 'champion_model.pkl'))
 
         if os.path.exists(champion_path):
             logger.info("Loading existing champion model for comparison...")
@@ -138,8 +127,8 @@ def model_train(X_train: pd.DataFrame,
 
         # Save new model only if it's better
         if is_new_champion:
-            with open(challenger_path, 'wb') as f:
+            with open(champion_path, 'wb') as f:
                 pickle.dump(model, f)
-            logger.info(f"New champion model saved to {challenger_path}")
+            logger.info(f"New champion model saved to {champion_path}")
 
     return model, X_train.columns, results_dict, plt_obj, is_new_champion
