@@ -123,3 +123,18 @@ output_plot:
   dataset:
     type: matplotlib.MatplotlibWriter
     filepath: data/08_reporting/shap_plot.png
+
+ana_data_NY:
+  type: MemoryDataSet
+
+df_with_predict:
+  type: MemoryDataSet
+
+evaluation_metrics:
+  type: MemoryDataSet
+
+evaluation_metrics_df:
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/eval_metric_drift_data.csv
+  save_args:
+    index: False
