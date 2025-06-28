@@ -10225,3 +10225,8 @@ You can resume the pipeline run from the nearest nodes with persisted inputs by 
 2025-06-28 18:44:29,314 - kedro.runner.sequential_runner - INFO - Completed 1 out of 1 tasks
 2025-06-28 18:44:29,314 - kedro.runner.sequential_runner - INFO - Pipeline execution completed successfully in 16.4 sec.
 2025-06-28 18:44:29,337 - kedro.io.data_catalog - INFO - Loading data from drifted_features (JSONDataset)...
+2025-06-28 19:08:43,905 - kedro.framework.project - INFO - Using 'conf/logging.yml' as logging configuration. You can change this by setting the KEDRO_LOGGING_CONFIG environment variable accordingly.
+2025-06-28 19:08:45,445 - py.warnings - WARNING - /Users/mgalao/Library/CloudStorage/OneDrive-NOVAIMS/MSc_DSAA-DS/2nd Semester/Q4 Machine Learning Operations/machine-learning-operations-project/venv/lib/python3.12/site-packages/mlflow/pyfunc/utils/data_validation.py:186: UserWarning: [33mAdd type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.[0m
+  color_warning(
+
+2025-06-28 19:08:45,520 - kedro_telemetry.plugin - INFO - Kedro is sending anonymous usage data with the sole purpose of improving the product. No personal data or IP addresses are stored on our side. If you want to opt out, set the `KEDRO_DISABLE_TELEMETRY` or `DO_NOT_TRACK` environment variables, or create a `.telemetry` file in the current working directory with the contents `consent: false`. Read more at https://docs.kedro.org/en/stable/configuration/telemetry.html
