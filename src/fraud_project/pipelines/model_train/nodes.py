@@ -16,6 +16,7 @@ from sklearn.metrics import (
 )
 import shap
 import matplotlib.pyplot as plt
+from mlflow.sklearn import load_model
 
 logger = logging.getLogger(__name__)
 
@@ -23,8 +24,6 @@ def model_train(X_train: pd.DataFrame,
                 X_test: pd.DataFrame,
                 y_train: pd.DataFrame,
                 y_test: pd.DataFrame,
-                model_cls: type,
-                model_params: Dict[str, Any],
                 parameters: Dict[str, Any],
                 best_columns: list = None):
     """
@@ -41,8 +40,28 @@ def model_train(X_train: pd.DataFrame,
     experiment_id = mlflow.get_experiment_by_name(experiment_name).experiment_id
     logger.info(f"Using MLflow experiment: {experiment_name} (ID: {experiment_id})")
 
-    # Enable automatic logging for scikit-learn models
-    mlflow.sklearn.autolog(log_model_signatures=True, log_input_examples=True)
+    from mlflow.sklearn import load_model
+
+    # Load challenger model from MLflow using a tag
+    mlflow_run_tag = parameters.get("mlflow_run_tag", "Optuna_Best")
+
+    client = mlflow.tracking.MlflowClient()
+    experiment_name = parameters.get("experiment_name")
+    experiment = mlflow.get_experiment_by_name(experiment_name)
+    runs = client.search_runs(experiment.experiment_id, f"tags.mlflow.runName = '{mlflow_run_tag}'")
+
+    if not runs:
+        raise FileNotFoundError(f"No MLflow run found with tag '{mlflow_run_tag}'")
+
+    challenger_run_id = runs[0].info.run_id
+    logger.info(f"Loading challenger model from MLflow run ID: {challenger_run_id}")
+
+    # Load model
+    model_uri = f"runs:/{challenger_run_id}/model"
+    model = mlflow.sklearn.load_model(model_uri)
+
+    model_cls = type(model)
+    model_params = model.get_params()
 
     # Start MLflow run for final training
     with mlflow.start_run(experiment_id=experiment_id, nested=True, run_name=f"FinalTrain_{model_cls.__name__}"):
@@ -82,7 +101,6 @@ def model_train(X_train: pd.DataFrame,
 
         logger.info(f"Train macro F1: {f1_train:.4f}, Test macro F1: {f1_test:.4f}")
         
-      
         # Log metrics to MLflow
         mlflow.log_metric("train_accuracy", acc_train)
         mlflow.log_metric("train_macro_precision", prec_train)
