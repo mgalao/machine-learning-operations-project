@@ -18,5 +18,5 @@ __pycache__/
 mlruns/
 ml_artifacts/
 
-# Ignore preprocessed training data
-data/03_primary/preprocessed_train_data.csv
+# Ignore all CSV files in that directory
+data/03_primary/*.csv
