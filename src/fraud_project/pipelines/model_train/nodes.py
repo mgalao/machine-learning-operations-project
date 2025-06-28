@@ -8,8 +8,12 @@ import os
 import warnings
 warnings.filterwarnings("ignore", category=Warning)
 import mlflow
-from sklearn.metrics import accuracy_score
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score
+)
 import shap
 import matplotlib.pyplot as plt
 
@@ -65,21 +69,43 @@ def model_train(X_train: pd.DataFrame,
         y_train_pred = model.predict(X_train)
         y_test_pred = model.predict(X_test)
 
-        # Calculate accuracy metrics
+        # Compute metrics
         acc_train = accuracy_score(y_train, y_train_pred)
+        prec_train = precision_score(y_train, y_train_pred, average='macro')
+        rec_train = recall_score(y_train, y_train_pred, average='macro')
+        f1_train = f1_score(y_train, y_train_pred, average='macro')
+
         acc_test = accuracy_score(y_test, y_test_pred)
-        logger.info(f"Train accuracy: {acc_train:.4f}, Test accuracy: {acc_test:.4f}")
+        prec_test = precision_score(y_test, y_test_pred, average='macro')
+        rec_test = recall_score(y_test, y_test_pred, average='macro')
+        f1_test = f1_score(y_test, y_test_pred, average='macro')
+
+        logger.info(f"Train macro F1: {f1_train:.4f}, Test macro F1: {f1_test:.4f}")
+        
+      
+        # Log metrics to MLflow
+        mlflow.log_metric("train_accuracy", acc_train)
+        mlflow.log_metric("train_macro_precision", prec_train)
+        mlflow.log_metric("train_macro_recall", rec_train)
+        mlflow.log_metric("train_macro_f1", f1_train)
+
+        mlflow.log_metric("test_accuracy", acc_test)
+        mlflow.log_metric("test_macro_precision", prec_test)
+        mlflow.log_metric("test_macro_recall", rec_test)
+        mlflow.log_metric("test_macro_f1", f1_test)
 
         # Collect results
         results_dict = {
             'classifier': model_cls.__name__,
-            'train_score': acc_train,
-            'test_score': acc_test
+            'train_accuracy': acc_train,
+            'train_macro_precision': prec_train,
+            'train_macro_recall': rec_train,
+            'train_macro_f1': f1_train,
+            'test_accuracy': acc_test,
+            'test_macro_precision': prec_test,
+            'test_macro_recall': rec_test,
+            'test_macro_f1': f1_test
         }
-
-        # Log metrics to MLflow
-        mlflow.log_metric("train_accuracy", acc_train)
-        mlflow.log_metric("test_accuracy", acc_test)
 
         # SHAP explainability for tree-based models
         plt_obj = None
@@ -101,7 +127,7 @@ def model_train(X_train: pd.DataFrame,
         else:
             logger.info("SHAP explanation skipped: model is not tree-based or doesn't support predict_proba.")
 
-        # Champion model comparison
+        # Champion model comparison using macro F1
         is_new_champion = True
         champion_path = parameters.get("champion_model_path", os.path.join(os.getcwd(), 'data', '06_models', 'champion_model.pkl'))
 
@@ -111,11 +137,11 @@ def model_train(X_train: pd.DataFrame,
                 with open(champion_path, 'rb') as f:
                     champion_model = pickle.load(f)
                 champion_pred = champion_model.predict(X_test)
-                champion_score = accuracy_score(y_test, champion_pred)
-                logger.info(f"Champion test accuracy: {champion_score:.4f}")
-                logger.info(f"Candidate test accuracy: {acc_test:.4f}")
+                champion_f1 = f1_score(y_test, champion_pred, average='macro')
+                logger.info(f"Champion macro F1 score: {champion_f1:.4f}")
+                logger.info(f"Candidate macro F1 score: {f1_test:.4f}")
 
-                if acc_test <= champion_score:
+                if f1_test <= champion_f1:
                     logger.info("New model did NOT outperform the current champion. Existing model retained.")
                     is_new_champion = False
                 else:
