@@ -1,7 +1,11 @@
 # 🕵️‍♂️💳 Credit card fraud detection using MLOps
 
 ## 📋 Project Overview
-This repository contains materials for a Machine Learning Operations project, that aims to study Fraud detection in the United States from 2019 to June 2020 and is focused on generating a pipeline that is capable of building models ready for production in a real case scenario, using tools like Kedro, MLFlow, Hopsworks, Evidently, NannyMl, Docker and more to build a full automatized machine learning pipeline.
+This repository contains the complete implementation of a Machine Learning Operations (MLOps) project focused on credit card fraud detection in the United States between 2019 and June 2020. The main objective is to design and develop an automated, production-ready ML pipeline capable of detecting fraudulent transactions in real-world conditions.
+
+Built with modern MLOps practices, the pipeline leverages tools such as Kedro for orchestration, MLflow for experiment tracking and model versioning, Hopsworks for feature management, Evidently and NannyML for drift detection and data quality monitoring, and Docker for containerized deployment. The project brings together model training, evaluation, monitoring, and deployment into a seamless, reproducible workflow.
+
+This end-to-end pipeline is designed not only to train and serve models, but also to continuously monitor data drift, retrain models when necessary, and support integration with real-time environments.
 
 ## 👥 Team Members
 - Bruna Simões
