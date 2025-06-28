@@ -42,6 +42,10 @@ def data_drift(data_reference: pd.DataFrame, data_analysis: pd.DataFrame) -> dic
 
     psi_series = pd.Series(psi_scores, index=numerical_features)
     drifted_features = psi_series[psi_series > 0.1]
+    psi_df = pd.DataFrame({
+        "feature": psi_series.index,
+        "psi_score": psi_series.values
+    })
 
     if not drifted_features.empty:
         logger.warning("Significant data drift detected via PSI:\n%s", drifted_features)
@@ -87,4 +91,4 @@ def data_drift(data_reference: pd.DataFrame, data_analysis: pd.DataFrame) -> dic
     if (psi_pca > 0.1).any():
         logger.warning("Significant drift in PCA components detected: \n%s", psi_pca[psi_pca > 0.1])
 
-    return psi_series, psi_pca, drift_df, drifted_features.tolist()
+    return psi_df, psi_pca, drift_df, drifted_features.tolist()
