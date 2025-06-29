@@ -30,6 +30,7 @@ This end-to-end pipeline is designed not only to train and serve models, but als
 ├── .dockerignore            # Specifies files and directories that should be excluded from the Docker build context (like .git, __pycache__, etc.).
 ├── .gitignore               # Defines intentionally untracked files to ignore in Git, helping keep the repository clean.
 ├── Dockerfile               # Contains instructions to build a Docker image for the project.
+├── MLOps_Project.pdf        # Project report.
 ├── README.md                # Main markdown file describing the project — purpose, setup instructions, usage, etc.
 ├── info.log                 # Likely a generated log file capturing runtime info or debugging messages.
 ├── kedro_viz.cmd            # A Windows batch script to run Kedro-Viz, the interactive pipeline visualization tool.
