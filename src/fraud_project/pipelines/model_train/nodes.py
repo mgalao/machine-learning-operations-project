@@ -33,25 +33,27 @@ def model_train(X_train: pd.DataFrame,
         trained_model, features_used, results_dict, shap_plot_figure
     """
 
-    # Load MLflow experiment name and experiment ID
-    logger.info("Loading MLflow experiment configuration...")
-    with open('conf/local/mlflow.yml') as f:
-        experiment_name = yaml.safe_load(f)['tracking']['experiment']['name']
-    experiment_id = mlflow.get_experiment_by_name(experiment_name).experiment_id
+    experiment_name = "fraud_project_model_selection"
+    experiment = mlflow.get_experiment_by_name(experiment_name)
+    experiment_id = experiment.experiment_id
+
     logger.info(f"Using MLflow experiment: {experiment_name} (ID: {experiment_id})")
 
-    from mlflow.sklearn import load_model
-
-    # Load challenger model from MLflow using a tag
-    mlflow_run_tag = parameters.get("mlflow_run_tag", "Optuna_Best")
+    mlflow_run_name_prefix = parameters.get("mlflow_run_tag", "Optuna_Best")
 
     client = mlflow.tracking.MlflowClient()
-    experiment_name = parameters.get("experiment_name")
     experiment = mlflow.get_experiment_by_name(experiment_name)
-    runs = client.search_runs(experiment.experiment_id, f"tags.mlflow.runName = '{mlflow_run_tag}'")
+
+    # Find runs where run name starts with the given prefix
+    runs = client.search_runs(
+        experiment.experiment_id,
+        f"attributes.run_name LIKE '{mlflow_run_name_prefix}%'"
+    )
 
     if not runs:
-        raise FileNotFoundError(f"No MLflow run found with tag '{mlflow_run_tag}'")
+        raise FileNotFoundError(
+            f"No MLflow run found with name starting with '{mlflow_run_name_prefix}' in experiment '{experiment_name}'"
+        )
 
     challenger_run_id = runs[0].info.run_id
     logger.info(f"Loading challenger model from MLflow run ID: {challenger_run_id}")
@@ -70,7 +72,7 @@ def model_train(X_train: pd.DataFrame,
         mlflow.set_tag("model_type", model_cls.__name__)
 
         # Optional feature selection
-        if parameters.get("use_feature_selection") and best_columns:
+        if parameters.get("use_feature_selection") and best_columns is not None and len(best_columns) > 0:
             logger.info("Applying feature selection based on selected columns...")
             X_train = X_train[best_columns]
             X_test = X_test[best_columns]
@@ -125,25 +127,24 @@ def model_train(X_train: pd.DataFrame,
             'test_macro_f1': f1_test
         }
 
-        # SHAP explainability for tree-based models
+        # SHAP explainability
+        logger.info("Generating SHAP summary plot for model explainability...")
+
         plt_obj = None
-        if hasattr(model, 'predict_proba') and 'Tree' in model_cls.__name__:
-            logger.info("Generating SHAP summary plot for model explainability...")
-            explainer = shap.TreeExplainer(model)
-            shap_values = explainer.shap_values(X_train)
+        try:
+            explainer = shap.Explainer(model, X_train)
+            shap_values = explainer(X_train)
+
             shap.initjs()
-
-            # SHAP summary plot for class 1
-            if isinstance(shap_values, list) and len(shap_values) > 1:
-                shap.summary_plot(shap_values[1], X_train, feature_names=X_train.columns, show=False)
-            else:
-                shap.summary_plot(shap_values, X_train, feature_names=X_train.columns, show=False)
-
+            shap.summary_plot(shap_values, X_train, show=False)
             plt.tight_layout()
             plt_obj = plt
             logger.info("SHAP summary plot generated.")
-        else:
-            logger.info("SHAP explanation skipped: model is not tree-based or doesn't support predict_proba.")
+
+        # If SHAP fails, log a warning and return an empty figure
+        except Exception as e:
+            logger.warning(f"SHAP explanation failed: {e}")
+            plt_obj = plt.figure()
 
         # Champion model comparison using macro F1
         is_new_champion = True

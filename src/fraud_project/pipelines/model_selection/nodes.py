@@ -177,6 +177,8 @@ def model_selection(X_train: pd.DataFrame,
         mlflow.log_metric("val_macro_recall", val_recall)
         mlflow.log_metric("val_macro_f1", val_f1)
 
+        mlflow.sklearn.log_model(best_model, artifact_path="model")
+
     # Save the best model as model_challenger.pkl (overwrite if exists)
     model_save_path = "data/06_models/model_challenger.pkl"
     with open(model_save_path, "wb") as f:

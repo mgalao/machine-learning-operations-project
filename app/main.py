@@ -29,24 +29,3 @@ def make_prediction(input_data: InputData):
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
-
-
-# from fastapi import FastAPI
-# from pydantic import BaseModel
-# from app.model.recommender import load_model, recommend_for_user
-
-# app = FastAPI()
-# algo, meta = load_model("models/v1/model_and_meta.pkl")
-
-# class RecommendRequest(BaseModel):
-#     user_id: int
-#     num_recommendations: int = 5
-
-# @app.post("/recommend")
-# def recommend(req: RecommendRequest):
-#     recs = recommend_for_user(algo, meta, req.user_id, req.num_recommendations)
-#     return {"user_id": req.user_id, "recommendations": recs}
-
-# @app.get("/")
-# def read_root():
-#     return {"message": "Welcome to the Spotify Recommender API"}

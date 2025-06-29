@@ -17,12 +17,12 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func=load_and_merge_feature_groups,
                 inputs=["params:feature_store_groups"],
-                outputs="raw_data",
+                outputs="fraud_raw_data",
                 name="load_and_merge_feature_groups",
             ),
             node(
                 func=clean_data,
-                inputs="raw_data",
+                inputs="fraud_raw_data",
                 outputs=["ref_data_cleaned", "cleaning_params"],
                 name="clean_data",
             ),

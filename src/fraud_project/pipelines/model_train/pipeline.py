@@ -20,7 +20,7 @@ def create_pipeline(**kwargs) -> Pipeline:
                     "best_columns"
                 ],
                 outputs=[
-                    "production_model",      
+                    "model_champion",      
                     "production_columns",
                     "production_model_metrics",
                     "output_plot",

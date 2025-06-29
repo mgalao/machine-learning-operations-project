@@ -45,36 +45,3 @@ tests/
 # Docker files themselves
 Dockerfile
 .dockerignore
-
-
-# # Byte-compiled / optimized / DLL files
-# __pycache__/
-# *.py[cod]
-# *$py.class
-
-# # Jupyter notebooks (optional)
-# *.ipynb
-
-# # Virtual environment folders
-# .venv/
-# env/
-# venv/
-
-# # OS metadata
-# .DS_Store
-
-# # Git-related
-# .git
-# .gitignore
-
-# # Avoid uploading large or sensitive files unintentionally
-# *.log
-# *.zip
-
-
-# # CSV data 
-# data/
-
-# # Docker files themselves
-# Dockerfile
-# .dockerignore

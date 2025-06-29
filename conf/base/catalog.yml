@@ -79,11 +79,11 @@ y_test_data:
   type: pandas.CSVDataset
   filepath: data/05_model_input/y_test.csv 
 
-# production_columns:
-#   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
-#   dataset:
-#     type: pickle.PickleDataset
-#     filepath: data/06_models/production_cols.pkl
+production_columns:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: pickle.PickleDataset
+    filepath: data/06_models/production_cols.pkl
 
 feature_importance_plot:
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
@@ -107,11 +107,11 @@ parameters_optuna:
 #     type: pickle.PickleDataset
 #     filepath: data/06_models/production_model.pkl
 
-production_model:
+model_champion:
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
   dataset:
     type: pickle.PickleDataset
-    filepath: data/06_models/champion_model_000_.pkl
+    filepath: data/06_models/model_champion.pkl
 
 production_model_metrics:
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset

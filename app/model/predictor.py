@@ -6,20 +6,10 @@ import re
 # Path to the models directory
 MODEL_DIR = Path("/app/models")
 
-def get_latest_model_path():
-    """Find the most recent champion_model_XXX_.pkl file by version number."""
-    pattern = re.compile(r"champion_model_(\d+)_\.pkl")
-    candidates = [f for f in MODEL_DIR.glob("champion_model_*_*.pkl") if pattern.match(f.name)]
-
-    if not candidates:
-        raise FileNotFoundError("No champion model found in the models directory.")
-
-    latest = max(candidates, key=lambda f: int(pattern.search(f.name).group(1)))
-    return latest
 
 def load_model():
     """Load the latest champion model and the corresponding best columns."""
-    model_path = get_latest_model_path()
+    model_path = MODEL_DIR / "model_champion.pkl"
     columns_path = MODEL_DIR / "best_cols.pkl"
 
     if not columns_path.exists():
@@ -49,35 +39,3 @@ def predict(model, input_data: dict, columns: list):
 
     data = np.array(features).reshape(1, -1)
     return model.predict(data).tolist()[0]
-
-# import pickle
-
-# def load_model(model_path="models/v1/model_and_meta.pkl"):
-#     """
-#     Loads:
-#       - algo: the Surprise SVD model
-#       - meta: dict mapping track_id -> {"track_name": ..., "artists": ...}
-#     """
-#     with open(model_path, "rb") as f:
-#         algo, meta = pickle.load(f)
-#     return algo, meta
-
-# def recommend_for_user(algo, meta, user_id, k=5):
-#     """
-#     Returns top-k recommendations for user_id.
-#     Uses meta dict instead of re-reading CSV.
-#     """
-#     track_ids = list(meta.keys())
-#     scores = [(tid, algo.predict(user_id, tid).est) for tid in track_ids]
-#     top_k = sorted(scores, key=lambda x: x[1], reverse=True)[:k]
-
-#     results = []
-#     for tid, score in top_k:
-#         info = meta[tid]
-#         results.append({
-#             "track_id": tid,
-#             "track_name": info["track_name"],
-#             "artists": info["artists"],
-#             "score": score
-#         })
-#     return results

@@ -272,7 +272,7 @@ def manual_tests(df: pd.DataFrame, parameters: Dict[str, Any]):
     # pd_df_ge = gx.from_pandas(df)
     assert set(df.columns) == set(expected_columns)
     assert df["trans_num"].notnull().all() and df["trans_num"].is_unique
-    assert df[target_col].isin([0, 1, 2]).all()
+    assert df[target_col].isin([0, 1]).all()
     assert df["amt"].dtype == "float64"
 
     # Extract results

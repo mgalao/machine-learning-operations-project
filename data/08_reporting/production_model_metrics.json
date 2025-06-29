@@ -1,0 +1,11 @@
+{
+  "classifier": "XGBClassifier",
+  "train_accuracy": 1.0,
+  "train_macro_precision": 1.0,
+  "train_macro_recall": 1.0,
+  "train_macro_f1": 1.0,
+  "test_accuracy": 0.998274025926334,
+  "test_macro_precision": 0.9644152237970938,
+  "test_macro_recall": 0.8795806181786048,
+  "test_macro_f1": 0.9176846874804037
+}

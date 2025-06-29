@@ -6,10 +6,3 @@ scikit-learn
 numpy<2
 pandas
 xgboost
-
-# fastapi
-# uvicorn
-# pydantic
-# pandas
-# scikit-surprise
-# numpy<2
